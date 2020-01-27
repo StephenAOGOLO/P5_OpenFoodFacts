@@ -96,9 +96,15 @@ ainsi que leur statut d'avancement sur l'outil en ligne [TRELLO](https://trello.
         afin de quitter le programme. 
 
 ## Documentation - Driven development  
-- Comment fonctionne l'application Purbeurre.
-- Comment installer l'application PurBeurre.
-- Comment utiliser l'application PurBeurre.
+- _***Comment fonctionne l'application Purbeurre***_  
+
+        In progress...
+- _***Comment installer l'application PurBeurre***_  
+
+        In progress...
+- _***Comment utiliser l'application PurBeurre***_  
+
+        In progress...
 
 ## Outils de développement  
 - Pycharm ; version : 2019.3
