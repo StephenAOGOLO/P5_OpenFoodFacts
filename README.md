@@ -100,6 +100,12 @@ ainsi que leur statut d'avancement sur l'outil en ligne [TRELLO](https://trello.
 - Comment installer l'application PurBeurre.
 - Comment utiliser l'application PurBeurre.
 
+## Outils de développement  
+- Pycharm ; version : 2019.3
+- Python ; version : 3.7
+- Draw.io ; version 12.5.8
+- MySQL ; version 8.0 
+- Notepad Plus Plus ; version 7.8.1
 ---
 ## Rappel
 >[Projet hébergé sous GitHub](https://github.com/StephenAOGOLO/P5_OpenFoodFacts.git)  
