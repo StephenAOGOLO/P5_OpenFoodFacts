@@ -1,5 +1,5 @@
-![50% center](images\oc.png)   
-![50% center](images\off.png)  
+![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeH7711sJeOaZ_HOpwi3M7MjPOQeOPE2TyMxn-_NyxyHu_O2tm&s) ![](https://static.openfoodfacts.org/images/misc/openfoodfacts-logo-fr-178x150.png)       
+  
 # P5_OpenFoodFacts
 Utilisez les données publiques de l'OpenFoodFacts
 
