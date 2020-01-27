@@ -27,8 +27,7 @@ Vous pouvez retrouver l'ensenmble de ces étapes fonctionnelles,
 ainsi que leur statut d'avancement sur l'outil en ligne [TRELLO](https://trello.com/invite/b/46lT5ayx/e10292af3dc3d7b88e39166737f37d71/p5openfoodfacts) 
 
 ## Les User-Stories
-* __***US10***__  
-Fonction compte utilisateur
+* __***US10***__  *Fonction compte utilisateur*
 
         En tant que personne lambda,
         je peux créer un compte utilisateur,
