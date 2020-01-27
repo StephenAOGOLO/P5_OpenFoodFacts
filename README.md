@@ -95,6 +95,10 @@ ainsi que leur statut d'avancement sur l'outil en ligne [TRELLO](https://trello.
         je peux sélectionner la proposition 3,
         afin de quitter le programme. 
 
+## Documentation - Driven development  
+- Comment fonctionne l'application Purbeurre.
+- Comment installer l'application PurBeurre.
+- Comment utiliser l'application PurBeurre.
 
 ---
 ## Rappel
