@@ -1,5 +1,5 @@
 # P5_OpenFoodFacts
-Utilisez les données publiques de l'OpenFoodFacts
+Utilisez les données publiques de l'OpenFoodFacts  
 
 [![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeH7711sJeOaZ_HOpwi3M7MjPOQeOPE2TyMxn-_NyxyHu_O2tm&s)](https://openclassrooms.com/fr)
 [![](https://static.openfoodfacts.org/images/misc/openfoodfacts-logo-fr-178x150.png)](https://fr.openfoodfacts.org/)       
