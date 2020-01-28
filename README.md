@@ -1,7 +1,8 @@
-![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeH7711sJeOaZ_HOpwi3M7MjPOQeOPE2TyMxn-_NyxyHu_O2tm&s) ![](https://static.openfoodfacts.org/images/misc/openfoodfacts-logo-fr-178x150.png)       
-  
 # P5_OpenFoodFacts
 Utilisez les données publiques de l'OpenFoodFacts
+
+[![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeH7711sJeOaZ_HOpwi3M7MjPOQeOPE2TyMxn-_NyxyHu_O2tm&s)](https://openclassrooms.com/fr)
+[![](https://static.openfoodfacts.org/images/misc/openfoodfacts-logo-fr-178x150.png)](https://fr.openfoodfacts.org/)       
 
 ## Contexte
 La startup Pur Beurre connait bien les habitudes alimentaires françaises.  
@@ -43,7 +44,7 @@ ainsi que leur statut d'avancement sur l'outil en ligne [TRELLO](https://trello.
             -"Retrouvez mes aliments substitués."
             -"Quitter le programme."
         afin de répondre à mon besoin actuel. 
-* __***US30***__ *Fonction proposition 1*
+* __***US30***__ *Fonction aliment à remplacer*
 
         En tant qu’utilisateur enregistré,
         je peux sélectionner la proposition 1,
@@ -73,7 +74,7 @@ ainsi que leur statut d'avancement sur l'outil en ligne [TRELLO](https://trello.
         je peux sauvegarder l’aliment de substitution dans la base de données,
         afin de pouvoir le retrouver dans son espace dédié.
 
-* __***US40***__ *Fonction proposition 2*
+* __***US40***__ *Fonction mes aliments substitués*
 
         En tant qu’utilisateur enregistré,
         je peux sélectionner la proposition 2 du menu principal,
