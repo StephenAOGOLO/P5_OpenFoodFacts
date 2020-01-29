@@ -1,9 +1,7 @@
 # P5_OpenFoodFacts
 Utilisez les données publiques de l'OpenFoodFacts  
-
 [![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeH7711sJeOaZ_HOpwi3M7MjPOQeOPE2TyMxn-_NyxyHu_O2tm&s)](https://openclassrooms.com/fr)
-[![](https://static.openfoodfacts.org/images/misc/openfoodfacts-logo-fr-178x150.png)](https://fr.openfoodfacts.org/)       
-
+[![](https://static.openfoodfacts.org/images/misc/openfoodfacts-logo-fr-178x150.png)](https://fr.openfoodfacts.org/)  
 ## Contexte
 La startup Pur Beurre connait bien les habitudes alimentaires françaises.  
 Leur restaurant, Ratatouille, remporte un succès croissant et attire toujours plus de visiteurs,  
@@ -11,7 +9,6 @@ sur la butte de Montmartre.
 L'équipe a remarqué que leurs utilisateurs voulaient bien changer leur alimentation,  
 mais ne savaient pas bien par quoi commencer.  
 Remplacer le Nutella par une pâte aux noisettes, oui, mais laquelle ? Et dans quel magasin l'acheter ?  
-
 ## But du projet
 Créer un programme qui interagirait avec la base Open Food Facts pour en récupérer les aliments,  
 les comparer et proposer à l'utilisateur un substitut plus sain à l'aliment qui lui fait envie.  
@@ -20,7 +17,6 @@ Cela lui permettra de lire et stocker, dans sa propre base de données, les info
 Le programme devra ainsi, proposer des produits alternatifs, disponible depuis sa propre base.  
 Chaque produit pourra être sauvegardé dans la base de donnée de l'application.  
 Le projet hébergé sur GitHub est disponible [ici](https://github.com/StephenAOGOLO/P5_OpenFoodFacts.git).  
-
 ## Découpage du projet
 Le projet a été découpé en plusieurs étapes de réalisation.  
 Chaque étape du projet est une 'user-story'  
@@ -28,7 +24,6 @@ qui représente une fonction principale, secondaire ou tertiaire de l'applicatio
 La réalisation du projet suit ces étapes fonctionnelles dans la section **Les User-Stories**.  
 Vous pouvez retrouver l'ensenmble de ces étapes fonctionnelles,  
 ainsi que leur statut d'avancement sur l'outil en ligne [TRELLO](https://trello.com/invite/b/46lT5ayx/e10292af3dc3d7b88e39166737f37d71/p5openfoodfacts) 
-
 ## Les User-Stories
 * __***US10***__  *Fonction compte utilisateur*
 
@@ -97,24 +92,38 @@ ainsi que leur statut d'avancement sur l'outil en ligne [TRELLO](https://trello.
         En tant qu’utilisateur,
         je peux sélectionner la proposition 3,
         afin de quitter le programme. 
-
 ## Documentation - Driven development  
-- _***Comment fonctionne l'application Purbeurre***_  
-
+### Comment installer l'application PurBeurre  
+#### *ENVIRONNEMENT VIRTUEL*.  
+Ouvrir un invité de commandes et rendez-vous à la racine du projet téléchargé, exemple sous windows :   
+-       cd D:projet\projet_python\P5_OpenFoodFacts-master
+Créez l'environnement virtuel, exemple sous windows :  
+-       python -m virtualenv -p python my_env.  
+Lancez l'environnement virtuel, exemple sous windows :
+-       my_env\Script\activate.  
+#### *DEPENDANCES*.  
+Pour installer les dépendances du programme, entrez la commande : 
+-       pip install -r requirements.txt   
+exemple sous windows :
+-       my_env\Script\pip install -r Labyrinthe\requirements.txt
+#### *DEMARRAGE DU PROGRAMME*.
+Rendez-vous dans le répertoire "P5_OpenFoodFacts", exemple sous windows :
+ -      cd P5_OpenFoodFacts
+Lancer le programme principale "main.py", exemple sous windows :
+-       python main.py 
+Pour lancer le programme autrement, double-cliquez sur "main.py" oubien ouvrir "main.py" dans un IDE python.
+### Comment fonctionne l'application Purbeurre  
         In progress...
-- _***Comment installer l'application PurBeurre***_  
-
+### Comment utiliser l'application PurBeurre  
         In progress...
-- _***Comment utiliser l'application PurBeurre***_  
-
-        In progress...
-
 ## Outils de développement  
 - Pycharm ; version : 2019.3
 - Python ; version : 3.7
 - Draw.io ; version 12.5.8
 - MySQL ; version 8.0 
 - Notepad Plus Plus ; version 7.8.1
+## AUTEUR  
+Stephen A.OGOLO  
 ---
 ## Rappel
 >[Projet hébergé sous GitHub](https://github.com/StephenAOGOLO/P5_OpenFoodFacts.git)  
