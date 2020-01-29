@@ -1,2 +1,3 @@
 configparser==4.0.2
 pylint
+mysql-connector>=2.2.9
