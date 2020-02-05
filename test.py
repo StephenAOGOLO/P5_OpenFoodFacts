@@ -53,27 +53,13 @@ def creation_fichier(path_fichier="./",name_fichier="fichier_genere_par_python" 
 
 def load_api_data():
     list_c = ["product_name", "generic_name", "categories", "brands", "nutriscore_grade", "stores", "purchase_places", "url"]
-    url = "https://world.openpetfoodfacts.org/api/v0/product/20106836.json"
-    #url = "https://fr-fr.openfoodfacts.org/categories.json"
+    url = "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=ketchup&search_simple=1&action=process&json=1"
     response = requests.get(url)
-    json_response = response.json()
-    print(type(json_response))
-    #print(json_response)
-    str_r_p = str(json_response)
-    for key, value in json_response.items():
-        print("{}===>{}".format(key, value))
-        if type(value) is dict:
-            for k, v in value.items():
-                print("        {}===>{}".format(k, v))
-        #if type(value) == type(json_response):
-                if k in list_c:
-                    print(k)
-            #for value_k, value_v in value.items():
-            #    print("   "+value_k, value_v)
-            #    if type(value_v) == type(json_response):
-            #        for value_k2, value_v2 in value_v.items():
-            #            print("      "+value_k2, value_v2)
-    creation_fichier("./Packages/Results/","results","txt", str_r_p)
+    dict_response = response.json()
+    for element in list_c:
+        for i in range(0,20):
+            if element in dict_response["products"][i]:
+                print("{} ===> {}".format(element, dict_response["products"][i][element]))
 
 
 if __name__ == "__main__":
