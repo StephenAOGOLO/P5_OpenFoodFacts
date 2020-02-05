@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/P5_OpenFoodFacts.iml" filepath="$PROJECT_DIR$/.idea/P5_OpenFoodFacts.iml" />
+      <module fileurl="file://$USER_HOME$/PycharmProjects/P5_OpenFoodFacts/.idea/P5_OpenFoodFacts.iml" filepath="$USER_HOME$/PycharmProjects/P5_OpenFoodFacts/.idea/P5_OpenFoodFacts.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/P5_OpennFoodFacts_local.iml" filepath="$PROJECT_DIR$/.idea/P5_OpennFoodFacts_local.iml" />
     </modules>
   </component>
 </project>

@@ -60,3 +60,7 @@ def find_process(the_process="le_program_executable.exe"):
     return dico_processus, status
 
 
+if __name__=="__main__":
+    initialization()
+
+

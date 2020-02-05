@@ -56,6 +56,10 @@ class Mysql:
         cmd = "SHOW TABLE "
         self.cursor.execute(cmd+tb)
 
+    def show_db(self):
+        cmd = "SHOW DATABASES "
+        self.cursor.execute(cmd)
+
     def show_columns(self, col):
         cmd = "SHOW COLUMNS "
         self.cursor.execute(cmd+col)
@@ -66,3 +70,13 @@ class Mysql:
 
     def close_connection(self):
         return self.cnx.close
+
+    def load_sql_file(self, file):
+        cmd = "SOURCE "
+        self.cursor.execute(cmd+file)
+
+    def executing(self, cmd):
+        self.cursor.execute(cmd)
+
+    def executing_2(self, cmd, arg):
+        self.cursor.execute(cmd, arg)

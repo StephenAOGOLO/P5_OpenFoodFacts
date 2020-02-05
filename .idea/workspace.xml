@@ -1,20 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6dc312ee-149b-4c99-894b-9cbfab7ab8fd" name="Default Changelist" comment="">
+    <list default="true" id="e926360c-3621-4906-a504-5f1dc679deed" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Packages/db_purebeurre_1.sql" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Packages/mysql_operations.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/P5_OpenFoodFacts.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/P5_OpenFoodFacts.drawio" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/build_db_purebeurre.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/create_db_user.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/delete_db_purebeurre.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/loading.py" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/loading.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="BATCH File" />
+        <option value="Structured Query Language" />
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
-  <component name="ProjectId" id="1WkneY2P7Mc99pgf3U0NlWFzWl7" />
+  <component name="Git.Settings">
+    <option name="RECENT_COMMON_BRANCH" value="master" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="SYNC" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="D:\STEPHEN_AO\05_THE_PYTHON_APPLICATION_DEVELOPER\PROJECTS\05_Utilisez_des_API_REST_dans_vos_projets_web\P5_OpennFoodFacts_local\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1WkmKJ2S0XIUvSgOiN4dpB5v0Z9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -22,23 +48,33 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+    <property name="add_unversioned_files" value="true" />
+    <property name="ignore_missing_gitignore" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/P5_OpenFoodFacts" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.project" />
   </component>
-  <component name="RunManager">
-    <configuration name="P5_OFF_Python" type="PythonConfigurationType" factoryName="Python">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\steph\PycharmProjects\P5_OpenFoodFacts\Packages" />
+      <recent name="C:\Users\steph\PycharmProjects\P5_OpenFoodFacts" />
+      <recent name="D:\STEPHEN_AO\05_THE_PYTHON_APPLICATION_DEVELOPER\PROJECTS\05_Utilisez_des_API_REST_dans_vos_projets_web\P5_OpennFoodFacts_local\Packages" />
+      <recent name="D:\STEPHEN_AO\05_THE_PYTHON_APPLICATION_DEVELOPER\PROJECTS\05_Utilisez_des_API_REST_dans_vos_projets_web\P5_OpennFoodFacts_local" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.p5_off_python">
+    <configuration name="loading" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="P5_OpenFoodFacts" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="D:\STEPHEN_AO\05_THE_PYTHON_APPLICATION_DEVELOPER\PROJECTS\05_Utilisez_des_API_REST_dans_vos_projets_web\P5_OFF_local_env\Scripts\python.exe" />
-      <option name="WORKING_DIRECTORY" value="D:/STEPHEN_AO/05_THE_PYTHON_APPLICATION_DEVELOPER/PROJECTS/05_Utilisez_des_API_REST_dans_vos_projets_web/P5_OFF_local_env" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Packages" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="D:/STEPHEN_AO/05_THE_PYTHON_APPLICATION_DEVELOPER/PROJECTS/05_Utilisez_des_API_REST_dans_vos_projets_web/P5_OFF_local_env/Scripts" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Packages/loading.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -47,6 +83,81 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="mysql_operations" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="P5_OpenFoodFacts" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Packages" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Packages/mysql_operations.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="p5_off_python" type="PythonConfigurationType" factoryName="Python">
+      <module name="P5_OpenFoodFacts" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="D:\STEPHEN_AO\05_THE_PYTHON_APPLICATION_DEVELOPER\PROJECTS\05_Utilisez_des_API_REST_dans_vos_projets_web\P5_OFF_local_env\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="D:\STEPHEN_AO\05_THE_PYTHON_APPLICATION_DEVELOPER\PROJECTS\05_Utilisez_des_API_REST_dans_vos_projets_web\P5_OFF_local_env\test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="P5_OpenFoodFacts" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="D:\STEPHEN_AO\05_THE_PYTHON_APPLICATION_DEVELOPER\PROJECTS\05_Utilisez_des_API_REST_dans_vos_projets_web\P5_OFF_local_env\test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.p5_off_python" />
+      <item itemvalue="Python.mysql_operations" />
+      <item itemvalue="Python.loading" />
+      <item itemvalue="Python.test" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.loading" />
+        <item itemvalue="Python.mysql_operations" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -65,30 +176,247 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6dc312ee-149b-4c99-894b-9cbfab7ab8fd" name="Default Changelist" comment="" />
-      <created>1580912511811</created>
+      <changelist id="e926360c-3621-4906-a504-5f1dc679deed" name="Default Changelist" comment="" />
+      <created>1579701902561</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1580912511811</updated>
+      <updated>1579701902561</updated>
     </task>
+    <task id="LOCAL-00001" summary="First commit&#10;- Preparing README.md">
+      <created>1579709593929</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1579709593929</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Second commit - on master&#10;- Preparing README.md&#10;- Changing US10 title into italic style">
+      <created>1580107126247</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1580107126247</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Third commit - on master&#10;- Preparing README.md&#10;- Adding &quot;Doc Driven Dev&quot; section">
+      <created>1580115606063</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1580115606064</updated>
+    </task>
+    <task id="LOCAL-00004" summary="4th commit - on master&#10;- Adding tools version into README.md section.&#10;- Adding P5_OpenFoodFacts.drawio file.">
+      <created>1580125672814</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1580125672814</updated>
+    </task>
+    <task id="LOCAL-00005" summary="4th commit - on master&#10;- Updating P5_OpenFoodFacts.drawio file.">
+      <created>1580128598855</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1580128598855</updated>
+    </task>
+    <task id="LOCAL-00006" summary="5th commit - on master&#10;- Updating README.md file.">
+      <created>1580129004139</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1580129004139</updated>
+    </task>
+    <task id="LOCAL-00007" summary="6th commit - on master&#10;- Updating README.md file.&#10;- Adding pictures">
+      <created>1580130533418</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1580130533418</updated>
+    </task>
+    <task id="LOCAL-00008" summary="7th commit - on master&#10;- Updating README.md file.">
+      <created>1580130793938</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1580130793938</updated>
+    </task>
+    <task id="LOCAL-00009" summary="8th commit - on master&#10;- Updating README.md file.&#10;- Taking web pictures.">
+      <created>1580131642971</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1580131642971</updated>
+    </task>
+    <task id="LOCAL-00010" summary="1st commit - on PythonBddApi.&#10;- Updating README.md file, Change US10.&#10;- Adding sql files into Packages.">
+      <created>1580213279167</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1580213279167</updated>
+    </task>
+    <task id="LOCAL-00011" summary="2nd commit - on PythonBddApi.&#10;- Updating README.md file, US titles.&#10;- Deleting __init__.py.">
+      <created>1580218753415</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1580218753416</updated>
+    </task>
+    <task id="LOCAL-00012" summary="3rd commit - on PythonBddApi.&#10;-rebuild project P5">
+      <created>1580224148933</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1580224148933</updated>
+    </task>
+    <task id="LOCAL-00013" summary="4th commit - on PythonBddApi.&#10;-rebuild project P5">
+      <created>1580224329324</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1580224329324</updated>
+    </task>
+    <task id="LOCAL-00014" summary="5th commit - on PythonBddApi.&#10;-Adding requirements.txt&#10;-Adding .gitignore&#10;-Modifying README.md">
+      <created>1580293268795</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1580293268795</updated>
+    </task>
+    <task id="LOCAL-00015" summary="6th commit - on PythonBddApi.&#10;-Adding mysql-connector to requirements.txt">
+      <created>1580296484443</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1580296484443</updated>
+    </task>
+    <task id="LOCAL-00016" summary="7th commit - on PythonBddApi.&#10;-Adding root_link.bat">
+      <created>1580315880022</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1580315880022</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="First commit&#10;- Preparing README.md" />
+    <MESSAGE value="Second commit - on master&#10;- Preparing README.md&#10;- Changing US10 title into italic style" />
+    <MESSAGE value="Third commit - on master&#10;- Preparing README.md&#10;- Adding &quot;Doc Driven Dev&quot; section" />
+    <MESSAGE value="4th commit - on master&#10;- Adding tools version into README.md section.&#10;- Adding P5_OpenFoodFacts.drawio file." />
+    <MESSAGE value="4th commit - on master&#10;- Updating P5_OpenFoodFacts.drawio file." />
+    <MESSAGE value="5th commit - on master&#10;- Updating README.md file." />
+    <MESSAGE value="6th commit - on master&#10;- Updating README.md file.&#10;- Adding pictures" />
+    <MESSAGE value="7th commit - on master&#10;- Updating README.md file." />
+    <MESSAGE value="8th commit - on master&#10;- Updating README.md file.&#10;- Taking web pictures." />
+    <MESSAGE value="1st commit - on PythonBddApi.&#10;- Updating README.md file, Change US10.&#10;- Adding sql files into Packages." />
+    <MESSAGE value="2nd commit - on PythonBddApi.&#10;- Updating README.md file, US titles.&#10;- Deleting __init__.py." />
+    <MESSAGE value="3rd commit - on PythonBddApi.&#10;-rebuild project P5" />
+    <MESSAGE value="4th commit - on PythonBddApi.&#10;-rebuild project P5" />
+    <MESSAGE value="5th commit - on PythonBddApi.&#10;-Adding requirements.txt&#10;-Adding .gitignore&#10;-Modifying README.md" />
+    <MESSAGE value="6th commit - on PythonBddApi.&#10;-Adding mysql-connector to requirements.txt" />
+    <MESSAGE value="7th commit - on PythonBddApi.&#10;-Adding root_link.bat" />
+    <option name="LAST_COMMIT_MESSAGE" value="7th commit - on PythonBddApi.&#10;-Adding root_link.bat" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="2334" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1580912829247">
+    <state x="223" y="68" width="1089" height="740" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1580739676075">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="68" width="1089" height="740" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580739676075" />
+    <state x="2199" y="86" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580225480407" />
+    <state x="2594" y="324" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1580128525319">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2334" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580912829247" />
-    <state x="2660" y="276" key="FileChooserDialogImpl" timestamp="1580913165205">
+    <state x="2594" y="324" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580128525319" />
+    <state x="2544" y="202" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1580912063762">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2660" y="276" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580913165205" />
-    <state x="2381" y="163" key="SettingsEditor" timestamp="1580913222322">
+    <state x="499" y="160" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580740217536" />
+    <state x="2544" y="202" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580912063762" />
+    <state x="302" y="0" key="CommitChangelistDialog2" timestamp="1580315878572">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="302" y="0" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580315878572" />
+    <state x="2298" y="115" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580293267204" />
+    <state x="299" y="68" key="DBNavigator.ProjectSettingsDialog" timestamp="1580748363014">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="299" y="68" key="DBNavigator.ProjectSettingsDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580748363014" />
+    <state x="2606" y="196" key="FileChooserDialogImpl" timestamp="1580912508772">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2381" y="163" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580913222322" />
-    <state x="2575" y="345" key="com.intellij.ide.util.TipDialog" timestamp="1580912569978">
+    <state x="259" y="227" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580739575114" />
+    <state x="2606" y="196" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580912508772" />
+    <state width="1515" height="261" key="GridCell.Tab.0.bottom" timestamp="1580912510831">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2575" y="345" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580912569978" />
+    <state width="1515" height="268" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580910861889" />
+    <state width="1515" height="261" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580912510831" />
+    <state width="1515" height="306" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580579796837" />
+    <state width="1515" height="261" key="GridCell.Tab.0.center" timestamp="1580912510831">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1515" height="268" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580910861889" />
+    <state width="1515" height="261" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580912510831" />
+    <state width="1515" height="306" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580579796837" />
+    <state width="1515" height="261" key="GridCell.Tab.0.left" timestamp="1580912510831">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1515" height="268" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580910861889" />
+    <state width="1515" height="261" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580912510831" />
+    <state width="1515" height="306" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580579796837" />
+    <state width="1515" height="261" key="GridCell.Tab.0.right" timestamp="1580912510831">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1515" height="268" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580910861889" />
+    <state width="1515" height="261" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580912510831" />
+    <state width="1515" height="306" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580579796837" />
+    <state width="1515" height="261" key="GridCell.Tab.1.bottom" timestamp="1580912510831">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580737301617" />
+    <state width="1515" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580912510831" />
+    <state width="1515" height="261" key="GridCell.Tab.1.center" timestamp="1580912510831">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580737301617" />
+    <state width="1515" height="261" key="GridCell.Tab.1.center/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580912510831" />
+    <state width="1515" height="261" key="GridCell.Tab.1.left" timestamp="1580912510831">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580737301617" />
+    <state width="1515" height="261" key="GridCell.Tab.1.left/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580912510831" />
+    <state width="1515" height="261" key="GridCell.Tab.1.right" timestamp="1580912510831">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580737301617" />
+    <state width="1515" height="261" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580912510831" />
+    <state x="2266" y="71" width="1536" height="713" key="SettingsEditor" timestamp="1580912419027">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="277" y="56" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580907706242" />
+    <state x="2266" y="71" width="1564" height="713" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580912419027" />
+    <state x="0" y="56" width="1536" height="713" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1580579795558" />
+    <state x="2727" y="437" key="VCS.ChangelistChooser" timestamp="1580123187590">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2727" y="437" key="VCS.ChangelistChooser/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580123187590" />
+    <state x="442" y="201" key="Vcs.Push.Dialog.v2" timestamp="1580315882125">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="442" y="201" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580315882125" />
+    <state x="2472" y="254" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580293310071" />
+    <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1580736599652">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580736599652" />
+    <state x="524" y="273" key="com.intellij.ide.util.TipDialog" timestamp="1580735878795">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="524" y="273" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580735878795" />
+    <state x="2575" y="345" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580224622403" />
+    <state x="524" y="273" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1580579003471" />
+    <state x="2084" y="-13" width="1211" height="508" maximized="true" key="dock-window-1" timestamp="1580738472676">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2084" y="-13" width="1211" height="508" maximized="true" key="dock-window-1/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580738472676" />
   </component>
 </project>
