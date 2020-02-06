@@ -11,7 +11,10 @@ import mysql.connector as mc
 import Packages.loading as ld
 import Packages.mysql_operations as mo
 import requests
+import json
 import time
+import logging as lg
+lg.basicConfig(level=lg.WARNING)
 
 
 def close_connection():
@@ -38,36 +41,38 @@ def main_of_reset():
     ld.initialization()
 
 
-def creation_fichier(path_fichier="./",name_fichier="fichier_genere_par_python" ,extension="txt", contenu = "vide"):
-
-    now = time.localtime()
-    when_happens = "{}-{}-{}_{}-{}-{}".format(now[0], now[1], now[2], now[3], now[4], now[5])
-    creation_time = "_"+when_happens
-    print("=" * 150)
-    new_file = open(path_fichier+"//"+name_fichier+creation_time+"."+extension, "wt")
-    for ligne in contenu:
-        new_file.write(ligne)
-    new_file.close
-    print("le fichier '{}.{}' est prêt".format(name_fichier,extension))
+def open_json_file(file):
+    with open(file) as f:
+        data = json.load(f)
+    return data
 
 
 def load_api_data():
-    list_c = ["product_name", "generic_name", "categories", "brands", "nutriscore_grade", "stores", "purchase_places", "url"]
-    url = "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=ketchup&search_simple=1&action=process&json=1"
-    response = requests.get(url)
-    dict_response = response.json()
-    for element in list_c:
-        for i in range(0,20):
-            if element in dict_response["products"][i]:
-                print("{} ===> {}".format(element, dict_response["products"][i][element]))
+    dict_data = {}
+    list_c = ["product_name", "categories", "brands", "nutriscore_grade", "stores", "purchase_places", "url"]
+    dict_data["sent"] = {}
+    dict_data["rcvd"] = {}
+    dict_data["sent"]["urls"] = open_json_file(".\\Packages\\urls.json")
+    for url_name, url in dict_data["sent"]["urls"].items():
+        response = requests.get(url)
+        dict_data["rcvd"][url_name] = response.json()
+    dict_data["rcvd"]["aliments"] = {}
+
+    for url_name, url in dict_data["sent"]["urls"].items():
+        dict_data["rcvd"]["aliments"][url_name] = {}
+        for i in range(0, 30):
+            dict_data["rcvd"]["aliments"][url_name][str(i)] = {}
+            for element in list_c:
+                if element in dict_data["rcvd"][url_name]["products"][i]:
+                    dict_data["rcvd"]["aliments"][url_name][str(i)][element] = dict_data["rcvd"][url_name]["products"][i][element]
+
+    return dict_data
 
 
 if __name__ == "__main__":
 
-    load_api_data()
-
-
-
-
-
-
+    dico = load_api_data()
+    for i in range(0, 30):
+        print("*"*10)
+        for k, v in dico["rcvd"]["aliments"]["steack"][str(i)].items():
+            print("{} : {}".format(k, v))
