@@ -1,12 +1,12 @@
 {
-  "beurre": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=beurre&search_simple=1&page_size=30&json=1",
-  "huile": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=huile&search_simple=1&page_size=30&json=1",
-  "ketchup": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=ketchup&search_simple=1&page_size=30&json=1",
-  "mayonnaise": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=mayonnaise&search_simple=1&page_size=30&json=1",
-  "moutarde": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=moutarde&search_simple=1&page_size=30&json=1",
-  "pizza": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=pizza&search_simple=1&page_size=30&json=1",
-  "quiche": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=quiche&search_simple=1&page_size=30&json=1",
-  "riz": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=riz&search_simple=1&page_size=30&json=1",
-  "saucisse": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=saucisse&search_simple=1&page_size=30&json=1",
-  "steack": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=steack&search_simple=1&page_size=30&json=1"
+  "beurre": "https://fr.openfoodfacts.org/categorie/matiere-grasse-de-beurre.json",
+  "huile": "https://fr.openfoodfacts.org/categorie/huiles.json",
+  "ketchup": "https://fr.openfoodfacts.org/categorie/ketchup.json",
+  "mayonnaise": "https://fr.openfoodfacts.org/categorie/mayonnaises.json",
+  "moutarde": "https://fr.openfoodfacts.org/categorie/moutardes.json",
+  "pizza": "https://fr.openfoodfacts.org/categorie/pizzas.json",
+  "quiche": "https://fr.openfoodfacts.org/categorie/quiches.json",
+  "riz": "https://fr.openfoodfacts.org/categorie/riz-parfum%C3%A9s.json",
+  "saucisse": "https://fr.openfoodfacts.org/categorie/saucisses.json",
+  "steack": "https://fr.openfoodfacts.org/categorie/steaks.json"
 }
