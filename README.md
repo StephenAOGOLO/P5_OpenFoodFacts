@@ -25,7 +25,7 @@ La réalisation du projet suit ces étapes fonctionnelles dans les sections :
 **Les User-Stories** et **Les Developer-stories**.  
 Vous pouvez retrouver l'ensenmble de ces étapes fonctionnelles,  
 ainsi que leur statut d'avancement sur l'outil en ligne [TRELLO](https://trello.com/invite/b/46lT5ayx/e10292af3dc3d7b88e39166737f37d71/p5openfoodfacts) 
-## Les User-Stories
+### Les User-Stories
 * __***US10***__  *Fonction compte utilisateur*
 
         En tant qu'utilisateur enregistré,
@@ -93,7 +93,7 @@ ainsi que leur statut d'avancement sur l'outil en ligne [TRELLO](https://trello.
         En tant qu’utilisateur,
         je peux sélectionner la proposition 3,
         afin de quitter le programme. 
-## Les Developer-Stories
+### Les Developer-Stories
 * __***DS10***__ *Fonction création base de données*
 * __***DS11***__ *Fonction remplissage base de données*
 * __***DS12***__ *Fonction modification base de données*
@@ -103,8 +103,18 @@ ainsi que leur statut d'avancement sur l'outil en ligne [TRELLO](https://trello.
 * __***DS23***__ *Fonction injection des données API*
 * __***DS30***__ *Fonction consultation des données locales*
 * __***DS31***__ *Fonction affichage des données locales*
-
-
+### Le modèle physique de données
+Le modèle physique de données est disponible dans le fichier  
+*P5_OpenFoodFacts.drawio*.  
+pour lire ce fichier veuillez vous rendre sur le site [*DRAW.IO*](https://www.draw.io/).  
+- Sélectionnez *"Device"*
+- Sélectionnez *"Open Existing Diagram"*
+- Sélectionnez le fichier *P5_OpenFoodFacts.drawio* disponible [*ici*](P5_OpenFoodFacts.drawio)
+### Le fichier de création de la BDD
+Dans ce projet, deux scripts dédiés à la base de données existent.  
+- db_purebeurre_*_empty.sql *(Ne contenant aucune données)*  
+- db_purebeurre_*_full.sql *(contenant des données)*  
+Ces scripts de création de la base de données sont disponible dans le répertoire [*/Packages*](/Packages)
 ## Documentation - Driven development  
 ### Comment installer l'application PurBeurre  
 #### *ENVIRONNEMENT VIRTUEL*.  
