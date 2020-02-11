@@ -21,7 +21,8 @@ Le projet hébergé sur GitHub est disponible [ici](https://github.com/StephenAO
 Le projet a été découpé en plusieurs étapes de réalisation.  
 Chaque étape du projet est une 'user-story'  
 qui représente une fonction principale, secondaire ou tertiaire de l'application.  
-La réalisation du projet suit ces étapes fonctionnelles dans la section **Les User-Stories**.  
+La réalisation du projet suit ces étapes fonctionnelles dans les sections :   
+**Les User-Stories** et **Les Developer-stories**.  
 Vous pouvez retrouver l'ensenmble de ces étapes fonctionnelles,  
 ainsi que leur statut d'avancement sur l'outil en ligne [TRELLO](https://trello.com/invite/b/46lT5ayx/e10292af3dc3d7b88e39166737f37d71/p5openfoodfacts) 
 ## Les User-Stories
@@ -92,6 +93,18 @@ ainsi que leur statut d'avancement sur l'outil en ligne [TRELLO](https://trello.
         En tant qu’utilisateur,
         je peux sélectionner la proposition 3,
         afin de quitter le programme. 
+## Les Developer-Stories
+* __***DS10***__ *Fonction création base de données*
+* __***DS11***__ *Fonction remplissage base de données*
+* __***DS12***__ *Fonction modification base de données*
+* __***DS20***__ *Fonction récupération des données API*
+* __***DS21***__ *Fonction stockage des données API*
+* __***DS22***__ *Fonction triage des données API*
+* __***DS23***__ *Fonction injection des données API*
+* __***DS30***__ *Fonction consultation des données locales*
+* __***DS31***__ *Fonction affichage des données locales*
+
+
 ## Documentation - Driven development  
 ### Comment installer l'application PurBeurre  
 #### *ENVIRONNEMENT VIRTUEL*.  
