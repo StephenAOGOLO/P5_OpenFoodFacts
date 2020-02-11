@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `aliment` (
   PRIMARY KEY (`id`),
   KEY `FK_sub_category` (`local_category`),
   CONSTRAINT `FK_sub_category` FOREIGN KEY (`local_category`) REFERENCES `category` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=01 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Les données exportées n'étaient pas sélectionnées.
 
