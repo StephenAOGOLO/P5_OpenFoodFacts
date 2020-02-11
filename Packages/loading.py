@@ -28,18 +28,6 @@ def initialization():
             root_status = True
             break
     return root_status
-        #for key, value, in process_report[0].items():
-            #print(key, value["nom"])
-            #print(process_report[1])
-
-
-
-        #if value["nom"] in process_report[0].values():
-        #    break
-    #for i in range(1,11):
-    #    print("Vous avez {} secondes pour vous authentifier en tant que root".format(11-i))
-    #    time.sleep(1)
-    #os.system(".\\Packages\\root_link.bat")
 
 
 def find_process(the_process="le_program_executable.exe"):
@@ -60,7 +48,7 @@ def find_process(the_process="le_program_executable.exe"):
     return dico_processus, status
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     initialization()
 
 

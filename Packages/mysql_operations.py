@@ -92,16 +92,6 @@ class Mysql:
 
     def insert_data(self, tb, rows, values):
         formula = "INSERT INTO {} {} VALUES {}".format(tb, rows, values)
-        #aliment_1 = ("01", "legumes", "http://les-legumes.com")
-        #aliment_1 = ("01", "legumes", "http://les-legumes.com")
-
-        #formula = "INSERT INTO aliment (product_name, categories, brands, nutriscore_grade, stores, url)" \
-        #          " VALUES (%s, %s, %s, %s, %s, %s)"
-        #aliment_1 = ("carotte", "legumes", "Le vrai bio", "e", "Auchan", "http://carotte.com")
-
-        #cmd1 = "INSERT INTO "
-        #cmd2 = "VALUES "
-        #cmd = cmd1+table+" "+row+" "+cmd2+value
         self.cursor.execute(formula)
         self.cnx.commit()
 
