@@ -62,12 +62,18 @@ def all_rows(all_data):
 
 
 def provide_categories(all_data):
-    all_data["console"] = {}
+
     all_data["console"]["categories"] = {}
     for i, element in enumerate(all_data["rcvd"]["local_category"]):
         lg.info("{} - {}".format(i, element))
         all_data["console"]["categories"][i] = element
     return all_data["console"]["categories"]
+
+
+def console_data(all_data):
+    all_data["console"] = {}
+    provide_categories(all_data)
+    return all_data["console"]
 
 
 def show_all_data(all_data):
