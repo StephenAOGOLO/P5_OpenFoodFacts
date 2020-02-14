@@ -44,7 +44,7 @@ def create_db_purebeurre():
     session = mo.Mysql("stephen", "stephen")
     session.create_db()
     session = mo.Mysql("stephen", "stephen", "db_purebeurre")
-    contenu = open_sql_file("test.sql")
+    contenu = open_sql_file("db_purebeurre_ready.sql")
     contenu = "".join(contenu)
     contenu = contenu.replace("\n","")
     contenu = contenu.split(";")
@@ -135,7 +135,7 @@ def open_sql_file(path_fichier):
 
 if __name__ == "__main__":
     initialization()
-    #contenu = open_sql_file("test.sql")
+    #contenu = open_sql_file("db_purebeurre_ready.sql")
     #contenu = "".join(contenu)
     #contenu = contenu.replace("\n","")
     #contenu = contenu.split(";")

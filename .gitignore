@@ -12,3 +12,6 @@ markdown_syntax.bat
 .idea/modules.xml
 .idea/vcs.xml
 LICENSE.txt
+.idea/P5_OpenFoodFacts.iml
+Packages/Results/
+Packages/__pycache__/
