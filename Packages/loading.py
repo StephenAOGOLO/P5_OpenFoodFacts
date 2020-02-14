@@ -34,9 +34,10 @@ def off_initialization():
 
 def initialization():
     create_db_purebeurre()
-    #big_data = ao.load_api_data()
-    #fill_table_category(big_data)
-    #fill_table_aliment(big_data)
+    big_data = ao.load_api_data()
+    session = mo.Mysql("stephen", "stephen", "db_purebeurre")
+    fill_table_category(session, big_data)
+    fill_table_aliment(session, big_data)
 
 
 def create_db_purebeurre():
@@ -58,31 +59,16 @@ def create_tables(tables_data):
     return True
 
 
-def create_table_category():
-    pass
-
-
-def create_table_aliment():
-    pass
-
-
-def create_table_historic():
-    pass
-
-def fill_table_category(dico):
-    ## TABLE CATEGORY
-    session = mo.Mysql("stephen", "stephen")
-    #dico = ao.load_api_data()
+def fill_table_category(session, dico):
+    # TABLE CATEGORY
     for i, category in enumerate(dico["rcvd"]["local_category"]):
         pure_value = "('{}', '{}')".format(i+1, category)
         session.insert_data("category", "(id, name)", pure_value)
 
 
-def fill_table_aliment(dico):
+def fill_table_aliment(session, dico):
 
     # TABLE ALIMENT
-    session = mo.Mysql("stephen", "stephen")
-    #dico = ao.load_api_data()
     for category in dico["rcvd"]["local_category"]:
         for i in range(0, 20):
             raw_data = ""
@@ -145,6 +131,7 @@ def open_sql_file(path_fichier):
     print("\nFin de fichier\n")
     print("=" * 150)
     return liste_fichier
+
 
 if __name__ == "__main__":
     initialization()

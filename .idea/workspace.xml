@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e926360c-3621-4906-a504-5f1dc679deed" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Packages/db_purebeurre_1.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Packages/mysql_operations.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/P5_OpenFoodFacts.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/P5_OpenFoodFacts.drawio" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/build_db_purebeurre.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/create_db_user.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/delete_db_purebeurre.sql" beforeDir="false" />
+    <list default="true" id="e926360c-3621-4906-a504-5f1dc679deed" name="Default Changelist" comment="7th commit - on PythonBddApi.&#10;-Adding root_link.bat">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/api_operations.py" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/api_operations.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/loading.py" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/loading.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,13 +43,14 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="add_unversioned_files" value="true" />
     <property name="ignore_missing_gitignore" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/P5_OpenFoodFacts" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\steph\PycharmProjects\P5_OpenFoodFacts\Packages" />
       <recent name="C:\Users\steph\PycharmProjects\P5_OpenFoodFacts" />
+      <recent name="D:\STEPHEN_AO\05_THE_PYTHON_APPLICATION_DEVELOPER\PROJECTS\05_Utilisez_des_API_REST_dans_vos_projets_web\P5_OFF_local_env" />
+      <recent name="C:\Users\steph\PycharmProjects\P5_OpenFoodFacts\Packages" />
       <recent name="D:\STEPHEN_AO\05_THE_PYTHON_APPLICATION_DEVELOPER\PROJECTS\05_Utilisez_des_API_REST_dans_vos_projets_web\P5_OpennFoodFacts_local\Packages" />
       <recent name="D:\STEPHEN_AO\05_THE_PYTHON_APPLICATION_DEVELOPER\PROJECTS\05_Utilisez_des_API_REST_dans_vos_projets_web\P5_OpennFoodFacts_local" />
     </key>
@@ -148,9 +142,9 @@
     </configuration>
     <list>
       <item itemvalue="Python.p5_off_python" />
-      <item itemvalue="Python.mysql_operations" />
-      <item itemvalue="Python.loading" />
       <item itemvalue="Python.test" />
+      <item itemvalue="Python.loading" />
+      <item itemvalue="Python.mysql_operations" />
     </list>
     <recent_temporary>
       <list>
@@ -331,11 +325,11 @@
     </state>
     <state x="499" y="160" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580740217536" />
     <state x="2544" y="202" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580912063762" />
-    <state x="302" y="0" key="CommitChangelistDialog2" timestamp="1580315878572">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="2298" y="115" key="CommitChangelistDialog2" timestamp="1581688440352">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="302" y="0" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580315878572" />
-    <state x="2298" y="115" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580293267204" />
+    <state x="2298" y="115" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1581688440352" />
     <state x="299" y="68" key="DBNavigator.ProjectSettingsDialog" timestamp="1580748363014">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -389,11 +383,11 @@
     </state>
     <state width="1515" height="261" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580737301617" />
     <state width="1515" height="261" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580912510831" />
-    <state x="2266" y="71" width="1536" height="713" key="SettingsEditor" timestamp="1580912419027">
+    <state x="2266" y="71" width="1536" height="713" key="SettingsEditor" timestamp="1581688270804">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="277" y="56" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580907706242" />
-    <state x="2266" y="71" width="1564" height="713" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1580912419027" />
+    <state x="2266" y="71" width="1564" height="713" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1581688270804" />
     <state x="0" y="56" width="1536" height="713" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1580579795558" />
     <state x="2727" y="437" key="VCS.ChangelistChooser" timestamp="1580123187590">
       <screen x="1920" y="0" width="1920" height="1040" />
@@ -418,5 +412,9 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2084" y="-13" width="1211" height="508" maximized="true" key="dock-window-1/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1580738472676" />
+    <state x="93" y="93" width="1350" height="638" key="dock-window-2" timestamp="1581687299397">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="93" y="93" width="1350" height="638" key="dock-window-2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1581687299397" />
   </component>
 </project>
