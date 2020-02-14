@@ -140,10 +140,10 @@ def open_sql_file(path_fichier):
 
 
 if __name__ == "__main__":
+    initialization()
     #session = mo.Mysql("stephen", "stephen")
     #status = session.create_db()
     #print(status)
-    initialization()
     #contenu = open_sql_file("db_purebeurre_ready.sql")
     #contenu = "".join(contenu)
     #contenu = contenu.replace("\n","")
