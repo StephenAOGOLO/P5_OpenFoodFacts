@@ -16,13 +16,13 @@ def load_api_data():
     dict_data["rcvd"] = {}
     #dict_data["sent"]["urls"] = open_json_file(".\\Packages\\urls.json")
     dict_data["sent"]["urls"] = open_json_file("urls.json")
+    print("Retrieving data from OpenFoodFacts server in progress...")
     for url_name, url in dict_data["sent"]["urls"].items():
-        print("Retrieving data from OpenFoodFacts server in progress...")
         response = requests.get(url)
         dict_data["rcvd"][url_name] = response.json()
-        print("Data received from OpenFoodFacts server")
-        print("Data organizing in progress...")
     dict_data["rcvd"]["aliments"] = {}
+    print("Data received from OpenFoodFacts server")
+    print("Data organizing in progress...")
     for url_name, url in dict_data["sent"]["urls"].items():
         dict_data["rcvd"]["aliments"][url_name] = {}
         for i in range(0, 20):

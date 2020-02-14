@@ -7,10 +7,11 @@ When it starts the program process is following the steps below:
 - The endgame:
 """
 # -*- coding: utf-8 -*-
+import Packages.loading as load
 
 
 def main():
-    pass
+    load.initialization()
 
 
 if __name__ == "__main__":

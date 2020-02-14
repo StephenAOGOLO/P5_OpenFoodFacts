@@ -7,7 +7,7 @@ lg.basicConfig(level=lg.WARNING)
 
 class Mysql:
 
-    def __init__(self, usr, psw, db="db_purebeurre", hst="127.0.0.1"):
+    def __init__(self, usr, psw, db="", hst="127.0.0.1"):
         self.user = usr
         self.password = psw
         self.host = hst
@@ -29,13 +29,15 @@ class Mysql:
         my_cursor = self.cnx.cursor()
         return my_cursor
 
-    def create_db(self, db):
+    def create_db(self, db="db_purebeurre"):
         cmd = "CREATE DATABASE "
         self.cursor.execute(cmd+db)
+        self.cnx.commit()
 
     def create_tb(self, tb):
         cmd = "CREATE TABLE "
         self.cursor.execute(cmd+tb)
+        self.cnx.commit()
 
     def drop_db(self, db):
         cmd = "DROP DATABASE "
@@ -102,6 +104,7 @@ class Mysql:
 
     def executing(self, cmd):
         self.cursor.execute(cmd)
+        self.cnx.commit()
 
     def executing_2(self, cmd, arg):
         self.cursor.execute(cmd, arg)
