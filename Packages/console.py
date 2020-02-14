@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import os
 import Packages.api_operations as ao
+import Packages.loading as load
 
 
 def menu_1():
@@ -144,9 +145,8 @@ def get_choice():
 def start_program():
     display_stars()
     print("interface running...")
-    print("*" * 50)
-    #api_data = ao.load_api_data()
-    #dict_categories = get_categories(api_data)
+    display_stars()
+    load.initialization()
     interface()
 
 

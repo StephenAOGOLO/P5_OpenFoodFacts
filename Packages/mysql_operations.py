@@ -30,9 +30,16 @@ class Mysql:
         return my_cursor
 
     def create_db(self, db="db_purebeurre"):
-        cmd = "CREATE DATABASE "
-        self.cursor.execute(cmd+db)
-        self.cnx.commit()
+        status = False
+        try:
+            cmd = "CREATE DATABASE "
+            self.cursor.execute(cmd+db)
+            self.cnx.commit()
+        except mc.errors.DatabaseError as e:
+            lg.info(e)
+            print("Database created")
+            status = True
+        return status
 
     def create_tb(self, tb):
         cmd = "CREATE TABLE "

@@ -33,16 +33,21 @@ def off_initialization():
 
 
 def initialization():
-    create_db_purebeurre()
+    status = create_db_purebeurre()
+    if status:
+        return status
     big_data = ao.load_api_data()
     session = mo.Mysql("stephen", "stephen", "db_purebeurre")
     fill_table_category(session, big_data)
     fill_table_aliment(session, big_data)
+    return status
 
 
 def create_db_purebeurre():
     session = mo.Mysql("stephen", "stephen")
-    session.create_db()
+    status = session.create_db()
+    if status:
+        return status
     session = mo.Mysql("stephen", "stephen", "db_purebeurre")
     contenu = open_sql_file("db_purebeurre_ready.sql")
     contenu = "".join(contenu)
@@ -50,6 +55,7 @@ def create_db_purebeurre():
     contenu = contenu.split(";")
     dict_tables = {"category":contenu[0],"aliment":contenu[1],"historic":contenu[2]}
     create_tables(dict_tables)
+    return status
 
 
 def create_tables(tables_data):
@@ -134,6 +140,9 @@ def open_sql_file(path_fichier):
 
 
 if __name__ == "__main__":
+    #session = mo.Mysql("stephen", "stephen")
+    #status = session.create_db()
+    #print(status)
     initialization()
     #contenu = open_sql_file("db_purebeurre_ready.sql")
     #contenu = "".join(contenu)
