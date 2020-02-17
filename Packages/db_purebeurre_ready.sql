@@ -1,10 +1,10 @@
-CREATE TABLE IF NOT EXISTS `category` (
+CREATE TABLE IF NOT EXISTS `Category` (
   `id` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE IF NOT EXISTS `aliment` (
+CREATE TABLE IF NOT EXISTS `Aliment` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `product_name` varchar(100) NOT NULL,
   `local_name` varchar(100) NOT NULL DEFAULT 'NO_INFO',
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `aliment` (
   CONSTRAINT `FK_sub_category` FOREIGN KEY (`local_category`) REFERENCES `category` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=01 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE IF NOT EXISTS `historic` (
+CREATE TABLE IF NOT EXISTS `Historic` (
   `swap_id` int(10) NOT NULL AUTO_INCREMENT,
   `aliment_id` int(10) DEFAULT NULL,
   `substituted_id` int(10) DEFAULT NULL,

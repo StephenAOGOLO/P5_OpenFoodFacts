@@ -14,28 +14,8 @@ import Packages.api_operations as ao
 lg.basicConfig(level=lg.WARNING)
 
 
-def off_initialization():
-    """
-    So this function is ran to concentrate these parameters first and return dict ready to use.
-    """
-    os.system(".\\Packages\\root_link.bat")
-    root_status = False
-    while 1:
-        process_report = find_process("mysql.exe")
-        print(process_report)
-        if process_report[1]:
-            print("vrai")
-        else:
-            print("faux")
-            root_status = True
-            break
-    return root_status
-
-
 def initialization():
     status = create_db_purebeurre()
-    if status:
-        return status
     big_data = ao.load_api_data()
     session = mo.Mysql("stephen", "stephen", "db_purebeurre")
     fill_table_category(session, big_data)
@@ -46,23 +26,29 @@ def initialization():
 def create_db_purebeurre():
     session = mo.Mysql("stephen", "stephen")
     status = session.create_db()
-    if status:
-        return status
     session = mo.Mysql("stephen", "stephen", "db_purebeurre")
     contenu = open_sql_file("db_purebeurre_ready.sql")
     contenu = "".join(contenu)
-    contenu = contenu.replace("\n","")
+    contenu = contenu.replace("\n", "")
     contenu = contenu.split(";")
-    dict_tables = {"category":contenu[0],"aliment":contenu[1],"historic":contenu[2]}
+    dict_tables = {"category": contenu[0], "aliment": contenu[1], "historic": contenu[2]}
     create_tables(dict_tables)
     return status
 
 
+def drop_tables(session):
+    session.executing("DROP TABLE IF EXISTS Historic")
+    session.executing("DROP TABLE IF EXISTS Aliment")
+    session.executing("DROP TABLE IF EXISTS Category")
+
+
 def create_tables(tables_data):
+    status = False
     session = mo.Mysql("stephen", "stephen", "db_purebeurre")
+    drop_tables(session)
     for table, data in tables_data.items():
-        session.executing(data)
-    return True
+        status = session.executing(data)
+    return status
 
 
 def fill_table_category(session, dico):
@@ -101,42 +87,23 @@ def fill_table_aliment(session, dico):
             session.insert_data("aliment", "(product_name, brands, nutriscore_grade, stores, purchase_places, url, local_category, local_name)", pure_value)
 
 
-def find_process(the_process="le_program_executable.exe"):
-    dico_processus = {}
-    status = False
-    for indice, process in enumerate(psutil.process_iter()):
-        if process.name() == the_process:
-            lg.info("Voici le/les processus %s en cours d'execution", the_process)
-            lg.info("%s", process)
-            dico_processus[str(indice)] = {}
-            dico_processus[str(indice)]["nom"] = process.name()
-            dico_processus[str(indice)]["pid"] = process.pid
-            dico_processus[str(indice)]["complete_info"] = process
-            status = True
-        else:
-            lg.info("le/les processus %s est/sont introuvable(s)", the_process)
-            pass
-    return dico_processus, status
+def open_sql_file(path_file):
+    """ This function is used to open sql file.
+    It's feeding the content file in a list.
 
+    :param path_file:
+    :return list_file: """
 
-def open_sql_file(path_fichier):
-    """ Fonction d'ouverture d'un fichier
-                        et
-        sauvegrade du contenu en mémoire
-
-    :param path_fichier:
-    :return liste_fichier: """
-
-    with open(path_fichier,"rt") as fichier:
-        liste_fichier = fichier.readlines()
-    print("=" * 150)
-    print("\nVoici le contenu du fichier : {}\n".format(path_fichier))
-    for indice, ligne in enumerate(liste_fichier):
-        print("ligne {} : {}".format(indice, ligne))
-    print("=" * 150)
-    print("\nFin de fichier\n")
-    print("=" * 150)
-    return liste_fichier
+    with open(path_file,"rt") as file:
+        list_file = file.readlines()
+    lg.info("=" * 150)
+    lg.info("\nThere is the content file : {}\n".format(path_file))
+    for i, line in enumerate(list_file):
+        lg.info("ligne {} : {}".format(i, line))
+    lg.info("=" * 150)
+    lg.info("\nEnd of file\n")
+    lg.info("=" * 150)
+    return list_file
 
 
 if __name__ == "__main__":

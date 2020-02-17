@@ -37,14 +37,21 @@ class Mysql:
             self.cnx.commit()
         except mc.errors.DatabaseError as e:
             lg.info(e)
-            print("Database created")
+            print("Database already created")
             status = True
         return status
 
     def create_tb(self, tb):
-        cmd = "CREATE TABLE "
-        self.cursor.execute(cmd+tb)
-        self.cnx.commit()
+        status = False
+        try:
+            cmd = "CREATE TABLE "
+            self.cursor.execute(cmd+tb)
+            self.cnx.commit()
+        except mc.errors.DatabaseError as e:
+            lg.info(e)
+            print("Tables already created")
+            status = True
+        return status
 
     def drop_db(self, db):
         cmd = "DROP DATABASE "
@@ -100,9 +107,16 @@ class Mysql:
         self.cursor.execute(cmd+file)
 
     def insert_data(self, tb, rows, values):
-        formula = "INSERT INTO {} {} VALUES {}".format(tb, rows, values)
-        self.cursor.execute(formula)
-        self.cnx.commit()
+        status = False
+        try:
+            formula = "INSERT INTO {} {} VALUES {}".format(tb, rows, values)
+            self.cursor.execute(formula)
+            self.cnx.commit()
+        except mc.errors.IntegrityError as e:
+            lg.info(e)
+            print("Entry already done")
+            status = True
+        return status
 
     def display_data(self):
         for e in self.cursor:
@@ -110,8 +124,15 @@ class Mysql:
         print("*" * 50)
 
     def executing(self, cmd):
-        self.cursor.execute(cmd)
-        self.cnx.commit()
+        status = False
+        try:
+            self.cursor.execute(cmd)
+            self.cnx.commit()
+        except mc.errors as e:
+            lg.info(e)
+            print("Tables already created")
+            status = True
+        return status
 
     def executing_2(self, cmd, arg):
         self.cursor.execute(cmd, arg)

@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e926360c-3621-4906-a504-5f1dc679deed" name="Default Changelist" comment="7th commit - on PythonBddApi.&#10;-Adding root_link.bat">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/api_operations.py" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/api_operations.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/loading.py" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/loading.py" afterDir="false" />
-    </list>
+    <list default="true" id="e926360c-3621-4906-a504-5f1dc679deed" name="Default Changelist" comment="7th commit - on PythonBddApi.&#10;-Adding root_link.bat" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -141,10 +137,10 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.p5_off_python" />
-      <item itemvalue="Python.test" />
       <item itemvalue="Python.loading" />
       <item itemvalue="Python.mysql_operations" />
+      <item itemvalue="Python.p5_off_python" />
+      <item itemvalue="Python.test" />
     </list>
     <recent_temporary>
       <list>
