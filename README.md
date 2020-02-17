@@ -28,9 +28,8 @@ ainsi que leur statut d'avancement sur l'outil en ligne [TRELLO](https://trello.
 ### Les User-Stories
 * __***US10***__  *Fonction compte utilisateur*
 
-        En tant qu'utilisateur enregistré,
-        je peux démarrer l'application purebeurre,
-        afin d'accéder au menu principale.
+        En tant que personne lambda, je peux lancer l'IHM,
+        afin de pouvoir interagir avec les différents menu du programme.
 
 * __***US20***__ *Fonction menu principal*
 
