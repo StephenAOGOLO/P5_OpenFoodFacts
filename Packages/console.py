@@ -5,7 +5,7 @@ import Packages.api_operations as ao
 import Packages.loading as load
 
 
-def menu_1():
+def menu_1(big_data):
     """ Aliment to switch"""
     while 1:
         display_stars()
@@ -13,25 +13,26 @@ def menu_1():
         print("> **Quel aliment souhaitez-vous remplacer ?**")
         display_stars()
         print("Veuillez sélectionner la catégorie de votre aliment.")
-        print("liste des categories...")
-        print("\n0 -  menu principal")
+        #print("liste des categories...")
+        get_categories(big_data)
+        print("\nx -  menu principal")
         choice = get_choice()
-        if choice == str(0):
+        if choice == "x":
             print("Vous avez choisi le retour au menu principal")
-            menu()
+            menu(big_data)
         elif int(choice):
             print("Vous avez choisi la catégorie {}".format(choice))
-            menu_1_category()
+            menu_1_category(big_data)
         else:
             print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
 
 
-def menu_2():
+def menu_2(big_data):
     """Aliment to substitute"""
     print("> **menu_2**\n")
 
 
-def menu_1_category():
+def menu_1_category(big_data):
     """Category"""
     print("> **menu_category**\n")
     while 1:
@@ -45,15 +46,15 @@ def menu_1_category():
         choice = get_choice()
         if choice == str(0):
             print("Vous avez choisi le retour au menu principal")
-            menu()
+            menu(big_data)
         elif int(choice):
             print("Vous avez choisi l'aliment {}".format(choice))
-            menu_1_aliment()
+            menu_1_aliment(big_data)
         else:
             print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
 
 
-def menu_1_aliment():
+def menu_1_aliment(big_data):
     """Aliment"""
     print("En fonction de cet l'aliment")
     print("Voici le substitut proposé")
@@ -65,29 +66,29 @@ def menu_1_aliment():
     choice = get_choice()
     if choice == str(0):
         print("Vous avez choisi le retour au menu principal")
-        menu()
+        menu(big_data)
     if choice == str(1):
         print("Vous avez choisi l'aliment {}".format(choice))
-        menu_1_save()
+        menu_1_save(big_data)
     else:
         print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
 
 
-def menu_1_substitute():
+def menu_1_substitute(big_data):
     """Substitute"""
     print("> **menu_substitute**\n")
 
 
-def menu_1_save():
+def menu_1_save(big_data):
     """Save"""
     print("> **menu_save**\n")
     display_stars()
     print("l'aliment et son substitut ont été sauvegardé !")
     display_stars()
-    menu()
+    menu(big_data)
 
 
-def menu_2_historic():
+def menu_2_historic(big_data):
     """Historic"""
     print("> **menu_historic**\n")
     print("\n")
@@ -98,24 +99,23 @@ def menu_2_historic():
     choice = get_choice()
     if choice == str(0):
         print("Vous avez choisi le menu 0")
-        menu()
+        menu(big_data)
     else:
         print("\nMauvaise saisie!!\nVous avez entré {}".format(choice,))
-        menu_2_historic()
+        menu_2_historic(big_data)
 
 
-
-def menu():
+def menu(big_data):
     """Menu"""
     print("1 - Quel aliment souhaitez-vous remplacer ?")
     print("2 - Retrouver mes aliments subtitués.")
     choice = get_choice()
     if choice == str(1):
         print("Vous avez choisi le menu 1")
-        menu_1()
+        menu_1(big_data)
     elif choice == str(2):
         print("Vous avez choisi le menu 2")
-        menu_2_historic()
+        menu_2_historic(big_data)
     else:
         print("\nMauvaise saisie!!\nVous avez entré {}".format(choice,))
 
@@ -146,21 +146,22 @@ def start_program():
     display_stars()
     print("interface running...")
     display_stars()
-    load.initialization()
-    interface()
+    big_data = load.initialization()
+    interface(big_data)
 
 
-def get_categories(api_data):
+def get_categories(big_data):
     """Categories"""
-    ao.provide_categories()
+    for i, e in enumerate(big_data["rcvd"]["local_category"]):
+        print("{} - {}".format(i, e))
 
 
-def interface():
+def interface(big_data):
     """Interface"""
     presentation()
     quit = False
     while not quit:
-        menu()
+        menu(big_data)
     quit = True
     return quit
 

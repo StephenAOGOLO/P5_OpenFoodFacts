@@ -15,12 +15,12 @@ lg.basicConfig(level=lg.WARNING)
 
 
 def initialization():
-    status = create_db_purebeurre()
+    create_db_purebeurre()
     big_data = ao.load_api_data()
     session = mo.Mysql("stephen", "stephen", "db_purebeurre")
     fill_table_category(session, big_data)
     fill_table_aliment(session, big_data)
-    return status
+    return big_data
 
 
 def create_db_purebeurre():
