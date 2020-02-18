@@ -39,21 +39,21 @@ def menu_1a(big_data):
     display("*", 50, 5)
     while 1:
         print("Veuillez sélectionner la catégorie de votre aliment.")
-        list_category = get_categories(big_data)
+        dict_category = get_categories(big_data)
         print("\nx -  menu principal")
         choice = get_choice()
         if choice == "x":
             print("Vous avez choisi le retour au menu principal")
             menu(big_data)
-        elif choice == "0":
-        #elif choice is range(0, len(list_category)):
-            print("Vous avez choisi la catégorie {}".format(choice))
-            menu_1b(big_data)
+        elif choice in str(dict_category.keys()):
+            dict_user = {"user": dict_category[int(choice)]}
+            print("Vous avez choisi la catégorie : {}".format(dict_user["user"]))
+            menu_1b(big_data, dict_user)
         else:
             print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
 
 
-def menu_1b(big_data):
+def menu_1b(big_data, dict_user):
     """Aliment"""
     display("*",50, 5)
     while 1:
@@ -132,10 +132,11 @@ def get_choice():
 
 def get_categories(big_data):
     """Categories"""
+    dict_category = {}
     for i, e in enumerate(big_data["rcvd"]["local_category"]):
         print("{} - {}".format(i, e))
-    list_category = big_data["rcvd"]["local_category"]
-    return list_category
+        dict_category[i] = e
+    return dict_category
 
 
 def interface(big_data):
