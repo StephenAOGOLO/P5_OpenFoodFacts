@@ -27,7 +27,7 @@ def create_db_purebeurre():
     session = mo.Mysql("stephen", "stephen")
     status = session.create_db()
     session = mo.Mysql("stephen", "stephen", "db_purebeurre")
-    contenu = open_sql_file("db_purebeurre_ready.sql")
+    contenu = open_sql_file(".\\Packages\\db_purebeurre_ready.sql")
     contenu = "".join(contenu)
     contenu = contenu.replace("\n", "")
     contenu = contenu.split(";")

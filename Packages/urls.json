@@ -1,12 +1,3 @@
 {
-  "beurre": "https://fr-fr.openfoodfacts.org/categorie/matiere-grasse-de-beurre.json",
-  "huile": "https://fr-fr.openfoodfacts.org/categorie/huiles.json",
-  "ketchup": "https://fr-fr.openfoodfacts.org/categorie/ketchup.json",
-  "mayonnaise": "https://fr-fr.openfoodfacts.org/categorie/mayonnaises.json",
-  "moutarde": "https://fr-fr.openfoodfacts.org/categorie/moutardes.json",
-  "pizza": "https://fr-fr.openfoodfacts.org/categorie/pizzas.json",
-  "quiche": "https://fr-fr.openfoodfacts.org/categorie/quiches.json",
-  "riz": "https://fr-fr.openfoodfacts.org/categorie/riz-parfum%C3%A9s.json",
-  "saucisse": "https://fr-fr.openfoodfacts.org/categorie/saucisses.json",
-  "steack": "https://fr-fr.openfoodfacts.org/categorie/steaks.json"
+  "fromage": "https://fr.openfoodfacts.org/categorie/fromages.json"
 }
