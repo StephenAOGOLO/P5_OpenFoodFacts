@@ -139,6 +139,13 @@ def get_categories(big_data):
     return dict_category
 
 
+def get_aliments(big_data, category):
+    """ In progress """
+    pass
+    dict_aliments = {}
+
+
+
 def interface(big_data):
     """Interface"""
     presentation()
