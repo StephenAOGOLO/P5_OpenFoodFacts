@@ -9,33 +9,50 @@ def open_json_file(file):
     return data
 
 
-def load_api_data():
-    dict_data = {}
-    list_c = ["product_name", "brands", "nutriscore_grade", "stores", "purchase_places", "url"]
-    dict_data["sent"] = {}
-    dict_data["rcvd"] = {}
+def request_urls(dict_data):
     dict_data["sent"]["urls"] = open_json_file(".\\Packages\\urls.json")
-    #dict_data["sent"]["urls"] = open_json_file("urls.json")
-    print("Retrieving data from OpenFoodFacts server in progress...")
+    return dict_data
+
+def response_urls(dict_data):
     for url_name, url in dict_data["sent"]["urls"].items():
         response = requests.get(url)
         dict_data["rcvd"][url_name] = response.json()
-    dict_data["rcvd"]["aliments"] = {}
-    print("Data received from OpenFoodFacts server")
-    print("Data organizing in progress...")
+    return dict_data
+
+
+def get_aliments(dict_data):
+    list_r = ["product_name", "brands", "nutriscore_grade", "stores", "purchase_places", "url"]
     for url_name, url in dict_data["sent"]["urls"].items():
         dict_data["rcvd"]["aliments"][url_name] = {}
         for i in range(0, 20):
             dict_data["rcvd"]["aliments"][url_name][str(i)] = {}
-            for element in list_c:
+            for element in list_r:
                 if element in dict_data["rcvd"][url_name]["products"][i]:
-                    dict_data["rcvd"]["aliments"][url_name][str(i)][element] = dict_data["rcvd"][url_name]["products"][i][element]
+                    if dict_data["rcvd"][url_name]["products"][i][element] == "":
+                        dict_data["rcvd"]["aliments"][url_name][str(i)][element] = "EMPTY"
+                    else:
+                        dict_data["rcvd"]["aliments"][url_name][str(i)][element] = dict_data["rcvd"][url_name]["products"][i][element]
                 else:
                     dict_data["rcvd"]["aliments"][url_name][str(i)][element] = "NOT_PROVIDED"
+    return dict_data
+
+
+def load_api_data():
+    dict_data = {}
+    dict_data["sent"] = {}
+    dict_data["rcvd"] = {}
+    dict_data = request_urls(dict_data)
+    print("Retrieving data from OpenFoodFacts server in progress...")
+    dict_data = response_urls(dict_data)
+    dict_data["rcvd"]["aliments"] = {}
+    print("Data received from OpenFoodFacts server")
+    print("Data organizing in progress...")
+    dict_data = get_aliments(dict_data)
     print("Getting data ready for console and local database...")
     dict_data = all_rows(dict_data)
     dict_data = all_categories(dict_data)
     dict_data = prepare_sql_values(dict_data)
+    dict_data = prepare_ihm_values(dict_data)
     print("Data ready!!!")
     print("Data initialization complete.")
     return dict_data
@@ -70,28 +87,6 @@ def provide_categories(all_data):
     return all_data["console"]["categories"]
 
 
-def console_data(all_data):
-    all_data["console"] = {}
-    provide_categories(all_data)
-    return all_data["console"]
-
-
-def show_all_data(all_data):
-    if type(all_data) == dict:
-        for k, v in all_data.items():
-            print("{} => {}".format(k, v))
-            print("*"*50)
-            print("\n")
-            if type(v) == dict:
-                show_all_data(v)
-    else:
-        print("*"*50)
-        print("Fonction show_all_data(element)")
-        print("element n'est pas un dict...")
-        print("*" * 50)
-    return 0
-
-
 def prepare_sql_values(all_data):
     list_categories = []
     all_data["rcvd"]["sql_values"] = {}
@@ -116,9 +111,42 @@ def prepare_sql_values(all_data):
     return all_data
 
 
-if __name__ =="__main__":
+def prepare_ihm_values(all_data):
+    all_data["console"] = {}
+    list_c = all_data["rcvd"]["local_category"]
+    list_r = all_data["rcvd"]["rows"]
+    for i, category in enumerate(list_c):
+        all_data["console"][category] = {}
+        for k, v in all_data["rcvd"]["sql_values"][category].items():
+            print("\n{} = {}".format(k, v))
+            if "EMPTY" in v.values():
+                continue
+            if "NOT_PROVIDED" in v.values():
+                continue
+            else:
+                all_data["console"][category][k] = v
+    return all_data
+
+
+def show_all_data(all_data):
+    num = 0
+    if type(all_data) == dict:
+        for k, v in all_data.items():
+            level = "="*num
+            print(level+"> {} => {}".format(k, v))
+            print("*"*50)
+            if type(v) == dict:
+                show_all_data(v)
+            num += 1
+    else:
+        print("*"*50)
+        print("Fonction show_all_data(element)")
+        print("element n'est pas un dict...")
+        print("*" * 50)
+    return 0
+
+
+if __name__ == "__main__":
+
     dico = load_api_data()
-    categ = provide_categories(dico)
-    for k, v in categ.items():
-        print("{} - {}".format(k, v))
-    show_all_data(dico["rcvd"]["local_category"])
+    show_all_data(dico)
