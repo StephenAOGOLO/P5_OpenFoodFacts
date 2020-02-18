@@ -145,7 +145,6 @@ def get_aliments(big_data, category):
     dict_aliments = {}
 
 
-
 def interface(big_data):
     """Interface"""
     presentation()
