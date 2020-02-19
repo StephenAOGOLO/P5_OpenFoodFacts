@@ -11,6 +11,7 @@ import Packages.console as console
 
 
 def main():
+    """ Main"""
     console.start_program()
 
 
