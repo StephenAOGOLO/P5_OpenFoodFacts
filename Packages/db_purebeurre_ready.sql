@@ -1,18 +1,18 @@
 CREATE TABLE IF NOT EXISTS `Category` (
   `id` varchar(50) NOT NULL,
-  `name` varchar(50) NOT NULL,
+  `name` varchar(500) NOT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `Aliment` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
-  `product_name` varchar(100) NOT NULL,
-  `local_name` varchar(100) NOT NULL DEFAULT 'NO_INFO',
-  `local_category` varchar(50) NOT NULL,
-  `brands` varchar(100) NOT NULL,
+  `product_name` varchar(500) NOT NULL,
+  `local_name` varchar(500) NOT NULL DEFAULT 'NO_INFO',
+  `local_category` varchar(500) NOT NULL,
+  `brands` varchar(500) NOT NULL,
   `nutriscore_grade` varchar(100) NOT NULL,
-  `stores` varchar(100) NOT NULL DEFAULT 'NO_INFO',
-  `purchase_places` varchar(100) NOT NULL DEFAULT 'NO_INFO',
+  `stores` varchar(500) NOT NULL DEFAULT 'NO_INFO',
+  `purchase_places` varchar(500) NOT NULL DEFAULT 'NO_INFO',
   `url` longtext NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_sub_category` (`local_category`),

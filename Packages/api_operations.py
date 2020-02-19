@@ -13,6 +13,7 @@ def request_urls(dict_data):
     dict_data["sent"]["urls"] = open_json_file(".\\Packages\\urls.json")
     return dict_data
 
+
 def response_urls(dict_data):
     for url_name, url in dict_data["sent"]["urls"].items():
         response = requests.get(url)
@@ -106,8 +107,6 @@ def prepare_sql_values(all_data):
                     all_data["rcvd"]["sql_values"][category][category + "_" + str(i)][row] = the_row
                 except Exception as e:
                     lg.info("erreur sur part - ", e)
-    #for k, v in all_data["rcvd"]["sql_values"]["beurre"].items():
-    #    lg.info("{} -> {}".format(k, v))
     return all_data
 
 

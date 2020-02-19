@@ -80,11 +80,16 @@ def fill_table_aliment(session, dico):
     for i in range(0, 20):
         for category in dico["rcvd"]["local_category"]:
             value = dico["rcvd"]["sql_values"][category + "_" + str(i)]["raw_data"]
-            value += ","+category
-            value += "," + category + "_" + str(i)
-            value = value.replace(",", "' , '")
-            pure_value = "('{}')".format(value)
-            session.insert_data("aliment", "(product_name, brands, nutriscore_grade, stores, purchase_places, url, local_category, local_name)", pure_value)
+            if "EMPTY" in value:
+                continue
+            if "NOT_PROVIDED" in value:
+                continue
+            else:
+                value += "," + category
+                value += "," + category + "_" + str(i)
+                value = value.replace(",", "' , '")
+                pure_value = "('{}')".format(value)
+                session.insert_data("aliment", "(product_name, brands, nutriscore_grade, stores, purchase_places, url, local_category, local_name)", pure_value)
 
 
 def open_sql_file(path_file):
