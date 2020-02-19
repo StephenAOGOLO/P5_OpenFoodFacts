@@ -21,17 +21,19 @@ def menu(big_data):
     print("2 - Retrouver mes aliments subtitués.")
     print("x - Quitter le programme.")
     choice = get_choice()
-    if choice == str(1):
-        print("Vous avez choisi le menu 1")
-        menu_1a(big_data)
-    elif choice == str(2):
-        print("Vous avez choisi le menu 2")
-        menu_2a(big_data)
-    elif choice == "x":
+    if choice == "x":
         print("Vous avez choisi de quitter le programme")
         quit_console()
-    else:
-        print("\nMauvaise saisie!!\nVous avez entré {}".format(choice,))
+    try:
+        if choice == str(1):
+            print("Vous avez choisi le menu 1")
+            menu_1a(big_data)
+        elif choice == str(2):
+            print("Vous avez choisi le menu 2")
+            menu_2a(big_data)
+    except ValueError:
+        print("Mauvaise saisie!!\nVous avez entré {}".format(choice,))
+        display("*", 50, 5)
 
 
 def menu_1a(big_data):
@@ -45,49 +47,58 @@ def menu_1a(big_data):
         if choice == "x":
             print("Vous avez choisi le retour au menu principal")
             menu(big_data)
-        elif choice in str(dict_category.keys()):
-            dict_user = {"user": dict_category[int(choice)]}
-            print("Vous avez choisi la catégorie : {}".format(dict_user["user"]))
-            menu_1b(big_data, dict_user)
-        else:
-            print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
+        try:
+            if choice in str(dict_category.keys()):
+                big_data["user"] = {"category": dict_category[int(choice)]}
+                print("Vous avez fait le choix {} - choisi la catégorie : {}".format(choice, big_data["user"]["category"]))
+                menu_1b(big_data)
+        except ValueError:
+            print("Mauvaise saisie!!\nVous avez entré {}".format(choice))
+            display("*", 50, 5)
 
 
-def menu_1b(big_data, dict_user):
+def menu_1b(big_data):
     """Aliment"""
-    display("*",50, 5)
+    display("*", 50, 5)
     while 1:
-        print("Veuillez sélectionner l'aliment'.")
-        print("liste des aliments")
-        print("\n0 -   menu principal")
+        print("Veuillez sélectionner l'aliment de votre choix.")
+        dict_aliment = get_aliments(big_data)
+        print("\nx -   menu principal")
         choice = get_choice()
-        if choice == str(0):
+        if choice == "x":
             print("Vous avez choisi le retour au menu principal")
             menu(big_data)
-        elif int(choice):
-            print("Vous avez choisi l'aliment {}".format(choice))
-            menu_1c(big_data)
-        else:
-            print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
+        try:
+            if int(choice):
+                big_data["user"]["aliment"] = dict_aliment[int(choice)]
+                print("Vous avez fait le choix {} - l'aliment {}".format(choice, big_data["user"]["aliment"]))
+                menu_1c(big_data)
+        except ValueError:
+            print("Mauvaise saisie!!\nVous avez entré {}".format(choice))
+            display("*", 50, 5)
 
 
 def menu_1c(big_data):
     """Substitute"""
-    display("*",50, 5)
-    print("En fonction de l'aliment suivant :")
-    print("Voici le substitut proposé")
-    print("Voulez-vous le sauvegarder ?")
-    print("1 - sauvegarder ?")
-    print("0 - Retour au menu principal")
-    choice = get_choice()
-    if choice == str(0):
-        print("Vous avez choisi le retour au menu principal")
-        menu(big_data)
-    if choice == str(1):
-        print("Vous avez choisi l'aliment {}".format(choice))
-        menu_1d(big_data)
-    else:
-        print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
+    display("*", 50, 5)
+    while 1:
+        print("En fonction de l'aliment suivant :")
+        print("Voici le substitut proposé")
+        print("Voulez-vous le sauvegarder ?")
+        print("1 - sauvegarder ?")
+        print("x - Retour au menu principal")
+        choice = get_choice()
+        try:
+            if choice == str(0):
+                print("Vous avez choisi le retour au menu principal")
+                display("*", 50, 5)
+                menu(big_data)
+            if choice == str(1):
+                print("Vous avez choisi de sauvegarder cette opération")
+                menu_1d(big_data)
+        except ValueError:
+            print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
+            display("*", 50, 5)
 
 
 def menu_1d(big_data):
@@ -137,6 +148,18 @@ def get_categories(big_data):
         print("{} - {}".format(i, e))
         dict_category[i] = e
     return dict_category
+
+
+def get_aliments(big_data):
+    dict_aliments = {}
+    for i, e in enumerate(big_data["console"][big_data["user"]["category"]]):
+        print("{} - {}".format(i, e))
+        dict_aliments[i] = e
+    return dict_aliments
+
+
+def get_substitute(big_data):
+    pass
 
 
 def interface(big_data):

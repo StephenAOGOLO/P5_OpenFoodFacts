@@ -117,7 +117,7 @@ def prepare_ihm_values(all_data):
     for i, category in enumerate(list_c):
         all_data["console"][category] = {}
         for k, v in all_data["rcvd"]["sql_values"][category].items():
-            print("\n{} = {}".format(k, v))
+            lg.info("\n{} = {}".format(k, v))
             if "EMPTY" in v.values():
                 continue
             if "NOT_PROVIDED" in v.values():
