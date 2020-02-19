@@ -159,6 +159,7 @@ def get_aliments(big_data):
 
 
 def get_substitute(big_data):
+    """ Substitute """
     pass
 
 

@@ -127,6 +127,11 @@ def prepare_ihm_values(all_data):
     return all_data
 
 
+def classify_ihm_values(all_data):
+    """Classify IHM data """
+    pass
+
+
 def show_all_data(all_data):
     num = 0
     if type(all_data) == dict:
