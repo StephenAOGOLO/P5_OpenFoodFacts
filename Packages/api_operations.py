@@ -134,6 +134,7 @@ def classify_ihm_values(all_data):
 
     dict_substitute = set_substitute(all_data)
     all_data["console"]["substitute"] = dict_substitute
+    traduce_rows(all_data)
     return all_data
 
 
@@ -145,8 +146,19 @@ def set_substitute(all_data):
             if va["nutriscore_grade"] < substitute:
                 substitute = ke
                 score = va
-        dict_substitutes[substitute] = score
+        dict_substitutes[k] = {}
+        dict_substitutes[k][substitute] = score
     return dict_substitutes
+
+
+def traduce_rows(all_data):
+    list_fr_r = ["Nom", "Catégorie", "Marque", "Nutriscore", "Magasins", "Lieu", "URL"]
+    all_data["console"]["rows"] = {}
+    for i, e in enumerate(all_data["rcvd"]["rows"]):
+        all_data["console"]["rows"][e] = list_fr_r[i]
+    return all_data
+
+
 
 
 def show_all_data(all_data):
