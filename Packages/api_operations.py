@@ -54,6 +54,7 @@ def load_api_data():
     dict_data = all_categories(dict_data)
     dict_data = prepare_sql_values(dict_data)
     dict_data = prepare_ihm_values(dict_data)
+    dict_data = classify_ihm_values(dict_data)
     print("Data ready!!!")
     print("Data initialization complete.")
     return dict_data
@@ -81,11 +82,11 @@ def all_rows(all_data):
 
 def provide_categories(all_data):
 
-    all_data["console"]["categories"] = {}
+    all_data["console"]["aliments"]["categories"] = {}
     for i, element in enumerate(all_data["rcvd"]["local_category"]):
         lg.info("{} - {}".format(i, element))
-        all_data["console"]["categories"][i] = element
-    return all_data["console"]["categories"]
+        all_data["console"]["aliments"]["categories"][i] = element
+    return all_data["console"]["aliments"]["categories"]
 
 
 def prepare_sql_values(all_data):
@@ -112,10 +113,11 @@ def prepare_sql_values(all_data):
 
 def prepare_ihm_values(all_data):
     all_data["console"] = {}
+    all_data["console"]["aliments"] = {}
     list_c = all_data["rcvd"]["local_category"]
     list_r = all_data["rcvd"]["rows"]
     for i, category in enumerate(list_c):
-        all_data["console"][category] = {}
+        all_data["console"]["aliments"][category] = {}
         for k, v in all_data["rcvd"]["sql_values"][category].items():
             lg.info("\n{} = {}".format(k, v))
             if "EMPTY" in v.values():
@@ -123,13 +125,28 @@ def prepare_ihm_values(all_data):
             if "NOT_PROVIDED" in v.values():
                 continue
             else:
-                all_data["console"][category][k] = v
+                all_data["console"]["aliments"][category][k] = v
     return all_data
 
 
 def classify_ihm_values(all_data):
     """Classify IHM data """
-    pass
+
+    dict_substitute = set_substitute(all_data)
+    all_data["console"]["substitute"] = dict_substitute
+    return all_data
+
+
+def set_substitute(all_data):
+    dict_substitutes = {}
+    substitute = "g"
+    for k, v in all_data["console"]["aliments"].items():
+        for ke, va in v.items():
+            if va["nutriscore_grade"] < substitute:
+                substitute = ke
+                score = va
+        dict_substitutes[substitute] = score
+    return dict_substitutes
 
 
 def show_all_data(all_data):

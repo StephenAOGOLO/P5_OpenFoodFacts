@@ -152,7 +152,7 @@ def get_categories(big_data):
 
 def get_aliments(big_data):
     dict_aliments = {}
-    for i, e in enumerate(big_data["console"][big_data["user"]["category"]]):
+    for i, e in enumerate(big_data["console"]["aliments"][big_data["user"]["category"]]):
         print("{} - {}".format(i, e))
         dict_aliments[i] = e
     return dict_aliments
