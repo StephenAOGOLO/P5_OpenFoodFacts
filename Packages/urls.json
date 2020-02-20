@@ -2,7 +2,7 @@
   "biscuit": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=biscuit&search_simple=1&action=process&json=1",
   "soupe": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=soupe&search_simple=1&action=process&json=1",
   "nugget": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=nuggets&search_simple=1&action=process&json=1",
-  "crepe_": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=crepes&search_simple=1&action=process&json=1",
+  "crepe": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=crepes&search_simple=1&action=process&json=1",
   "pizza": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=pizzas&search_simple=1&action=process&json=1",
   "quiche": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=quiches&search_simple=1&action=process&json=1",
   "nouille": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=nouilles&search_simple=1&action=process&json=1",
