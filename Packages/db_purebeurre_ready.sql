@@ -22,10 +22,10 @@ CREATE TABLE IF NOT EXISTS `Aliment` (
 CREATE TABLE IF NOT EXISTS `Historic` (
   `swap_id` int(10) NOT NULL AUTO_INCREMENT,
   `aliment_id` int(10) DEFAULT NULL,
-  `substituted_id` int(10) DEFAULT NULL,
+  `substitute_id` int(10) DEFAULT NULL,
   PRIMARY KEY (`swap_id`),
   KEY `FK_aliment_id` (`aliment_id`),
-  KEY `FK_substituted_id` (`substituted_id`),
+  KEY `FK_substitute_id` (`substitute_id`),
   CONSTRAINT `FK_aliment_id` FOREIGN KEY (`aliment_id`) REFERENCES `aliment` (`id`),
-  CONSTRAINT `FK_substituted_id` FOREIGN KEY (`substituted_id`) REFERENCES `aliment` (`id`)
+  CONSTRAINT `FK_substitute_id` FOREIGN KEY (`substitute_id`) REFERENCES `aliment` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

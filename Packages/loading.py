@@ -92,6 +92,20 @@ def fill_table_aliment(session, dico):
                 session.insert_data("aliment", "(product_name, brands, nutriscore_grade, stores, purchase_places, url, local_category, local_name)", pure_value)
 
 
+def fill_table_historic(dico):
+    session = mo.Mysql("stephen", "stephen", "db_purebeurre")
+    aliment = dico["save"]["aliment"]
+    substitute = dico["save"]["substitute"]
+    where_clause_a = "local_name = '{}' ".format(aliment)
+    where_clause_s = "local_name = '{}' ".format(substitute)
+    aliment_id = session.select_from_where("id", "aliment", where_clause_a)
+    substitute_id = session.select_from_where("id", "aliment", where_clause_s)
+    aliment_id = int(aliment_id[0][0])
+    substitute_id = int(substitute_id[0][0])
+    pure_value = "('{}', '{}')".format(aliment_id, substitute_id)
+    session.insert_data("historic", "(aliment_id, substitute_id)", pure_value)
+
+
 def open_sql_file(path_file):
     """ This function is used to open sql file.
     It's feeding the content file in a list.

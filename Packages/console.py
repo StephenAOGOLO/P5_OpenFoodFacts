@@ -81,6 +81,7 @@ def menu_1b(big_data):
 def menu_1c(big_data):
     """Substitute"""
     substitute = get_substitute(big_data)
+    aliment = big_data["user"]
     display("*", 50, 5)
     display_substitute(big_data, substitute)
     while 1:
@@ -89,24 +90,16 @@ def menu_1c(big_data):
         print("x - Retour au menu principal")
         choice = get_choice()
         try:
-            if choice == str(0):
+            if choice == "x":
                 print("Vous avez choisi le retour au menu principal")
                 display("*", 50, 5)
                 menu(big_data)
             if choice == str(1):
                 print("Vous avez choisi de sauvegarder cette opération")
-                menu_1d(big_data)
+                save_data(big_data, aliment, substitute)
         except ValueError:
             print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
             display("*", 50, 5)
-
-
-def menu_1d(big_data):
-    """Save"""
-    display("*",50, 5)
-    print("l'aliment et son substitut ont été sauvegardé !")
-    display("*",50, 5)
-    menu(big_data)
 
 
 def menu_2a(big_data):
@@ -166,6 +159,19 @@ def get_substitute(big_data):
         if k == aliment["category"]:
             substitute[k] = big_data["console"]["substitute"][k]
     return substitute
+
+
+def save_data(big_data, aliment, substitute):
+    """Save"""
+    big_data["save"] = {"aliment": aliment["aliment"]}
+    for k, v in substitute.items():
+        for ke in v.keys():
+            big_data["save"]["substitute"] = ke
+    display("*", 50, 5)
+    print("l'aliment et son substitut ont été sauvegardé !")
+    display("*", 50, 5)
+    load.fill_table_historic(big_data)
+    interface(big_data)
 
 
 def display_aliment(big_data):
