@@ -21,7 +21,7 @@ def presentation():
 def menu(big_data):
     """Menu"""
     while 1:
-        print("1 - Trouver le meilleur aliment.")
+        print("1 - Quel aliment souhaitez-vous remplacer.")
         print("2 - Retrouver mes aliments subtitués.")
         print("x - Quitter le programme.")
         display("*", 50)
@@ -45,7 +45,7 @@ def menu_1a(big_data):
     """ Category"""
     display("*", 50, 5)
     while 1:
-        print("Veuillez sélectionner la catégorie de votre aliment.")
+        print("Sélectionnez la catégorie.")
         display("*", 50)
         dict_category = get_categories(big_data)
         print("\nx -  menu principal")
@@ -68,7 +68,7 @@ def menu_1b(big_data):
     """Aliment"""
     display("*", 50, 5)
     while 1:
-        print("Veuillez sélectionner l'aliment de votre choix.")
+        print("Sélectionnez l'aliment.")
         display("*", 50)
         dict_aliment = get_aliments(big_data)
         print("\nx -   menu principal")
