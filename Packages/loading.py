@@ -22,8 +22,7 @@ def initialization():
         fill_table_category(session, big_data)
         fill_table_aliment(session, big_data)
     else:
-        big_data = read_table_category()
-        read_table_aliment(big_data)
+        big_data = build_big_data(session)
     return big_data
 
 
@@ -57,6 +56,12 @@ def maintain_db(choice):
     else:
         print("La base de donnée actuelle va être réinitilalisée !!")
     return update_status
+
+
+def build_big_data(session):
+    big_data = read_table_category(session)
+    big_data = read_table_aliment(session, big_data)
+    return big_data
 
 
 def create_db_purebeurre():
@@ -145,12 +150,20 @@ def fill_table_historic(dico):
     session.insert_data("historic", "(aliment_id, substitute_id)", pure_value)
 
 
-def read_table_aliment(dico):
+def read_table_aliment(session, dico):
     return dico
 
 
-def read_table_category():
-    dico = {}
+def read_table_category(session):
+
+    dico = {"rcvd": {}}
+    dico["rcvd"]["local_category"] = []
+    list_content = session.select_from("*", "Category")
+    for index_tuple in range(1, len(list_content)+1):
+        for i, e in enumerate(list_content):
+            if e[0] == str(index_tuple):
+                dico["rcvd"]["local_category"].append(e[1])
+                continue
     return dico
 
 
