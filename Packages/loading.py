@@ -15,11 +15,15 @@ lg.basicConfig(level=lg.WARNING)
 
 
 def initialization():
-    create_db_purebeurre()
-    big_data = ao.load_api_data()
+    status = create_db_purebeurre()
     session = mo.Mysql("stephen", "stephen", "db_purebeurre")
-    fill_table_category(session, big_data)
-    fill_table_aliment(session, big_data)
+    if status:
+        big_data = ao.load_api_data()
+        fill_table_category(session, big_data)
+        fill_table_aliment(session, big_data)
+    else:
+        big_data = read_table_category()
+        read_table_aliment(big_data)
     return big_data
 
 
@@ -36,26 +40,31 @@ def update_db(status):
             print("\n0 - Oui\n1 - Non\n")
             choice = input("Quel est votre choix : ")
             if choice == str(0):
-                maintain_db(choice)
-                return status
+                update_status = maintain_db(choice)
+                return update_status
             elif choice == str(1):
-                maintain_db(choice)
-                return status
+                update_status = maintain_db(choice)
+                return update_status
             else:
                 print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
 
 
 def maintain_db(choice):
+    update_status = True
     if choice == str(0):
         print("La base de donnée actuelle va être utilisée !!")
+        update_status = False
     else:
         print("La base de donnée actuelle va être réinitilalisée !!")
+    return update_status
 
 
 def create_db_purebeurre():
     session = mo.Mysql("stephen", "stephen")
     status = session.create_db()
     status = update_db(status)
+    if not status:
+        return status
     session = mo.Mysql("stephen", "stephen", "db_purebeurre")
     contenu = open_sql_file(".\\Packages\\db_purebeurre_ready.sql")
     contenu = "".join(contenu)
@@ -134,6 +143,15 @@ def fill_table_historic(dico):
     substitute_id = int(substitute_id[0][0])
     pure_value = "('{}', '{}')".format(aliment_id, substitute_id)
     session.insert_data("historic", "(aliment_id, substitute_id)", pure_value)
+
+
+def read_table_aliment(dico):
+    return dico
+
+
+def read_table_category():
+    dico = {}
+    return dico
 
 
 def read_table_historic(dico):
