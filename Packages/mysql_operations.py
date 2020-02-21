@@ -61,10 +61,13 @@ class Mysql:
         cmd = "DROP TABLE "
         self.cursor.execute(cmd+tb)
 
-    def select_row_from_tb(self, row, tb):
-        cmd1 = "SELECT "
-        cmd2 = "FROM "
-        self.cursor.execute(cmd1+row+cmd2+tb)
+    def select_from(self, row, tb):
+        formula = "SELECT {} FROM {}".format(row, tb)
+        self.cursor.execute(formula)
+        results = self.cursor.fetchall()
+        for result in results:
+            lg.info(result)
+        return results
 
     def select_from_where(self, row, tb, w_clause):
         formula = "SELECT {} FROM {} WHERE {}".format(row, tb, w_clause)

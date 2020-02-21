@@ -106,6 +106,25 @@ def fill_table_historic(dico):
     session.insert_data("historic", "(aliment_id, substitute_id)", pure_value)
 
 
+def read_table_historic(dico):
+    session = mo.Mysql("stephen", "stephen", "db_purebeurre")
+    dico["console"]["historic"] = {}
+    dico["console"]["historic"]["swap_id"] = {}
+    dico["console"]["historic"]["graphic"] = {}
+    list_content = session.select_from("*", "Historic")
+    for i, e in enumerate(list_content):
+        lg.info("{} - {}".format(i, e))
+        dico["console"]["historic"]["swap_id"][str(e[0])] = {"aliment_id": e[1], "substitute_id": e[2]}
+    for k, v in dico["console"]["historic"]["swap_id"].items():
+        where_clause_a = "id = '{}' ".format(v["aliment_id"])
+        where_clause_s = "id = '{}' ".format(v["substitute_id"])
+        aliment = session.select_from_where("*", "Aliment", where_clause_a)
+        substitute = session.select_from_where("*", "Aliment", where_clause_s)
+        dico["console"]["historic"]["graphic"][k] = {"aliment": aliment, "substitute": substitute}
+        lg.info("{} - {}".format(k, v))
+    return dico
+
+
 def open_sql_file(path_file):
     """ This function is used to open sql file.
     It's feeding the content file in a list.

@@ -8,32 +8,37 @@ import time
 
 def presentation():
     """Presentation"""
-    display("*", 50, 3)
-    print("********** BIENVENUE SUR PUREBERRE app ***********")
-    display("*", 50, 3)
-    print("*"*35+" by Stephen A.O")
+    display(" ", 50, 3)
+    display("~", 50, 3)
+    print("~~~~~~~~~~ BIENVENUE SUR PUREBERRE app ~~~~~~~~~~")
+    display("~", 50, 3)
+    print("~"*35+" by Stephen A.O")
+    display("~", 50)
+    display(" ", 50, 3)
     display()
 
 
 def menu(big_data):
     """Menu"""
-    print("1 - Quel aliment souhaitez-vous remplacer ?")
-    print("2 - Retrouver mes aliments subtitués.")
-    print("x - Quitter le programme.")
-    choice = get_choice()
-    if choice == "x":
-        print("Vous avez choisi de quitter le programme")
-        quit_console()
-    try:
-        if choice == str(1):
-            print("Vous avez choisi le menu 1")
-            menu_1a(big_data)
-        elif choice == str(2):
-            print("Vous avez choisi le menu 2")
-            menu_2a(big_data)
-    except ValueError:
-        print("Mauvaise saisie!!\nVous avez entré {}".format(choice,))
-        display("*", 50, 5)
+    while 1:
+        print("1 - Trouver le meilleur aliment.")
+        print("2 - Retrouver mes aliments subtitués.")
+        print("x - Quitter le programme.")
+        display("*", 50)
+        choice = get_choice()
+        try:
+            if choice == "x":
+                print("Vous avez choisi de quitter le programme")
+                quit_console()
+            if choice == str(1):
+                print("Vous avez choisi le menu 1")
+                menu_1a(big_data)
+            elif choice == str(2):
+                print("Vous avez choisi le menu 2")
+                menu_2a(big_data)
+        except ValueError or KeyError:
+            print("Mauvaise saisie!!\nVous avez entré {}".format(choice,))
+            display("*", 50, 5)
 
 
 def menu_1a(big_data):
@@ -41,18 +46,20 @@ def menu_1a(big_data):
     display("*", 50, 5)
     while 1:
         print("Veuillez sélectionner la catégorie de votre aliment.")
+        display("*", 50)
         dict_category = get_categories(big_data)
         print("\nx -  menu principal")
+        display("*", 50)
         choice = get_choice()
-        if choice == "x":
-            print("Vous avez choisi le retour au menu principal")
-            menu(big_data)
         try:
+            if choice == "x":
+                print("Vous avez choisi le retour au menu principal")
+                interface(big_data)
             if choice in str(dict_category.keys()):
                 big_data["user"] = {"category": dict_category[int(choice)]}
                 print("Vous avez fait le choix {} - choisi la catégorie : {}".format(choice, big_data["user"]["category"]))
                 menu_1b(big_data)
-        except ValueError:
+        except ValueError or KeyError:
             print("Mauvaise saisie!!\nVous avez entré {}".format(choice))
             display("*", 50, 5)
 
@@ -62,42 +69,48 @@ def menu_1b(big_data):
     display("*", 50, 5)
     while 1:
         print("Veuillez sélectionner l'aliment de votre choix.")
+        display("*", 50)
         dict_aliment = get_aliments(big_data)
         print("\nx -   menu principal")
+        display("*", 50)
         choice = get_choice()
-        if choice == "x":
-            print("Vous avez choisi le retour au menu principal")
-            menu(big_data)
         try:
-            if int(choice):
+            if choice == "x":
+                print("Vous avez choisi le retour au menu principal")
+                interface(big_data)
+            if int(choice) <= len(dict_aliment):
                 big_data["user"]["aliment"] = dict_aliment[int(choice)]
                 print("Vous avez fait le choix {} - l'aliment {}".format(choice, big_data["user"]["aliment"]))
                 menu_1c(big_data)
-        except ValueError:
+        except Exception as e:
+            print(e)
             print("Mauvaise saisie!!\nVous avez entré {}".format(choice))
             display("*", 50, 5)
 
 
 def menu_1c(big_data):
     """Substitute"""
-    substitute = get_substitute(big_data)
-    aliment = big_data["user"]
-    display("*", 50, 5)
-    display_substitute(big_data, substitute)
     while 1:
-        print("\nVoulez-vous le sauvegarder ?")
+        substitute = get_substitute(big_data)
+        aliment = big_data["user"]
+        display("*", 50, 5)
+        display_substitute(big_data, substitute)
+        display("*", 50, 2)
+        print("Voulez-vous sauvegarder cet échange ?")
+        display("*", 50)
         print("1 - sauvegarder ?")
         print("x - Retour au menu principal")
+        display("*", 50)
         choice = get_choice()
         try:
             if choice == "x":
                 print("Vous avez choisi le retour au menu principal")
                 display("*", 50, 5)
-                menu(big_data)
+                interface(big_data)
             if choice == str(1):
                 print("Vous avez choisi de sauvegarder cette opération")
                 save_data(big_data, aliment, substitute)
-        except ValueError:
+        except ValueError or KeyError:
             print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
             display("*", 50, 5)
 
@@ -105,15 +118,22 @@ def menu_1c(big_data):
 def menu_2a(big_data):
     """Historic"""
     display("*",50, 5)
-    print("Voici l'historique des aliments substitués")
-    display("*", 50, 5)
-    print("0 - Menu principal.")
-    choice = get_choice()
-    if choice == str(0):
-        print("Vous avez choisi le menu 0")
-        menu(big_data)
-    else:
-        print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
+    while 1:
+        print("Historique des aliments substitués")
+        display("*", 50)
+        display_historic(big_data)
+        print("0 - Menu principal.")
+        display("*", 50)
+        choice = get_choice()
+        try:
+            if choice == str(0):
+                print("Vous avez choisi le menu 0")
+                interface(big_data)
+            else:
+                print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
+        except ValueError:
+            print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
+            display("*", 50, 5)
 
 
 def quit_console():
@@ -167,44 +187,60 @@ def save_data(big_data, aliment, substitute):
     for k, v in substitute.items():
         for ke in v.keys():
             big_data["save"]["substitute"] = ke
+    load.fill_table_historic(big_data)
     display("*", 50, 5)
     print("l'aliment et son substitut ont été sauvegardé !")
     display("*", 50, 5)
-    load.fill_table_historic(big_data)
     interface(big_data)
 
 
 def display_aliment(big_data):
     aliment_name = big_data["user"]["aliment"]
     aliment_category = big_data["user"]["category"]
+    display("~", 50, 2)
     print("En fonction de l'aliment {}".format(aliment_name))
-    display("_", 50, 1)
     for aliment in big_data["console"]["aliments"][aliment_category].keys():
         if aliment == aliment_name:
             for k, v in big_data["console"]["rows"].items():
                 if k == "local_category":
-                    print("{} : {} ".format(v, aliment_category))
+                    print("====> {} : {} ".format(v, aliment_category))
                 else:
-                    print("{} : {} ".format(v, big_data["console"]["aliments"][aliment_category][aliment_name][k]))
-    display("_", 50, 1)
+                    print("====> {} : {} ".format(v, big_data["console"]["aliments"][aliment_category][aliment_name][k]))
 
 
 def display_substitute(big_data, substitute):
     substitute_name = ""
     substitute_category = ""
     display_aliment(big_data)
-    print("\nVoici le substitut proposé :\n")
+    print("\nVoici le substitut proposé :")
     for key in substitute.keys():
         substitute_category = key
     for value in substitute[substitute_category].keys():
         substitute_name = value
-    display("_", 50, 1)
     for k, v in big_data["console"]["rows"].items():
         if k == "local_category":
-            print("{} : {} ".format(v, substitute_category))
+            print("====> {} : {} ".format(v, substitute_category))
         else:
-            print("{} : {} ".format(v, substitute[substitute_category][substitute_name][k]))
-    display("_", 50, 1)
+            print("====> {} : {} ".format(v, substitute[substitute_category][substitute_name][k]))
+    display("~", 50, 2)
+
+
+def display_historic(big_data):
+    big_data = load.read_table_historic(big_data)
+    if len(big_data["console"]["historic"]["graphic"]) == 0:
+        display("~", 50)
+        print(" "*5+"~~~~~ L'historique est vide ~~~~~")
+        display("~", 50)
+        return 0
+    for k, v in big_data["console"]["historic"]["graphic"].items():
+        print("REMPLACEMENT {}".format(k))
+        display("*", 50)
+        for ke, va in v.items():
+            print("{}".format(ke))
+            for element in va[0]:
+                print("====> {}".format(element))
+            print("\n")
+        display("*", 50)
 
 
 def interface(big_data):
