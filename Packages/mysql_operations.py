@@ -37,7 +37,7 @@ class Mysql:
             self.cnx.commit()
         except mc.errors.DatabaseError as e:
             lg.info(e)
-            print("Database already created")
+            print("Il existe déjà une base de données !!")
             status = True
         return status
 

@@ -23,9 +23,39 @@ def initialization():
     return big_data
 
 
+def update_db(status):
+    while 1:
+        if status:
+            print("Voulez-vous conserver la base de données actuelle ?")
+            print("~"*50)
+            print("==> Si vous répondez 'Oui', les informations proposées dans cette application"
+                  " seront peut-être pas à jour."
+                  "\n==> Si vous répondez 'Non', L'historique de vos aliments substitués"
+                  " et toutes les autres informations seront réinitialisés.")
+            print("~"*50)
+            print("\n0 - Oui\n1 - Non\n")
+            choice = input("Quel est votre choix : ")
+            if choice == str(0):
+                maintain_db(choice)
+                return status
+            elif choice == str(1):
+                maintain_db(choice)
+                return status
+            else:
+                print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
+
+
+def maintain_db(choice):
+    if choice == str(0):
+        print("La base de donnée actuelle va être utilisée !!")
+    else:
+        print("La base de donnée actuelle va être réinitilalisée !!")
+
+
 def create_db_purebeurre():
     session = mo.Mysql("stephen", "stephen")
     status = session.create_db()
+    status = update_db(status)
     session = mo.Mysql("stephen", "stephen", "db_purebeurre")
     contenu = open_sql_file(".\\Packages\\db_purebeurre_ready.sql")
     contenu = "".join(contenu)
