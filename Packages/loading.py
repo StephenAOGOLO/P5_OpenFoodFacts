@@ -59,8 +59,12 @@ def maintain_db(choice):
 
 
 def build_big_data(session):
-    big_data = read_table_category(session)
+    big_data = {"rcvd": {}, "console": {}}
+    big_data = ao.all_rows(big_data)
+    big_data = ao.traduce_rows(big_data)
+    big_data = read_table_category(session, big_data)
     big_data = read_table_aliment(session, big_data)
+    big_data = ao.classify_ihm_values(big_data)
     return big_data
 
 
@@ -133,7 +137,9 @@ def fill_table_aliment(session, dico):
                 value += "," + category + "_" + str(i)
                 value = value.replace(",", "' , '")
                 pure_value = "('{}')".format(value)
-                session.insert_data("aliment", "(product_name, brands, nutriscore_grade, stores, purchase_places, url, local_category, local_name)", pure_value)
+                session.insert_data("aliment", "(product_name, brands, nutriscore_grade,"
+                                               " stores, purchase_places, url, local_category,"
+                                               " local_name)", pure_value)
 
 
 def fill_table_historic(dico):
@@ -151,12 +157,22 @@ def fill_table_historic(dico):
 
 
 def read_table_aliment(session, dico):
+    dico["console"] = {}
+    dico["console"]["aliments"] = {}
+    list_r = dico["rcvd"]["rows"]
+    for category in dico["rcvd"]["local_category"]:
+        where_clause = "local_category = '{}' ".format(category)
+        list_content = session.select_from_where("*", "Aliment", where_clause)
+        dico["console"]["aliments"][category] = {}
+        for e in list_content:
+            dico["console"]["aliments"][category][e[2]] = {list_r[0]: e[1], list_r[1]: e[3], list_r[2]: e[4],
+                                                           list_r[3]: e[5], list_r[4]: e[6], list_r[5]: e[7],
+                                                           list_r[6]: e[8]}
     return dico
 
 
-def read_table_category(session):
+def read_table_category(session, dico):
 
-    dico = {"rcvd": {}}
     dico["rcvd"]["local_category"] = []
     list_content = session.select_from("*", "Category")
     for index_tuple in range(1, len(list_content)+1):

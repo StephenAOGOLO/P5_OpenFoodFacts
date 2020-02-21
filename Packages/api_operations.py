@@ -159,8 +159,6 @@ def traduce_rows(all_data):
     return all_data
 
 
-
-
 def show_all_data(all_data):
     num = 0
     if type(all_data) == dict:
