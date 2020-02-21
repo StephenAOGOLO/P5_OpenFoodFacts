@@ -27,8 +27,9 @@ def initialization():
 
 
 def update_db(status):
-    while 1:
-        if status:
+
+    if status:
+        while 1:
             print("Voulez-vous conserver la base de données actuelle ?")
             print("~"*50)
             print("==> Si vous répondez 'Oui', les informations proposées dans cette application"
@@ -46,6 +47,7 @@ def update_db(status):
                 return update_status
             else:
                 print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
+    return True
 
 
 def maintain_db(choice):
