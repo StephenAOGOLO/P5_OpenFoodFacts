@@ -190,6 +190,7 @@ def read_table_historic(dico):
     dico["console"]["historic"] = {}
     dico["console"]["historic"]["swap_id"] = {}
     dico["console"]["historic"]["graphic"] = {}
+    dico["console"]["historic"]["read_rows"] = read_columns(session, dico)
     list_content = session.select_from("*", "Historic")
     for i, e in enumerate(list_content):
         lg.info("{} - {}".format(i, e))
@@ -202,6 +203,21 @@ def read_table_historic(dico):
         dico["console"]["historic"]["graphic"][k] = {"aliment": aliment, "substitute": substitute}
         lg.info("{} - {}".format(k, v))
     return dico
+
+
+def read_columns(session, dico):
+
+    table = "INFORMATION_SCHEMA.COLUMNS"
+    where_clause = "TABLE_NAME = 'Aliment' "
+    t_rows = session.select_from_where("*", table, where_clause)
+    i = 1
+    read_rows = []
+    while i < len(t_rows):
+        for e in t_rows:
+            if i == e[4]:
+                read_rows.append(e[3])
+                i += 1
+    return read_rows
 
 
 def open_sql_file(path_file):

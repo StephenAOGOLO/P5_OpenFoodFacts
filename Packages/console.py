@@ -312,8 +312,11 @@ def display_historic(big_data):
         display("*", 50)
         for ke, va in v.items():
             print("{}".format(ke))
+            i = 0
             for element in va[0]:
-                print("====> {}".format(element))
+                row = big_data["console"]["historic"]["read_rows"][i]
+                print("====> {} : {} ".format(row, element))
+                i += 1
             print("\n")
         display("*", 50)
 
