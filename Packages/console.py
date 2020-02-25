@@ -57,7 +57,7 @@ def menu_1a(big_data):
                 interface(big_data)
             if choice in str(dict_category.keys()):
                 big_data["user"] = {"category": dict_category[int(choice)]}
-                print("Vous avez fait le choix {} - choisi la catégorie : {}".format(choice, big_data["user"]["category"]))
+                print("Vous avez fait le choix {}, la catégorie : {}".format(choice, big_data["user"]["category"]))
                 menu_1b(big_data)
         except ValueError or KeyError:
             print("Mauvaise saisie!!\nVous avez entré {}".format(choice))
@@ -189,8 +189,10 @@ def get_categories(big_data):
 
 def get_aliments(big_data):
     dict_aliments = {}
-    for i, e in enumerate(big_data["console"]["aliments"][big_data["user"]["category"]]):
-        print("{} - {}".format(i, e))
+    user_category = big_data["user"]["category"]
+    for i, e in enumerate(big_data["console"]["aliments"][user_category]):
+        title = big_data["console"]["aliments"][user_category][e]["product_name"]
+        print("{} : {}".format(i, title))
         dict_aliments[i] = e
     return dict_aliments
 
