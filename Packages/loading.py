@@ -112,7 +112,7 @@ def fill_table_aliment(session, dico):
 
     # TABLE ALIMENT
     for category in dico["rcvd"]["local_category"]:
-        for i in range(0, 20):
+        for i in range(0, len(dico["rcvd"]["sql_values"][category])):
             raw_data = ""
             dico["rcvd"]["sql_values"][category + "_" + str(i)] = {}
             dico["rcvd"]["sql_values"][category + "_" + str(i)]["pure_data"] = []
@@ -127,8 +127,10 @@ def fill_table_aliment(session, dico):
                 i_rows += 1
             dico["rcvd"]["sql_values"][category + "_" + str(i)]["raw_data"] = raw_data
             raw_data = ""
-    for i in range(0, 20):
-        for category in dico["rcvd"]["local_category"]:
+
+
+    for category in dico["rcvd"]["local_category"]:
+        for i in range(0, len(dico["rcvd"]["sql_values"][category])):
             value = dico["rcvd"]["sql_values"][category + "_" + str(i)]["raw_data"]
             if "EMPTY" in value:
                 continue

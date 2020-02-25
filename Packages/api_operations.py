@@ -25,7 +25,7 @@ def get_aliments(dict_data):
     list_r = ["product_name", "brands", "nutriscore_grade", "stores", "purchase_places", "url"]
     for url_name, url in dict_data["sent"]["urls"].items():
         dict_data["rcvd"]["aliments"][url_name] = {}
-        for i in range(0, 20):
+        for i in range(0, len(dict_data["rcvd"][url_name]["products"])):
             dict_data["rcvd"]["aliments"][url_name][str(i)] = {}
             for element in list_r:
                 if element in dict_data["rcvd"][url_name]["products"][i]:
@@ -96,10 +96,10 @@ def prepare_sql_values(all_data):
         all_data["rcvd"]["sql_values"][key] = {}
         list_categories.append(key)
     for category in list_categories:
-        for i in range(0, 20):
+        for i in range(0, len(all_data["rcvd"]["aliments"][category])):
             all_data["rcvd"]["sql_values"][category][category+"_"+str(i)] = all_data["rcvd"]["aliments"][category][str(i)]
     for category in list_categories:
-        for i in range(0, 20):
+        for i in range(0, len(all_data["rcvd"]["aliments"][category])):
             for row in all_data["rcvd"]["rows"]:
                 try:
                     the_row = all_data["rcvd"]["sql_values"][category][category+"_"+str(i)][row]
