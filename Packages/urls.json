@@ -7,6 +7,7 @@
   "quiche": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=quiches&search_simple=1&action=process&json=1",
   "nouille": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=nouilles&search_simple=1&action=process&json=1",
   "yaourt": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=yaourts&search_simple=1&action=process&json=1",
-  "jus_multifruits": "https://fr.openfoodfacts.org/categorie/jus-multifruits-a-base-de-jus-concentre.json",
-  "boeuf_bourguignon": "https://fr.openfoodfacts.org/categorie/boeufs-bourguignons.json"
+  "boeuf_bourguignon": "https://fr.openfoodfacts.org/categorie/boeufs-bourguignons.json",
+  "jus_de_fruits": "https://fr.openfoodfacts.org/categorie/boissons-aux-fruits.json",
+  "soda": "https://fr.openfoodfacts.org/categorie/sodas-aux-fruits-light.json"
 }
