@@ -262,7 +262,8 @@ def display_aliment(big_data):
             for k, v in value.items():
                 if k == aliment_name:
                     for ke, va in v.items():
-                        print("====> {} : {}".format(ke, va))
+                        row = big_data["console"]["rows"][ke]
+                        print("====> {} : {}".format(row, va))
                     break
 
 
