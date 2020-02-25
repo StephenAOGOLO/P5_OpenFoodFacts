@@ -81,6 +81,7 @@ def menu_1b(big_data):
             if int(choice) <= len(dict_aliment):
                 big_data["user"]["aliment"] = dict_aliment[int(choice)]
                 print("Vous avez fait le choix {} - l'aliment {}".format(choice, big_data["user"]["aliment"]))
+                display_aliment(big_data)
                 menu_1c(big_data)
         except Exception as e:
             print(e)
@@ -111,6 +112,29 @@ def menu_1c(big_data):
                 print("Vous avez choisi de sauvegarder cette opération")
                 save_data(big_data, aliment, substitute)
         except ValueError or KeyError:
+            print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
+            display("*", 50, 5)
+
+
+def menu_1c0(big_data):
+    """Historic"""
+    display("*",50, 5)
+    while 1:
+        display("~", 50)
+        print("\n~~~~~ Aucun substitut ne peut être proposé !! ~~~~~~~~~~~~")
+        print("\n" + "~~ L'aliment sélectionné possède le meilleur nutriscore ~~")
+        display("~", 50)
+        print("\nPour recommencer votre sélection,\nretournez au menu principale.\n")
+        print("0 - Menu principal.")
+        display("*", 50)
+        choice = get_choice()
+        try:
+            if choice == str(0):
+                print("Vous avez choisi le menu 0")
+                interface(big_data)
+            else:
+                print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
+        except ValueError:
             print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
             display("*", 50, 5)
 
@@ -178,7 +202,28 @@ def get_substitute(big_data):
     for k in big_data["console"]["substitute"].keys():
         if k == aliment["category"]:
             substitute[k] = big_data["console"]["substitute"][k]
+            check_score(substitute[k], big_data)
+            break
     return substitute
+
+
+def check_score(substitute, big_data):
+    aliment = big_data["user"]
+    for key, value in big_data["console"]["aliments"].items():
+        if key == aliment["category"]:
+            for k, v in value.items():
+                if k == aliment["aliment"]:
+                    aliment_info = {k: v}
+                    break
+    for key, value in aliment_info.items():
+        for k, v in substitute.items():
+            sub = v["nutriscore_grade"]
+            ali = aliment_info[key]["nutriscore_grade"]
+            if sub >= ali:
+
+                menu_1c0(big_data)
+
+
 
 
 def save_data(big_data, aliment, substitute):
@@ -194,7 +239,32 @@ def save_data(big_data, aliment, substitute):
     interface(big_data)
 
 
+def off_display_aliment(big_data):
+    aliment = big_data["user"]
+    for key, value in big_data["console"]["aliments"].items():
+        if key == aliment["category"]:
+            for k, v in value.items():
+                if k == aliment["aliment"]:
+                    for ke, va in v.items():
+                        print("====> {} : {}".format(ke, va))
+                    break
+
+
 def display_aliment(big_data):
+    all_aliments = big_data["console"]["aliments"].items()
+    aliment = big_data["user"]
+    category = aliment["category"]
+    aliment_name = aliment["aliment"]
+    for key, value in all_aliments:
+        if key == category:
+            for k, v in value.items():
+                if k == aliment_name:
+                    for ke, va in v.items():
+                        print("====> {} : {}".format(ke, va))
+                    break
+
+
+def display_all_aliments(big_data):
     aliment_name = big_data["user"]["aliment"]
     aliment_category = big_data["user"]["category"]
     display("~", 50, 2)
@@ -211,7 +281,7 @@ def display_aliment(big_data):
 def display_substitute(big_data, substitute):
     substitute_name = ""
     substitute_category = ""
-    display_aliment(big_data)
+    display_all_aliments(big_data)
     print("\nVoici le substitut proposé :")
     for key in substitute.keys():
         substitute_category = key
@@ -223,6 +293,8 @@ def display_substitute(big_data, substitute):
         else:
             print("====> {} : {} ".format(v, substitute[substitute_category][substitute_name][k]))
     display("~", 50, 2)
+
+
 
 
 def display_historic(big_data):

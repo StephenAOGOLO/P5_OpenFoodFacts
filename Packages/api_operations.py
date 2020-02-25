@@ -138,7 +138,7 @@ def classify_ihm_values(all_data):
     return all_data
 
 
-def set_substitute(all_data):
+def off_set_substitute(all_data):
     dict_substitutes = {}
     substitute = "g"
     for k, v in all_data["console"]["aliments"].items():
@@ -148,6 +148,20 @@ def set_substitute(all_data):
                 score = va
         dict_substitutes[k] = {}
         dict_substitutes[k][substitute] = score
+    return dict_substitutes
+
+
+def set_substitute(all_data):
+    dict_substitutes = {}
+    for k, v in all_data["console"]["aliments"].items():
+        score = "g"
+        for ke, va in v.items():
+            if va["nutriscore_grade"] < score:
+                substitute = ke
+                info = va
+                score = va["nutriscore_grade"]
+        dict_substitutes[k] = {}
+        dict_substitutes[k][substitute] = info
     return dict_substitutes
 
 
