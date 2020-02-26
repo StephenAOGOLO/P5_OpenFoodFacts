@@ -8,6 +8,7 @@ import configparser
 import os
 import time
 import psutil
+from getpass import *
 import logging as lg
 import Packages.mysql_operations as mo
 import Packages.api_operations as ao
@@ -15,6 +16,7 @@ lg.basicConfig(level=lg.WARNING)
 
 
 def initialization():
+    create_user()
     status = create_db_purebeurre()
     session = mo.Mysql("stephen", "stephen", "db_purebeurre")
     if status:
@@ -26,8 +28,20 @@ def initialization():
     return big_data
 
 
-def update_db(status):
+def create_user():
+    root_id = input("Veuillez entrer votre identifiant administrateur mysql : ")
+    #root_psw = gp.getpass("Veuillez entrer votre mot de passe administrateur mysql : ")
+    root_psw = getpass("Veuillez entrer votre mot de passe administrateur mysql : ")
+    root_session = mo.Mysql(root_id, root_psw)
+    cmd = """CREATE USER 'stephen'@'127.0.0.1' IDENTIFIED BY 'stephen'"""
+    status = root_session.executing(cmd)
+    print(status)
+    cmd = """GRANT ALL PRIVILEGES ON db_purebeurre.* TO 'stephen'@'127.0.0.1'"""
+    root_session.executing(cmd)
+    print(status)
 
+
+def update_db(status):
     if status:
         while 1:
             print("Voulez-vous conserver la base de données actuelle ?")
@@ -242,7 +256,10 @@ def open_sql_file(path_file):
 
 
 if __name__ == "__main__":
-    initialization()
+    create_user()
+
+    #initialization()
+
     #session = mo.Mysql("stephen", "stephen")
     #status = session.create_db()
     #print(status)

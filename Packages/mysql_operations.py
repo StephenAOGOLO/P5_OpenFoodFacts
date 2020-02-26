@@ -135,14 +135,13 @@ class Mysql:
         print("*" * 50)
 
     def executing(self, cmd):
-        status = False
+        status = True
         try:
             self.cursor.execute(cmd)
             self.cnx.commit()
-        except mc.errors as e:
-            lg.info(e)
-            print("Tables already created")
-            status = True
+        except Exception as e:
+            lg.warning(e)
+            status = e
         return status
 
     def executing_2(self, cmd, arg):

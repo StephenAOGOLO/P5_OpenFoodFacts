@@ -298,8 +298,6 @@ def display_substitute(big_data, substitute):
     display("~", 50, 2)
 
 
-
-
 def display_historic(big_data):
     big_data = load.read_table_historic(big_data)
     if len(big_data["console"]["historic"]["graphic"]) == 0:
