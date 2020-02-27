@@ -8,7 +8,7 @@ import configparser
 import os
 import time
 import psutil
-from getpass import *
+from getpass4 import *
 import logging as lg
 import Packages.mysql_operations as mo
 import Packages.api_operations as ao
@@ -16,7 +16,7 @@ lg.basicConfig(level=lg.WARNING)
 
 
 def initialization():
-    create_user()
+    init_root()
     status = create_db_purebeurre()
     session = mo.Mysql("stephen", "stephen", "db_purebeurre")
     if status:
@@ -28,17 +28,37 @@ def initialization():
     return big_data
 
 
-def create_user():
+def is_user_created(root_session, host="localhost", user="stephen"):
+    users = root_session.select_from("host, user", "mysql.user")
+    there = False
+    for e in users:
+        if (e[0] == "localhost") and (str(e[1].decode()) == "stephen"):
+            there = True
+            break
+    if not there:
+        create_user(root_session)
+
+
+def init_root(status=False):
+    if status:
+        root_session = connect_root()
+        is_user_created(root_session)
+
+
+def connect_root():
     root_id = input("Veuillez entrer votre identifiant administrateur mysql : ")
-    #root_psw = gp.getpass("Veuillez entrer votre mot de passe administrateur mysql : ")
     root_psw = getpass("Veuillez entrer votre mot de passe administrateur mysql : ")
     root_session = mo.Mysql(root_id, root_psw)
-    cmd = """CREATE USER 'stephen'@'127.0.0.1' IDENTIFIED BY 'stephen'"""
+    return root_session
+
+
+def create_user(root_session, user="stephen", host="localhost", pseudo="stephen"):
+    cmd = """CREATE USER '{}'@'{}' IDENTIFIED BY '{}'""".format(user, host, pseudo)
     status = root_session.executing(cmd)
-    print(status)
-    cmd = """GRANT ALL PRIVILEGES ON db_purebeurre.* TO 'stephen'@'127.0.0.1'"""
+    cmd = """GRANT ALL PRIVILEGES ON db_purebeurre.* TO 'stephen'@'localhost'"""
     root_session.executing(cmd)
-    print(status)
+    print("l'utilisateur '{}'@'{}' identifié en tant que '{}' a été créée ! "
+          .format(user, host, pseudo))
 
 
 def update_db(status):
@@ -256,9 +276,8 @@ def open_sql_file(path_file):
 
 
 if __name__ == "__main__":
-    create_user()
 
-    #initialization()
+    initialization()
 
     #session = mo.Mysql("stephen", "stephen")
     #status = session.create_db()

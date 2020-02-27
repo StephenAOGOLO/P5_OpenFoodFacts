@@ -3,4 +3,4 @@ pylint
 mysql-connector>=2.2.9
 psutil>=5.6.7
 requests>=2.22.0
-
+getpass4>=0.0.8
