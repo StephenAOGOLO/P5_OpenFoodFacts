@@ -8,20 +8,41 @@ class Data:
     """Data"""
     def __init__(self):
         """init"""
-        self.big_data = load_api_data()
+        self.json_url_file = ".\\Packages\\urls.json"
+        self.big_data = self.load_api_data()
 
+    def load_api_data(self):
+        """function"""
+        all_data = {}
+        all_data["sent"] = {}
+        all_data["rcvd"] = {}
+        all_data = self.request_urls(all_data)
+        print("Retrieving data from OpenFoodFacts server in progress...")
+        all_data = response_urls(all_data)
+        all_data["rcvd"]["aliments"] = {}
+        print("Data received from OpenFoodFacts server")
+        print("Data organizing in progress...")
+        all_data = get_aliments(all_data)
+        print("Getting data ready for console and local database...")
+        all_data = all_rows(all_data)
+        all_data = all_categories(all_data)
+        all_data = prepare_sql_values(all_data)
+        all_data = prepare_ihm_values(all_data)
+        all_data = classify_ihm_values(all_data)
+        print("Data ready!!!")
+        print("Data initialization complete.")
+        return all_data
 
-def open_json_file(file):
-    """function"""
-    with open(file) as f:
-        data = json.load(f)
-    return data
+    def open_json_file(self):
+        """function"""
+        with open(self.json_url_file) as f:
+            data = json.load(f)
+        return data
 
-
-def request_urls(all_data):
-    """function"""
-    all_data["sent"]["urls"] = open_json_file(".\\Packages\\urls.json")
-    return all_data
+    def request_urls(self, all_data):
+        """function"""
+        all_data["sent"]["urls"] = self.open_json_file()
+        return all_data
 
 
 def response_urls(all_data):
@@ -47,29 +68,6 @@ def get_aliments(all_data):
                         all_data["rcvd"]["aliments"][url_name][str(i)][element] = all_data["rcvd"][url_name]["products"][i][element]
                 else:
                     all_data["rcvd"]["aliments"][url_name][str(i)][element] = "NOT_PROVIDED"
-    return all_data
-
-
-def load_api_data():
-    """function"""
-    all_data = {}
-    all_data["sent"] = {}
-    all_data["rcvd"] = {}
-    all_data = request_urls(all_data)
-    print("Retrieving data from OpenFoodFacts server in progress...")
-    all_data = response_urls(all_data)
-    all_data["rcvd"]["aliments"] = {}
-    print("Data received from OpenFoodFacts server")
-    print("Data organizing in progress...")
-    all_data = get_aliments(all_data)
-    print("Getting data ready for console and local database...")
-    all_data = all_rows(all_data)
-    all_data = all_categories(all_data)
-    all_data = prepare_sql_values(all_data)
-    all_data = prepare_ihm_values(all_data)
-    all_data = classify_ihm_values(all_data)
-    print("Data ready!!!")
-    print("Data initialization complete.")
     return all_data
 
 
@@ -189,6 +187,5 @@ def show_all_data(all_data):
 
 
 if __name__ == "__main__":
-
-    dico = load_api_data()
-    show_all_data(dico)
+    the_instance = Data()
+    big_data = the_instance.load_api_data()
