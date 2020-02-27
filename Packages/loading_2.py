@@ -11,28 +11,29 @@ import psutil
 from getpass4 import *
 import logging as lg
 import Packages.mysql_operations_2 as mo
-import Packages.api_operations as ao
+import Packages.api_operations_2 as ao
 lg.basicConfig(level=lg.WARNING)
 
 class Loading:
     """ Loading """
     def __init__(self):
-        self.root_db = init_root(False)
-        self.created_db = create_db_purebeurre(False)
+        """init"""
+        self.status = check_db(False)
         self.mysql_session = mo.Mysql("stephen", "stephen", "db_purebeurre")
-        self.big_data = get_all_data()
+        self.big_data = self.initialization()
 
-def initialization():
-    init_root(False)
-    status = create_db_purebeurre(False)
-    session = mo.Mysql("stephen", "stephen", "db_purebeurre")
-    big_data = get_all_data(status, session)
-    return big_data
+    def initialization(self):
+        init_root(False)
+        #status = check_db(False)
+        big_data = get_all_data(self.status, self.mysql_session)
+        return big_data
 
 
 def get_all_data(status, session):
     if status:
-        big_data = ao.load_api_data()
+        the_instance = ao.Data()
+        big_data = the_instance.big_data
+        #big_data = ao.load_api_data()
         fill_table_category(session, big_data)
         fill_table_aliment(session, big_data)
     else:
@@ -117,7 +118,7 @@ def build_big_data(session):
     return big_data
 
 
-def create_db_purebeurre(check_status=False):
+def check_db(check_status=False):
     session = mo.Mysql("stephen", "stephen")
     status = session.create_db()
     if check_status:

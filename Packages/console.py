@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import os
 import Packages.api_operations as ao
-import Packages.loading as load
+import Packages.loading_2 as load
 import time
 
 
@@ -162,7 +162,7 @@ def menu_2a(big_data):
 
 def quit_console():
     print("Fermeture de la console en cours ...")
-    time.sleep(3)
+    time.sleep(1)
     exit()
 
 
@@ -330,7 +330,9 @@ def start_program():
     display("*",50, 5)
     print("interface running...")
     display("*",50, 5)
-    big_data = load.initialization()
+    #big_data = load.initialization()
+    the_instance = load.Loading()
+    big_data = the_instance.big_data
     interface(big_data)
 
 
