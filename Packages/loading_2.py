@@ -12,15 +12,25 @@ from getpass4 import *
 import logging as lg
 import Packages.mysql_operations_2 as mo
 import Packages.api_operations_2 as ao
+import Packages.options as opt
 lg.basicConfig(level=lg.WARNING)
 
 class Loading:
     """ Loading """
+    #the_options = opt.Settings()
+    #params = the_options.get_data_file_ini("loading")
     def __init__(self):
         """init"""
-        self.sql_file = ".\\Packages\\db_purebeurre_ready.sql"
-        self.status = self.check_db(False)
-        self.mysql_session = mo.Mysql("stephen", "stephen", "db_purebeurre")
+        #self.sql_file = ".\\Packages\\db_purebeurre_ready.sql"
+        the_options = opt.Settings()
+        self.params = the_options.get_data_file_ini("loading")
+        self.sql_file = self.params["db_sql_file"]
+        self.verify = self.params["check_db_exists"]
+        self.status = self.check_db(self.verify)
+        self.user = self.params["user"]
+        self.psw = self.params["psw"]
+        self.db_name = self.params["db_name"]
+        self.mysql_session = mo.Mysql(self.user, self.psw, self.db_name)
         self.big_data = self.initialization()
 
     def initialization(self):
@@ -95,11 +105,11 @@ class Loading:
             status = self.mysql_session.executing(data)
         return status
 
-    def check_db(self, check_status=False):
+    def check_db(self, check_status=0):
         """check_db"""
         self.mysql_session = mo.Mysql("stephen", "stephen")
         status = self.mysql_session.create_db()
-        if check_status:
+        if check_status == "1":
             status = update_db(status)
             if not status:
                 return status
@@ -300,6 +310,9 @@ def maintain_db(choice):
 
 
 if __name__ == "__main__":
+    #the_options = opt.Settings()
+    #data = the_options.get_data_file_ini("loading")
+    #print(data)
     the_instance = Loading()
     big_data = the_instance.big_data
 
