@@ -1,6 +1,8 @@
+"""Top comment"""
 import json
 import requests
 import logging as lg
+
 
 class Data:
     """Data"""
@@ -8,18 +10,22 @@ class Data:
         """init"""
         self.big_data = load_api_data()
 
+
 def open_json_file(file):
+    """function"""
     with open(file) as f:
         data = json.load(f)
     return data
 
 
 def request_urls(all_data):
+    """function"""
     all_data["sent"]["urls"] = open_json_file(".\\Packages\\urls.json")
     return all_data
 
 
 def response_urls(all_data):
+    """function"""
     for url_name, url in all_data["sent"]["urls"].items():
         response = requests.get(url)
         all_data["rcvd"][url_name] = response.json()
@@ -27,6 +33,7 @@ def response_urls(all_data):
 
 
 def get_aliments(all_data):
+    """function"""
     list_r = ["product_name", "brands", "nutriscore_grade", "stores", "purchase_places", "url"]
     for url_name, url in all_data["sent"]["urls"].items():
         all_data["rcvd"]["aliments"][url_name] = {}
@@ -44,6 +51,7 @@ def get_aliments(all_data):
 
 
 def load_api_data():
+    """function"""
     all_data = {}
     all_data["sent"] = {}
     all_data["rcvd"] = {}
@@ -66,6 +74,7 @@ def load_api_data():
 
 
 def all_categories(all_data):
+    """function"""
     all_data["rcvd"]["local_category"] = []
     for key in all_data["rcvd"]["aliments"].keys():
         all_data["rcvd"]["local_category"].append(key)
@@ -73,7 +82,7 @@ def all_categories(all_data):
 
 
 def all_rows(all_data):
-
+    """function"""
     all_data["rcvd"]["rows"] = ["product_name",
                                 "local_category",
                                 "brands",
@@ -85,16 +94,8 @@ def all_rows(all_data):
     return all_data
 
 
-def provide_categories(all_data):
-
-    all_data["console"]["aliments"]["categories"] = {}
-    for i, element in enumerate(all_data["rcvd"]["local_category"]):
-        lg.info("{} - {}".format(i, element))
-        all_data["console"]["aliments"]["categories"][i] = element
-    return all_data["console"]["aliments"]["categories"]
-
-
 def prepare_sql_values(all_data):
+    """function"""
     list_categories = []
     all_data["rcvd"]["sql_values"] = {}
     for key in all_data["rcvd"]["aliments"].keys():
@@ -117,6 +118,7 @@ def prepare_sql_values(all_data):
 
 
 def prepare_ihm_values(all_data):
+    """function"""
     all_data["console"] = {}
     all_data["console"]["aliments"] = {}
     list_c = all_data["rcvd"]["local_category"]
@@ -143,20 +145,8 @@ def classify_ihm_values(all_data):
     return all_data
 
 
-def off_set_substitute(all_data):
-    dict_substitutes = {}
-    substitute = "g"
-    for k, v in all_data["console"]["aliments"].items():
-        for ke, va in v.items():
-            if va["nutriscore_grade"] < substitute:
-                substitute = ke
-                score = va
-        dict_substitutes[k] = {}
-        dict_substitutes[k][substitute] = score
-    return dict_substitutes
-
-
 def set_substitute(all_data):
+    """function"""
     dict_substitutes = {}
     for k, v in all_data["console"]["aliments"].items():
         score = "g"
@@ -171,6 +161,7 @@ def set_substitute(all_data):
 
 
 def traduce_rows(all_data):
+    """function"""
     list_fr_r = ["Nom", "Catégorie", "Marque", "Nutriscore", "Magasins", "Lieu", "URL"]
     all_data["console"]["rows"] = {}
     for i, e in enumerate(all_data["rcvd"]["rows"]):
@@ -179,6 +170,7 @@ def traduce_rows(all_data):
 
 
 def show_all_data(all_data):
+    """function"""
     num = 0
     if type(all_data) == dict:
         for k, v in all_data.items():
