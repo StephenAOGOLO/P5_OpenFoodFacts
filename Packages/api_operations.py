@@ -1,66 +1,79 @@
+"""Top comment"""
+# -*- coding: utf-8 -*-
 import json
 import requests
 import logging as lg
 
 
-def open_json_file(file):
-    with open(file) as f:
-        data = json.load(f)
-    return data
+class Data:
+    """Data"""
+    def __init__(self):
+        """init"""
+        self.json_url_file = ".\\Packages\\urls.json"
+        self.big_data = self.load_api_data()
+
+    def load_api_data(self):
+        """function"""
+        all_data = {}
+        all_data["sent"] = {}
+        all_data["rcvd"] = {}
+        all_data = self.request_urls(all_data)
+        print("Retrieving data from OpenFoodFacts server in progress...")
+        all_data = response_urls(all_data)
+        all_data["rcvd"]["aliments"] = {}
+        print("Data received from OpenFoodFacts server")
+        print("Data organizing in progress...")
+        all_data = get_aliments(all_data)
+        print("Getting data ready for console and local database...")
+        all_data = all_rows(all_data)
+        all_data = all_categories(all_data)
+        all_data = prepare_sql_values(all_data)
+        all_data = prepare_ihm_values(all_data)
+        all_data = classify_ihm_values(all_data)
+        print("Data ready!!!")
+        print("Data initialization complete.")
+        return all_data
+
+    def open_json_file(self):
+        """function"""
+        with open(self.json_url_file) as f:
+            data = json.load(f)
+        return data
+
+    def request_urls(self, all_data):
+        """function"""
+        all_data["sent"]["urls"] = self.open_json_file()
+        return all_data
 
 
-def request_urls(dict_data):
-    dict_data["sent"]["urls"] = open_json_file(".\\Packages\\urls.json")
-    return dict_data
-
-
-def response_urls(dict_data):
-    for url_name, url in dict_data["sent"]["urls"].items():
+def response_urls(all_data):
+    """function"""
+    for url_name, url in all_data["sent"]["urls"].items():
         response = requests.get(url)
-        dict_data["rcvd"][url_name] = response.json()
-    return dict_data
+        all_data["rcvd"][url_name] = response.json()
+    return all_data
 
 
-def get_aliments(dict_data):
+def get_aliments(all_data):
+    """function"""
     list_r = ["product_name", "brands", "nutriscore_grade", "stores", "purchase_places", "url"]
-    for url_name, url in dict_data["sent"]["urls"].items():
-        dict_data["rcvd"]["aliments"][url_name] = {}
-        for i in range(0, len(dict_data["rcvd"][url_name]["products"])):
-            dict_data["rcvd"]["aliments"][url_name][str(i)] = {}
+    for url_name, url in all_data["sent"]["urls"].items():
+        all_data["rcvd"]["aliments"][url_name] = {}
+        for i in range(0, len(all_data["rcvd"][url_name]["products"])):
+            all_data["rcvd"]["aliments"][url_name][str(i)] = {}
             for element in list_r:
-                if element in dict_data["rcvd"][url_name]["products"][i]:
-                    if dict_data["rcvd"][url_name]["products"][i][element] == "":
-                        dict_data["rcvd"]["aliments"][url_name][str(i)][element] = "EMPTY"
+                if element in all_data["rcvd"][url_name]["products"][i]:
+                    if all_data["rcvd"][url_name]["products"][i][element] == "":
+                        all_data["rcvd"]["aliments"][url_name][str(i)][element] = "EMPTY"
                     else:
-                        dict_data["rcvd"]["aliments"][url_name][str(i)][element] = dict_data["rcvd"][url_name]["products"][i][element]
+                        all_data["rcvd"]["aliments"][url_name][str(i)][element] = all_data["rcvd"][url_name]["products"][i][element]
                 else:
-                    dict_data["rcvd"]["aliments"][url_name][str(i)][element] = "NOT_PROVIDED"
-    return dict_data
-
-
-def load_api_data():
-    dict_data = {}
-    dict_data["sent"] = {}
-    dict_data["rcvd"] = {}
-    dict_data = request_urls(dict_data)
-    print("Retrieving data from OpenFoodFacts server in progress...")
-    dict_data = response_urls(dict_data)
-    dict_data["rcvd"]["aliments"] = {}
-    print("Data received from OpenFoodFacts server")
-    print("Data organizing in progress...")
-    dict_data = get_aliments(dict_data)
-    print("Getting data ready for console and local database...")
-    dict_data = all_rows(dict_data)
-    dict_data = all_categories(dict_data)
-    dict_data = prepare_sql_values(dict_data)
-    dict_data = prepare_ihm_values(dict_data)
-    dict_data = classify_ihm_values(dict_data)
-    print("Data ready!!!")
-    print("Data initialization complete.")
-    return dict_data
+                    all_data["rcvd"]["aliments"][url_name][str(i)][element] = "NOT_PROVIDED"
+    return all_data
 
 
 def all_categories(all_data):
+    """function"""
     all_data["rcvd"]["local_category"] = []
     for key in all_data["rcvd"]["aliments"].keys():
         all_data["rcvd"]["local_category"].append(key)
@@ -68,7 +81,7 @@ def all_categories(all_data):
 
 
 def all_rows(all_data):
-
+    """function"""
     all_data["rcvd"]["rows"] = ["product_name",
                                 "local_category",
                                 "brands",
@@ -80,16 +93,8 @@ def all_rows(all_data):
     return all_data
 
 
-def provide_categories(all_data):
-
-    all_data["console"]["aliments"]["categories"] = {}
-    for i, element in enumerate(all_data["rcvd"]["local_category"]):
-        lg.info("{} - {}".format(i, element))
-        all_data["console"]["aliments"]["categories"][i] = element
-    return all_data["console"]["aliments"]["categories"]
-
-
 def prepare_sql_values(all_data):
+    """function"""
     list_categories = []
     all_data["rcvd"]["sql_values"] = {}
     for key in all_data["rcvd"]["aliments"].keys():
@@ -112,6 +117,7 @@ def prepare_sql_values(all_data):
 
 
 def prepare_ihm_values(all_data):
+    """function"""
     all_data["console"] = {}
     all_data["console"]["aliments"] = {}
     list_c = all_data["rcvd"]["local_category"]
@@ -138,20 +144,8 @@ def classify_ihm_values(all_data):
     return all_data
 
 
-def off_set_substitute(all_data):
-    dict_substitutes = {}
-    substitute = "g"
-    for k, v in all_data["console"]["aliments"].items():
-        for ke, va in v.items():
-            if va["nutriscore_grade"] < substitute:
-                substitute = ke
-                score = va
-        dict_substitutes[k] = {}
-        dict_substitutes[k][substitute] = score
-    return dict_substitutes
-
-
 def set_substitute(all_data):
+    """function"""
     dict_substitutes = {}
     for k, v in all_data["console"]["aliments"].items():
         score = "g"
@@ -166,6 +160,7 @@ def set_substitute(all_data):
 
 
 def traduce_rows(all_data):
+    """function"""
     list_fr_r = ["Nom", "Catégorie", "Marque", "Nutriscore", "Magasins", "Lieu", "URL"]
     all_data["console"]["rows"] = {}
     for i, e in enumerate(all_data["rcvd"]["rows"]):
@@ -174,6 +169,7 @@ def traduce_rows(all_data):
 
 
 def show_all_data(all_data):
+    """function"""
     num = 0
     if type(all_data) == dict:
         for k, v in all_data.items():
@@ -192,6 +188,5 @@ def show_all_data(all_data):
 
 
 if __name__ == "__main__":
-
-    dico = load_api_data()
-    show_all_data(dico)
+    the_instance = Data()
+    big_data = the_instance.load_api_data()

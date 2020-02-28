@@ -21,7 +21,7 @@ class Loading:
     #params = the_options.get_data_file_ini("loading")
     def __init__(self):
         """init"""
-        #self.sql_file = ".\\Packages\\db_purebeurre_ready.sql"
+        #self.sql_file = ".\\Packages\\db_purebeurre.sql"
         the_options = opt.Settings()
         self.params = the_options.get_data_file_ini("loading")
         self.sql_file = self.params["db_sql_file"]

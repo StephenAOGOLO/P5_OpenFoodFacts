@@ -34,17 +34,6 @@ class Settings:
             data[str(j)] = str(config.get(section, j))
         return data
 
-    def get_option_file_ini(self, section):
-        """
-        This method picks all options of a specified section from 'settings.ini'.
-
-        :param section:
-        :return config.options(section):
-        """
-        config = cp.RawConfigParser()
-        config.read(self.file_ini)
-        return config.options(section)
-
     def get_all_sections_file_ini(self):
         """
         This method picks all sections from 'settings.ini'.
@@ -54,15 +43,3 @@ class Settings:
         config = cp.RawConfigParser()
         config.read(self.file_ini)
         return config.sections()
-
-    def get_particular_sections(self, pattern):
-        """
-        This method picks all options from a given section 'pattern'
-        :param pattern:
-        :return:
-        """
-        list_particular_section = []
-        for section in self.all_sections_file:
-            if pattern in section:
-                list_particular_section.append(section)
-        return list_particular_section

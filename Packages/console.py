@@ -1,8 +1,6 @@
 """Console"""
 # -*- coding: utf-8 -*-
-import os
-import Packages.api_operations as ao
-import Packages.loading_2 as load
+import Packages.loading as load
 import time
 
 
