@@ -172,7 +172,7 @@ def display(sign="*", number=50, lines=1):
 def get_choice():
     """Text entry"""
     text = input("Que voulez-vous faire : ")
-    display("*",50, 5)
+    display("*", 50, 5)
     return text
 
 
@@ -220,10 +220,7 @@ def check_score(substitute, big_data):
             sub = v["nutriscore_grade"]
             ali = aliment_info[key]["nutriscore_grade"]
             if sub >= ali:
-
                 menu_1c0(big_data)
-
-
 
 
 def save_data(big_data, aliment, substitute):
@@ -237,17 +234,6 @@ def save_data(big_data, aliment, substitute):
     print("l'aliment et son substitut ont été sauvegardé !")
     display("*", 50, 5)
     interface(big_data)
-
-
-def off_display_aliment(big_data):
-    aliment = big_data["user"]
-    for key, value in big_data["console"]["aliments"].items():
-        if key == aliment["category"]:
-            for k, v in value.items():
-                if k == aliment["aliment"]:
-                    for ke, va in v.items():
-                        print("====> {} : {}".format(ke, va))
-                    break
 
 
 def display_aliment(big_data):
@@ -328,7 +314,6 @@ def start_program():
     display("*",50, 5)
     print("interface running...")
     display("*",50, 5)
-    #big_data = load.initialization()
     the_instance = load.Loading()
     big_data = the_instance.big_data
     interface(big_data)

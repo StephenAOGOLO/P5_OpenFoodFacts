@@ -19,20 +19,23 @@ class Loading:
         the_options = opt.Settings()
         self.params = the_options.get_data_file_ini("loading")
         self.root_status = self.params["root_access"]
-        self.sql_file = self.params["db_sql_file"]
         self.verify = self.params["check_db_exists"]
-        self.status = self.check_db(self.verify)
         self.user = self.params["user"]
+        self.host = self.params["host"]
+        self.pseudo = self.params["pseudo"]
         self.psw = self.params["psw"]
         self.db_name = self.params["db_name"]
+        self.sql_file = self.params["db_sql_file"]
+        self.urls_json_file = self.params["urls_json_file"]
+        self.init_root()
+        self.status = self.check_db(self.verify)
         self.mysql_session = mo.Mysql(self.user, self.psw, self.db_name)
         self.big_data = self.initialization()
 
     def initialization(self):
         """initialization"""
-        self.init_root()
-        big_data = self.get_all_data()
-        return big_data
+        self.big_data = self.get_all_data()
+        return self.big_data
 
     def init_root(self):
         """init_root"""
@@ -43,49 +46,49 @@ class Loading:
     def get_all_data(self):
         """get_all_data"""
         if self.status:
-            the_instance = ao.Data()
-            big_data = the_instance.big_data
-            self.fill_table_category(big_data)
-            self.fill_table_aliment(big_data)
+            api = ao.Data()
+            data = api.big_data
+            self.fill_table_category(data)
+            self.fill_table_aliment(data)
         else:
-            big_data = self.build_big_data()
-        return big_data
+            data = self.build_big_data()
+        return data
 
     def build_big_data(self):
         """build_big_data"""
-        big_data = {"rcvd": {}, "console": {}}
-        big_data = ao.all_rows(big_data)
-        big_data = ao.traduce_rows(big_data)
-        big_data = self.read_table_category(big_data)
-        big_data = self.read_table_aliment(big_data)
-        big_data = ao.classify_ihm_values(big_data)
-        return big_data
+        data = {"rcvd": {}, "console": {}}
+        data = ao.all_rows(data)
+        data = ao.traduce_rows(data)
+        data = self.read_table_category(data)
+        data = self.read_table_aliment(data)
+        data = ao.classify_ihm_values(data)
+        return data
 
-    def read_table_aliment(self, dico):
+    def read_table_aliment(self, data):
         """read_table_aliment"""
-        dico["console"] = {}
-        dico["console"]["aliments"] = {}
-        list_r = dico["rcvd"]["rows"]
-        for category in dico["rcvd"]["local_category"]:
+        data["console"] = {}
+        data["console"]["aliments"] = {}
+        list_r = data["rcvd"]["rows"]
+        for category in data["rcvd"]["local_category"]:
             where_clause = "local_category = '{}' ".format(category)
             list_content = self.mysql_session.select_from_where("*", "Aliment", where_clause)
-            dico["console"]["aliments"][category] = {}
+            data["console"]["aliments"][category] = {}
             for e in list_content:
-                dico["console"]["aliments"][category][e[2]] = {list_r[0]: e[1], list_r[1]: e[3], list_r[2]: e[4],
+                data["console"]["aliments"][category][e[2]] = {list_r[0]: e[1], list_r[1]: e[3], list_r[2]: e[4],
                                                                list_r[3]: e[5], list_r[4]: e[6], list_r[5]: e[7],
                                                                list_r[6]: e[8]}
-        return dico
+        return data
 
-    def read_table_category(self, dico):
+    def read_table_category(self, data):
         """read_table_category"""
-        dico["rcvd"]["local_category"] = []
+        data["rcvd"]["local_category"] = []
         list_content = self.mysql_session.select_from("*", "Category")
         for index_tuple in range(1, len(list_content) + 1):
             for i, e in enumerate(list_content):
                 if e[0] == str(index_tuple):
-                    dico["rcvd"]["local_category"].append(e[1])
+                    data["rcvd"]["local_category"].append(e[1])
                     continue
-        return dico
+        return data
 
     def drop_tables(self):
         """drop_tables"""
@@ -106,7 +109,7 @@ class Loading:
             status = self.mysql_session.executing(data)
         return status
 
-    def check_db(self, check_status=0):
+    def check_db(self, check_status="0"):
         """check_db"""
         params = get_settings()
         user = params["user"]
@@ -127,33 +130,33 @@ class Loading:
         self.create_tables(dict_tables)
         return status
 
-    def fill_table_category(self, dico):
+    def fill_table_category(self, data):
         """fill_table_category"""
-        for i, category in enumerate(dico["rcvd"]["local_category"]):
+        for i, category in enumerate(data["rcvd"]["local_category"]):
             pure_value = "('{}', '{}')".format(i + 1, category)
             self.mysql_session.insert_data("category", "(id, name)", pure_value)
 
-    def fill_table_aliment(self, dico):
+    def fill_table_aliment(self, data):
         """fill_table_aliment"""
-        for category in dico["rcvd"]["local_category"]:
-            for i in range(0, len(dico["rcvd"]["sql_values"][category])):
+        for category in data["rcvd"]["local_category"]:
+            for i in range(0, len(data["rcvd"]["sql_values"][category])):
                 raw_data = ""
-                dico["rcvd"]["sql_values"][category + "_" + str(i)] = {}
-                dico["rcvd"]["sql_values"][category + "_" + str(i)]["pure_data"] = []
-                dico["rcvd"]["sql_values"][category + "_" + str(i)]["raw_data"] = ""
+                data["rcvd"]["sql_values"][category + "_" + str(i)] = {}
+                data["rcvd"]["sql_values"][category + "_" + str(i)]["pure_data"] = []
+                data["rcvd"]["sql_values"][category + "_" + str(i)]["raw_data"] = ""
                 i_rows = 0
-                for k, v in dico["rcvd"]["sql_values"][category][category + "_" + str(i)].items():
-                    dico["rcvd"]["sql_values"][category + "_" + str(i)]["pure_data"].append(v)
+                for k, v in data["rcvd"]["sql_values"][category][category + "_" + str(i)].items():
+                    data["rcvd"]["sql_values"][category + "_" + str(i)]["pure_data"].append(v)
                     if i_rows == 0:
                         raw_data += v
                     else:
                         raw_data += ", " + v
                     i_rows += 1
-                dico["rcvd"]["sql_values"][category + "_" + str(i)]["raw_data"] = raw_data
+                data["rcvd"]["sql_values"][category + "_" + str(i)]["raw_data"] = raw_data
                 raw_data = ""
-        for category in dico["rcvd"]["local_category"]:
-            for i in range(0, len(dico["rcvd"]["sql_values"][category])):
-                value = dico["rcvd"]["sql_values"][category + "_" + str(i)]["raw_data"]
+        for category in data["rcvd"]["local_category"]:
+            for i in range(0, len(data["rcvd"]["sql_values"][category])):
+                value = data["rcvd"]["sql_values"][category + "_" + str(i)]["raw_data"]
                 if "EMPTY" in value:
                     continue
                 if "NOT_PROVIDED" in value:
@@ -188,15 +191,15 @@ class Loading:
         return list_file
 
 
-def fill_table_historic(dico):
+def fill_table_historic(data):
     """fill_table_historic"""
     params = get_settings()
     user = params["user"]
     psw = params["psw"]
     db_name = params["db_name"]
     session = mo.Mysql(user, psw, db_name)
-    aliment = dico["save"]["aliment"]
-    substitute = dico["save"]["substitute"]
+    aliment = data["save"]["aliment"]
+    substitute = data["save"]["substitute"]
     where_clause_a = "local_name = '{}' ".format(aliment)
     where_clause_s = "local_name = '{}' ".format(substitute)
     aliment_id = session.select_from_where("id", "aliment", where_clause_a)
@@ -207,32 +210,32 @@ def fill_table_historic(dico):
     session.insert_data("historic", "(aliment_id, substitute_id)", pure_value)
 
 
-def read_table_historic(dico):
+def read_table_historic(data):
     """read_table_historic"""
     params = get_settings()
     user = params["user"]
     psw = params["psw"]
     db_name = params["db_name"]
     session = mo.Mysql(user, psw, db_name)
-    dico["console"]["historic"] = {}
-    dico["console"]["historic"]["swap_id"] = {}
-    dico["console"]["historic"]["graphic"] = {}
-    dico["console"]["historic"]["read_rows"] = read_columns(session, dico)
+    data["console"]["historic"] = {}
+    data["console"]["historic"]["swap_id"] = {}
+    data["console"]["historic"]["graphic"] = {}
+    data["console"]["historic"]["read_rows"] = read_columns(session)
     list_content = session.select_from("*", "Historic")
     for i, e in enumerate(list_content):
         lg.info("{} - {}".format(i, e))
-        dico["console"]["historic"]["swap_id"][str(e[0])] = {"aliment_id": e[1], "substitute_id": e[2]}
-    for k, v in dico["console"]["historic"]["swap_id"].items():
+        data["console"]["historic"]["swap_id"][str(e[0])] = {"aliment_id": e[1], "substitute_id": e[2]}
+    for k, v in data["console"]["historic"]["swap_id"].items():
         where_clause_a = "id = '{}' ".format(v["aliment_id"])
         where_clause_s = "id = '{}' ".format(v["substitute_id"])
         aliment = session.select_from_where("*", "Aliment", where_clause_a)
         substitute = session.select_from_where("*", "Aliment", where_clause_s)
-        dico["console"]["historic"]["graphic"][k] = {"aliment": aliment, "substitute": substitute}
+        data["console"]["historic"]["graphic"][k] = {"aliment": aliment, "substitute": substitute}
         lg.info("{} - {}".format(k, v))
-    return dico
+    return data
 
 
-def read_columns(session, dico):
+def read_columns(session):
     """read_columns"""
     table = "INFORMATION_SCHEMA.COLUMNS"
     where_clause = "TABLE_NAME = 'Aliment' "

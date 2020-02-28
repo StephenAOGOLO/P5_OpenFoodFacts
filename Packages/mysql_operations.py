@@ -8,7 +8,7 @@ lg.basicConfig(level=lg.WARNING)
 class Mysql:
     """Mysql"""
 
-    def __init__(self, usr, psw, db="", hst="127.0.0.1"):
+    def __init__(self, usr, psw, db="", hst="localhost"):
         """Init"""
         self.user = usr
         self.password = psw
