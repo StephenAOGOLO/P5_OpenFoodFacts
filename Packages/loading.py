@@ -5,8 +5,8 @@ Twelve methods to handle every input/output modules data.
 Eight methods to handle every input/output modules data.
 """
 # -*- coding: utf-8 -*-
-from getpass4 import getpass as gp
 import logging as lg
+from getpass4 import getpass as gp
 import Packages.mysql_operations as mo
 import Packages.api_operations as ao
 import Packages.options as opt
@@ -23,17 +23,11 @@ class Loading:
         """
         the_options = opt.Settings()
         self.params = the_options.get_data_file_ini("loading")
-        self.root_status = self.params["root_access"]
-        self.verify = self.params["check_db_exists"]
-        self.user = self.params["user"]
-        self.host = self.params["host"]
-        self.psw = self.params["psw"]
-        self.db_name = self.params["db_name"]
-        self.sql_file = self.params["db_sql_file"]
-        self.urls_json_file = self.params["urls_json_file"]
         self.init_root()
-        self.status = self.check_db(self.verify)
-        self.mysql_session = mo.Mysql(self.user, self.psw, self.db_name)
+        self.status = self.check_db(self.params["check_db_exists"])
+        self.mysql_session = mo.Mysql(self.params["user"],
+                                      self.params["psw"],
+                                      self.params["db_name"])
         self.big_data = self.initialization()
 
     def initialization(self):
@@ -49,7 +43,7 @@ class Loading:
         'init_root' method activate the root mode
         only if self.root_status is on.
         """
-        if self.root_status == "1":
+        if self.params["root_access"] == "1":
             root_session = connect_root()
             params = get_settings()
             usr = params["root_user_db"]
@@ -103,10 +97,11 @@ class Loading:
             where_clause = "local_category = '{}' ".format(category)
             list_content = self.mysql_session.select_from_where("*", "Aliment", where_clause)
             data["console"]["aliments"][category] = {}
-            for e in list_content:
-                data["console"]["aliments"][category][e[2]] = {list_r[0]: e[1], list_r[1]: e[3], list_r[2]: e[4],
-                                                               list_r[3]: e[5], list_r[4]: e[6], list_r[5]: e[7],
-                                                               list_r[6]: e[8]}
+            for element in list_content:
+                data["console"]["aliments"][category][element[2]] = {
+                    list_r[0]: element[1], list_r[1]: element[3], list_r[2]: element[4],
+                    list_r[3]: element[5], list_r[4]: element[6], list_r[5]: element[7],
+                    list_r[6]: element[8]}
         return data
 
     def read_table_category(self, data):
@@ -120,9 +115,9 @@ class Loading:
         data["rcvd"]["local_category"] = []
         list_content = self.mysql_session.select_from("*", "Category")
         for index_tuple in range(1, len(list_content) + 1):
-            for i, e in enumerate(list_content):
-                if e[0] == str(index_tuple):
-                    data["rcvd"]["local_category"].append(e[1])
+            for element in list_content:
+                if element[0] == str(index_tuple):
+                    data["rcvd"]["local_category"].append(element[1])
                     continue
         return data
 
@@ -148,7 +143,7 @@ class Loading:
         """
         status = False
         self.drop_tables()
-        for table, data in tables_data.items():
+        for data in tables_data.values():
             status = self.mysql_session.executing(data)
         return status
 
@@ -204,12 +199,12 @@ class Loading:
                 data["rcvd"]["sql_values"][category + "_" + str(i)]["pure_data"] = []
                 data["rcvd"]["sql_values"][category + "_" + str(i)]["raw_data"] = ""
                 i_rows = 0
-                for k, v in data["rcvd"]["sql_values"][category][category + "_" + str(i)].items():
-                    data["rcvd"]["sql_values"][category + "_" + str(i)]["pure_data"].append(v)
+                for value in data["rcvd"]["sql_values"][category][category + "_" + str(i)].values():
+                    data["rcvd"]["sql_values"][category + "_" + str(i)]["pure_data"].append(value)
                     if i_rows == 0:
-                        raw_data += v
+                        raw_data += value
                     else:
-                        raw_data += ", " + v
+                        raw_data += ", " + value
                     i_rows += 1
                 data["rcvd"]["sql_values"][category + "_" + str(i)]["raw_data"] = raw_data
                 raw_data = ""
@@ -220,14 +215,14 @@ class Loading:
                     continue
                 if "NOT_PROVIDED" in value:
                     continue
-                else:
-                    value += "," + category
-                    value += "," + category + "_" + str(i)
-                    value = value.replace(",", "' , '")
-                    pure_value = "('{}')".format(value)
-                    self.mysql_session.insert_data("aliment", "(product_name, brands, nutriscore_grade,"
-                                                   " stores, purchase_places, url, local_category,"
-                                                   " local_name)", pure_value)
+                value += "," + category
+                value += "," + category + "_" + str(i)
+                value = value.replace(",", "' , '")
+                pure_value = "('{}')".format(value)
+                self.mysql_session.insert_data(
+                    "aliment", "(product_name, brands, nutriscore_grade,"
+                               " stores, purchase_places, url, local_category,"
+                               " local_name)", pure_value)
 
     def open_sql_file(self):
         """
@@ -235,12 +230,12 @@ class Loading:
         It returns the content file in a list.
         :return:
         """
-        with open(self.sql_file, "rt") as file:
+        with open(self.params["db_sql_file"], "rt") as file:
             list_file = file.readlines()
         lg.info("=" * 150)
-        lg.info("\nThere is the content file : {}\n".format(self.sql_file))
+        lg.info("\nThere is the content file : %s\n", self.params["db_sql_file"])
         for i, line in enumerate(list_file):
-            lg.info("ligne {} : {}".format(i, line))
+            lg.info("ligne %s : %s", i, line)
         lg.info("=" * 150)
         lg.info("\nEnd of file\n")
         lg.info("=" * 150)
@@ -288,16 +283,17 @@ def read_table_historic(data):
     data["console"]["historic"]["graphic"] = {}
     data["console"]["historic"]["read_rows"] = read_columns(session)
     list_content = session.select_from("*", "Historic")
-    for i, e in enumerate(list_content):
-        lg.info("{} - {}".format(i, e))
-        data["console"]["historic"]["swap_id"][str(e[0])] = {"aliment_id": e[1], "substitute_id": e[2]}
-    for k, v in data["console"]["historic"]["swap_id"].items():
-        where_clause_a = "id = '{}' ".format(v["aliment_id"])
-        where_clause_s = "id = '{}' ".format(v["substitute_id"])
+    for i, element in enumerate(list_content):
+        lg.info("%s - %s", i, element)
+        data["console"]["historic"]["swap_id"][str(element[0])] =\
+            {"aliment_id": element[1], "substitute_id": element[2]}
+    for key, value in data["console"]["historic"]["swap_id"].items():
+        where_clause_a = "id = '{}' ".format(value["aliment_id"])
+        where_clause_s = "id = '{}' ".format(value["substitute_id"])
         aliment = session.select_from_where("*", "Aliment", where_clause_a)
         substitute = session.select_from_where("*", "Aliment", where_clause_s)
-        data["console"]["historic"]["graphic"][k] = {"aliment": aliment, "substitute": substitute}
-        lg.info("{} - {}".format(k, v))
+        data["console"]["historic"]["graphic"][key] = {"aliment": aliment, "substitute": substitute}
+        lg.info("%s - %s", key, value)
     return data
 
 
@@ -315,9 +311,9 @@ def read_columns(session):
     i = 1
     read_rows = []
     while i < len(t_rows):
-        for e in t_rows:
-            if i == e[4]:
-                read_rows.append(e[3])
+        for element in t_rows:
+            if i == element[4]:
+                read_rows.append(element[3])
                 i += 1
     return read_rows
 
@@ -332,8 +328,8 @@ def is_user_created(root_session, host="localhost", user="stephen"):
     """
     users = root_session.select_from("host, user", "mysql.user")
     there = False
-    for e in users:
-        if (e[0] == host) and (str(e[1].decode()) == user):
+    for element in users:
+        if (element[0] == host) and (str(element[1].decode()) == user):
             there = True
             break
     if not there:
@@ -357,7 +353,8 @@ def connect_root():
     return root_session
 
 
-def create_user(root_session, user="stephen", host="localhost", passwd="stephen", db_name="db_purebeurre"):
+def create_user(root_session, user="stephen", host="localhost",
+                passwd="stephen", db_name="db_purebeurre"):
     """
     'create_user' function creates a MYSQL user.
     :param root_session:
@@ -367,7 +364,7 @@ def create_user(root_session, user="stephen", host="localhost", passwd="stephen"
     :param db_name:
     """
     cmd = """CREATE USER '{}'@'{}' IDENTIFIED BY '{}'""".format(user, host, str(passwd))
-    status = root_session.executing(cmd)
+    root_session.executing(cmd)
     cmd = """GRANT ALL PRIVILEGES ON {}.* TO '{}'@'{}'""".format(db_name, user, host)
     root_session.executing(cmd)
     print("l'utilisateur '{}'@'{}' a été créée ! "
@@ -396,11 +393,10 @@ def update_db(status):
             if choice == str(0):
                 update_status = maintain_db(choice)
                 return update_status
-            elif choice == str(1):
+            if choice == str(1):
                 update_status = maintain_db(choice)
                 return update_status
-            else:
-                print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
+            print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
     return True
 
 
@@ -433,9 +429,5 @@ def get_settings():
 
 
 if __name__ == "__main__":
-    the_instance = Loading()
-    big_data = the_instance.big_data
-
-
-
-
+    THE_INSTANCE = Loading()
+    BIG_DATA = THE_INSTANCE.big_data
