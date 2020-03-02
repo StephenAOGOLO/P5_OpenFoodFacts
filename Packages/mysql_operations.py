@@ -4,8 +4,8 @@ This module is especially composed of one class 'Mysql'.
 Nine methods to create, fill and read MYSQL database and tables.
 """
 # -*- coding: utf-8 -*-
-import mysql.connector as mc
 import logging as lg
+import mysql.connector as mc
 lg.basicConfig(level=lg.WARNING)
 
 
@@ -19,14 +19,14 @@ class Mysql:
         self.user : MYSQL username
         self.password : MYSQL user password
         self.host : MYSQL server location
-        self.db : MYSQL database name
+        self.database : MYSQL database name
         self.cnx : MYSQL session
         self.cursor : MYSQL session pointer
         """
         self.user = usr
         self.password = psw
         self.host = hst
-        self.db = db
+        self.database = db
         self.cnx = self.connection()
         self.cursor = self.cursor_connection()
 
@@ -40,7 +40,7 @@ class Mysql:
             host=self.host,
             user=self.user,
             passwd=self.password,
-            database=self.db
+            database=self.database
         )
         lg.info(cnx)
         return cnx
@@ -54,51 +54,51 @@ class Mysql:
         my_cursor = self.cnx.cursor()
         return my_cursor
 
-    def create_db(self, db="db_purebeurre"):
+    def create_db(self, database="db_purebeurre"):
         """
         'create_db' method try to create a table
         into a database given as parameter.
-        :param db:
+        :param database:
         :return:
         """
         status = False
         try:
             cmd = "CREATE DATABASE "
-            self.cursor.execute(cmd+db)
+            self.cursor.execute(cmd+database)
             self.cnx.commit()
-        except mc.errors.DatabaseError as e:
-            lg.info(e)
+        except mc.errors.DatabaseError as error:
+            lg.info(error)
             print("Il existe déjà une base de données !!")
             status = True
         return status
 
-    def select_from(self, row, tb):
+    def select_from(self, row, table):
         """
         'select_from' method gets data
          from a table and a row, both given as parameter.
          It returns a list of tuples.
         :param row:
-        :param tb:
+        :param table:
         :return:
         """
-        formula = "SELECT {} FROM {}".format(row, tb)
+        formula = "SELECT {} FROM {}".format(row, table)
         self.cursor.execute(formula)
         results = self.cursor.fetchall()
         for result in results:
             lg.info(result)
         return results
 
-    def select_from_where(self, row, tb, w_clause):
+    def select_from_where(self, row, table, w_clause):
         """
         'select_from_where' method gets data
          from a table, a row and a criteria all of them given as parameter.
          It returns a list of tuples.
         :param row:
-        :param tb:
+        :param table:
         :param w_clause:
         :return:
         """
-        formula = "SELECT {} FROM {} WHERE {}".format(row, tb, w_clause)
+        formula = "SELECT {} FROM {} WHERE {}".format(row, table, w_clause)
         self.cursor.execute(formula)
         results = self.cursor.fetchall()
         for result in results:
@@ -112,22 +112,22 @@ class Mysql:
         """
         return self.cnx.close
 
-    def insert_data(self, tb, rows, values):
+    def insert_data(self, table, rows, values):
         """
         'insert_data' method inserts data
          into a table.
-        :param tb:
+        :param table:
         :param rows:
         :param values:
         :return:
         """
         status = False
         try:
-            formula = "INSERT INTO {} {} VALUES {}".format(tb, rows, values)
+            formula = "INSERT INTO {} {} VALUES {}".format(table, rows, values)
             self.cursor.execute(formula)
             self.cnx.commit()
-        except mc.errors.IntegrityError as e:
-            lg.info(e)
+        except mc.errors.IntegrityError as error:
+            lg.info(error)
             print("Entry already done")
             status = True
         return status
@@ -143,9 +143,7 @@ class Mysql:
         try:
             self.cursor.execute(cmd)
             self.cnx.commit()
-        except Exception as e:
-            lg.warning(e)
-            status = e
+        except mc.Error as error:
+            lg.warning(error)
+            status = error
         return status
-
-
