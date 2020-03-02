@@ -215,7 +215,7 @@ relatif ou absolu, du script sql dédié à la conception des tables SQL de la b
 
 Pour rappel:
 - "user" = "nom de l'utilisateur"  
-- "host" = "la machine d'hébergement mysql"    
+- "host" = "la machine d'hébergement du serveur MYSQL"    
 - "psw" = "mot de passe de l'utilisateur"  
 - "db_name" = "nom de la base de données"      
 
@@ -262,7 +262,7 @@ Ces paramètres sont pris en compte, uniquement lorsque le mode root est activé
 
 Pour rappel:
 - "root_user_db" = "nom de l'utilisateur"  
-- "root_host_db" = "la machine d'hébergement mysql"    
+- "root_host_db" = "la machine d'hébergement du serveur MYSQL"    
 - "root_psw_db" = "mot de passe de l'utilisateur" 
 
 --- 

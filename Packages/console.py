@@ -1,11 +1,19 @@
-"""Console"""
+"""
+Welcome to the console module, 'console.py'.
+This module is especially composed of functions.
+twenty-one functions are defined to handle each menu steps of the interface.
+"""
 # -*- coding: utf-8 -*-
 import Packages.loading as load
 import time
 
 
 def presentation():
-    """Presentation"""
+    """
+    'presentation' function is the first one
+    which displays a message.
+    It informs that the interface is now running.
+    """
     display(" ", 50, 3)
     display("~", 50, 3)
     print("~~~~~~~~~~ BIENVENUE SUR PUREBERRE app ~~~~~~~~~~")
@@ -17,7 +25,11 @@ def presentation():
 
 
 def menu(big_data):
-    """Menu"""
+    """
+    This menu displays and drives toward the aliment exchange
+    and the historic exchange. The customer is prompted to choose.
+    :param big_data:
+    """
     while 1:
         print("1 - Quel aliment souhaitez-vous remplacer.")
         print("2 - Retrouver mes aliments subtitués.")
@@ -40,7 +52,11 @@ def menu(big_data):
 
 
 def menu_1a(big_data):
-    """ Category"""
+    """
+    This menu displays all aliment category.
+    The customer is prompted to choose.
+    :param big_data:
+    """
     display("*", 50, 5)
     while 1:
         print("Sélectionnez la catégorie.")
@@ -63,7 +79,11 @@ def menu_1a(big_data):
 
 
 def menu_1b(big_data):
-    """Aliment"""
+    """
+    This menu displays all aliments from a category.
+    The customer is prompted to choose.
+    :param big_data:
+    """
     display("*", 50, 5)
     while 1:
         print("Sélectionnez l'aliment.")
@@ -88,7 +108,11 @@ def menu_1b(big_data):
 
 
 def menu_1c(big_data):
-    """Substitute"""
+    """
+    This menu displays the choosen aliment and his substitute.
+    The customer is prompted to save this exchange.
+    :param big_data:
+    """
     while 1:
         substitute = get_substitute(big_data)
         aliment = big_data["user"]
@@ -115,7 +139,11 @@ def menu_1c(big_data):
 
 
 def menu_1c0(big_data):
-    """Historic"""
+    """
+    This menu is enable when no substitute has been found.
+    The customer is prompted to go back to the main menu.
+    :param big_data:
+    """
     display("*",50, 5)
     while 1:
         display("~", 50)
@@ -138,7 +166,11 @@ def menu_1c0(big_data):
 
 
 def menu_2a(big_data):
-    """Historic"""
+    """
+    This menu displays the historic of all exchange done before.
+    The customer is prompted to go back to the main menu.
+    :param big_data:
+    """
     display("*",50, 5)
     while 1:
         print("Historique des aliments substitués")
@@ -159,25 +191,43 @@ def menu_2a(big_data):
 
 
 def quit_console():
+    """
+    'quit_console' function is called to stop the whole process.
+    """
     print("Fermeture de la console en cours ...")
     time.sleep(1)
     exit()
 
 
 def display(sign="*", number=50, lines=1):
+    """
+    'display' function displays characters.
+    :param sign: the character which is displayed
+    :param number: the number of character per line
+    :param lines: the number of lines to display
+    """
     for i in range(0, lines):
         print("{}".format(sign)*number)
 
 
 def get_choice():
-    """Text entry"""
+    """
+    'get_choice' function prompt the customer to enter his choice
+    by tapping on keyboard keys.
+    :return:
+    """
     text = input("Que voulez-vous faire : ")
     display("*", 50, 5)
     return text
 
 
 def get_categories(big_data):
-    """Categories"""
+    """
+    'get_categories' function retrieving all aliment categories
+    from the big data program.
+    :param big_data:
+    :return:
+    """
     dict_category = {}
     for i, e in enumerate(big_data["rcvd"]["local_category"]):
         print("{} - {}".format(i, e))
@@ -186,6 +236,12 @@ def get_categories(big_data):
 
 
 def get_aliments(big_data):
+    """
+    'get_aliments' function retrieving all aliments
+    from the big data program.
+    :param big_data:
+    :return:
+    """
     dict_aliments = {}
     user_category = big_data["user"]["category"]
     for i, e in enumerate(big_data["console"]["aliments"][user_category]):
@@ -196,7 +252,12 @@ def get_aliments(big_data):
 
 
 def get_substitute(big_data):
-    """ Substitute """
+    """
+    'get_substitute' function retrieving all substitutes
+    from the big data program.
+    :param big_data:
+    :return:
+    """
     substitute = {}
     aliment = big_data["user"]
     for k in big_data["console"]["substitute"].keys():
@@ -208,6 +269,12 @@ def get_substitute(big_data):
 
 
 def check_score(substitute, big_data):
+    """
+    'check_score' function analyses the aliment 'NUTRI-SCORE'
+    to find the substitute.
+    :param substitute:
+    :param big_data:
+    """
     aliment = big_data["user"]
     for key, value in big_data["console"]["aliments"].items():
         if key == aliment["category"]:
@@ -224,7 +291,12 @@ def check_score(substitute, big_data):
 
 
 def save_data(big_data, aliment, substitute):
-    """Save"""
+    """
+    'save_data' function stores the exchange into the historic.
+    :param big_data:
+    :param aliment:
+    :param substitute:
+    """
     big_data["save"] = {"aliment": aliment["aliment"]}
     for k, v in substitute.items():
         for ke in v.keys():
@@ -237,6 +309,11 @@ def save_data(big_data, aliment, substitute):
 
 
 def display_aliment(big_data):
+    """
+    'display_aliment' function is used to display all the aliments
+    from one category.
+    :param big_data:
+    """
     all_aliments = big_data["console"]["aliments"].items()
     aliment = big_data["user"]
     category = aliment["category"]
@@ -252,6 +329,11 @@ def display_aliment(big_data):
 
 
 def display_all_aliments(big_data):
+    """
+    'display_all_aliments' function is used to display all the aliments
+    from the big data program.
+    :param big_data:
+    """
     aliment_name = big_data["user"]["aliment"]
     aliment_category = big_data["user"]["category"]
     display("~", 50, 2)
@@ -266,6 +348,11 @@ def display_all_aliments(big_data):
 
 
 def display_substitute(big_data, substitute):
+    """
+    'display_substitute' function is used to display the substitute.
+    :param big_data:
+    :param substitute:
+    """
     substitute_name = ""
     substitute_category = ""
     display_all_aliments(big_data)
@@ -283,6 +370,11 @@ def display_substitute(big_data, substitute):
 
 
 def display_historic(big_data):
+    """
+    'display_substitute' function is used to display the historic.
+    :param big_data:
+    :return:
+    """
     big_data = load.read_table_historic(big_data)
     if len(big_data["console"]["historic"]["graphic"]) == 0:
         display("~", 50)
@@ -304,13 +396,21 @@ def display_historic(big_data):
 
 
 def interface(big_data):
-    """Interface"""
+    """
+    'interface' function drives the process
+    towards each components of the console.
+    :param big_data:
+    """
     presentation()
     while 1:
         menu(big_data)
 
 
 def start_program():
+    """
+    'start_program' gets the big data program
+    to provide it to the interface.
+    """
     display("*",50, 5)
     print("interface running...")
     display("*",50, 5)

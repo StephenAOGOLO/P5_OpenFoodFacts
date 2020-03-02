@@ -1,7 +1,8 @@
 """
 Welcome to the loading module, 'loading.py'.
-This module is especially composed of one function.
-Which is used to initialize and feeds program parameters.
+This module is composed of one class 'Loading'.
+Twelve methods to handle every input/output modules data.
+Eight methods to handle every input/output modules data.
 """
 # -*- coding: utf-8 -*-
 from getpass4 import getpass as gp
@@ -13,16 +14,19 @@ lg.basicConfig(level=lg.WARNING)
 
 
 class Loading:
-    """ Loading """
+    """Loading class create an instance which managing
+     steps initialization."""
     def __init__(self):
-        """init"""
+        """
+        Init constructor has thirteen attributes.
+        These attributes are picking parameters located into the external settings ini file.
+        """
         the_options = opt.Settings()
         self.params = the_options.get_data_file_ini("loading")
         self.root_status = self.params["root_access"]
         self.verify = self.params["check_db_exists"]
         self.user = self.params["user"]
         self.host = self.params["host"]
-        self.pseudo = self.params["pseudo"]
         self.psw = self.params["psw"]
         self.db_name = self.params["db_name"]
         self.sql_file = self.params["db_sql_file"]
@@ -33,18 +37,34 @@ class Loading:
         self.big_data = self.initialization()
 
     def initialization(self):
-        """initialization"""
+        """
+        'initialization' method sets as attribute the big data.
+        :return self.big_data:
+        """
         self.big_data = self.get_all_data()
         return self.big_data
 
     def init_root(self):
-        """init_root"""
+        """
+        'init_root' method activate the root mode
+        only if self.root_status is on.
+        """
         if self.root_status == "1":
             root_session = connect_root()
-            is_user_created(root_session)
+            params = get_settings()
+            usr = params["root_user_db"]
+            hst = params["root_host_db"]
+            is_user_created(root_session, hst, usr)
 
     def get_all_data(self):
-        """get_all_data"""
+        """
+        'get_all_data' method builds the local database and
+        fills it if self.status is on. It read the local database
+        if self.status is off. It either returns the big data from
+        OpFoFa server either the big data read from the existing
+        local database.
+        :return:
+        """
         if self.status:
             api = ao.Data()
             data = api.big_data
@@ -55,7 +75,11 @@ class Loading:
         return data
 
     def build_big_data(self):
-        """build_big_data"""
+        """
+        'build_big_data' method provides the big data
+        read from the existing local database.
+        :return:
+        """
         data = {"rcvd": {}, "console": {}}
         data = ao.all_rows(data)
         data = ao.traduce_rows(data)
@@ -65,7 +89,13 @@ class Loading:
         return data
 
     def read_table_aliment(self, data):
-        """read_table_aliment"""
+        """
+        'read_table_aliment' method reads
+         all needed data from table 'Aliment'.
+         It returns the data into a dict.
+        :param data:
+        :return:
+        """
         data["console"] = {}
         data["console"]["aliments"] = {}
         list_r = data["rcvd"]["rows"]
@@ -80,7 +110,13 @@ class Loading:
         return data
 
     def read_table_category(self, data):
-        """read_table_category"""
+        """
+        'read_table_category' method reads
+         all needed data from table 'Category'.
+         It returns the data into a dict.
+        :param data:
+        :return:
+        """
         data["rcvd"]["local_category"] = []
         list_content = self.mysql_session.select_from("*", "Category")
         for index_tuple in range(1, len(list_content) + 1):
@@ -91,7 +127,9 @@ class Loading:
         return data
 
     def drop_tables(self):
-        """drop_tables"""
+        """
+        'drop_tables' method erases all database tables.
+        """
         params = get_settings()
         user = params["user"]
         psw = params["psw"]
@@ -102,7 +140,12 @@ class Loading:
         self.mysql_session.executing("DROP TABLE IF EXISTS Category")
 
     def create_tables(self, tables_data):
-        """create_tables"""
+        """
+        'create_tables' method creates all database tables.
+        It returns status execution.
+        :param tables_data:
+        :return status:
+        """
         status = False
         self.drop_tables()
         for table, data in tables_data.items():
@@ -110,7 +153,15 @@ class Loading:
         return status
 
     def check_db(self, check_status="0"):
-        """check_db"""
+        """
+        'check_db' method determines the database existence.
+        If so, the method drives the process toward a database
+        creation choice. If not so, the method drives
+        the process toward the database creation.
+        It returns the process status .
+        :param check_status:
+        :return:
+        """
         params = get_settings()
         user = params["user"]
         psw = params["psw"]
@@ -131,13 +182,21 @@ class Loading:
         return status
 
     def fill_table_category(self, data):
-        """fill_table_category"""
+        """
+        'fill_table_category' method insert
+         all concerning data into table 'Category'.
+        :param data:
+        """
         for i, category in enumerate(data["rcvd"]["local_category"]):
             pure_value = "('{}', '{}')".format(i + 1, category)
             self.mysql_session.insert_data("category", "(id, name)", pure_value)
 
     def fill_table_aliment(self, data):
-        """fill_table_aliment"""
+        """
+        'fill_table_aliment' method insert
+         all concerning data into table 'Aliment'.
+        :param data:
+        """
         for category in data["rcvd"]["local_category"]:
             for i in range(0, len(data["rcvd"]["sql_values"][category])):
                 raw_data = ""
@@ -170,15 +229,12 @@ class Loading:
                                                    " stores, purchase_places, url, local_category,"
                                                    " local_name)", pure_value)
 
-
-
     def open_sql_file(self):
-        """open_sql_file"""
-        """ This function is used to open sql file.
-        It's feeding the content file in a list.
-
-        :return list_file: """
-
+        """
+        'open_sql_file' method opens sql file.
+        It returns the content file in a list.
+        :return:
+        """
         with open(self.sql_file, "rt") as file:
             list_file = file.readlines()
         lg.info("=" * 150)
@@ -192,7 +248,11 @@ class Loading:
 
 
 def fill_table_historic(data):
-    """fill_table_historic"""
+    """
+    'fill_table_historic' method insert
+    all concerning data into table 'Historic'.
+    :param data:
+    """
     params = get_settings()
     user = params["user"]
     psw = params["psw"]
@@ -211,7 +271,13 @@ def fill_table_historic(data):
 
 
 def read_table_historic(data):
-    """read_table_historic"""
+    """
+    'read_table_historic' method reads
+    all needed data from table 'Historic'.
+    It returns the data into a dict.
+    :param data:
+    :return:
+    """
     params = get_settings()
     user = params["user"]
     psw = params["psw"]
@@ -236,7 +302,13 @@ def read_table_historic(data):
 
 
 def read_columns(session):
-    """read_columns"""
+    """
+    'read_columns' method reads
+    all columns from table 'Aliment'.
+    It returns the data into a list.
+    :param session:
+    :return:
+    """
     table = "INFORMATION_SCHEMA.COLUMNS"
     where_clause = "TABLE_NAME = 'Aliment' "
     t_rows = session.select_from_where("*", table, where_clause)
@@ -251,37 +323,65 @@ def read_columns(session):
 
 
 def is_user_created(root_session, host="localhost", user="stephen"):
-    """is_user_created"""
+    """
+    'is_user_created' method checks if the MYSQL user
+    given as parameter is existing into MYSQL server.
+    :param root_session:
+    :param host:
+    :param user:
+    """
     users = root_session.select_from("host, user", "mysql.user")
     there = False
     for e in users:
-        if (e[0] == "localhost") and (str(e[1].decode()) == "stephen"):
+        if (e[0] == host) and (str(e[1].decode()) == user):
             there = True
             break
     if not there:
-        create_user(root_session)
+        params = get_settings()
+        usr = params["root_user_db"]
+        hst = params["root_host_db"]
+        psw = params["root_psw_db"]
+        create_user(root_session, usr, hst, psw)
 
 
 def connect_root():
-    """connect_root"""
+    """
+    'connect_root' function prompts the program user
+    to enter his MYSQL root credentials.
+    It returns the opened root session.
+    :return:
+    """
     root_id = input("Veuillez entrer votre identifiant administrateur mysql : ")
     root_psw = gp("Veuillez entrer votre mot de passe administrateur mysql : ")
     root_session = mo.Mysql(root_id, root_psw)
     return root_session
 
 
-def create_user(root_session, user="stephen", host="localhost", pseudo="stephen"):
-    """create_user"""
-    cmd = """CREATE USER '{}'@'{}' IDENTIFIED BY '{}'""".format(user, host, pseudo)
+def create_user(root_session, user="stephen", host="localhost", passwd="stephen", db_name="db_purebeurre"):
+    """
+    'create_user' function creates a MYSQL user.
+    :param root_session:
+    :param user:
+    :param host:
+    :param passwd:
+    :param db_name:
+    """
+    cmd = """CREATE USER '{}'@'{}' IDENTIFIED BY '{}'""".format(user, host, str(passwd))
     status = root_session.executing(cmd)
-    cmd = """GRANT ALL PRIVILEGES ON db_purebeurre.* TO 'stephen'@'localhost'"""
+    cmd = """GRANT ALL PRIVILEGES ON {}.* TO '{}'@'{}'""".format(db_name, user, host)
     root_session.executing(cmd)
-    print("l'utilisateur '{}'@'{}' identifié en tant que '{}' a été créée ! "
-          .format(user, host, pseudo))
+    print("l'utilisateur '{}'@'{}' a été créée ! "
+          .format(user, host))
 
 
 def update_db(status):
-    """update_db"""
+    """
+    'update_db' prompts the program user
+    either to keep the existing database
+    or reset it.
+    :param status:
+    :return:
+    """
     if status:
         while 1:
             print("Voulez-vous conserver la base de données actuelle ?")
@@ -305,7 +405,12 @@ def update_db(status):
 
 
 def maintain_db(choice):
-    """maintain_db"""
+    """
+    'maintain_db' function drives the process
+    toward the preserving or the resetting database.
+    :param choice:
+    :return:
+    """
     update_status = True
     if choice == str(0):
         print("La base de donnée actuelle va être utilisée !!")
@@ -316,6 +421,12 @@ def maintain_db(choice):
 
 
 def get_settings():
+    """
+    'get_settings' function provides all parameters
+    from the external settings ini file.
+    It returns a dict.
+    :return:
+    """
     the_options = opt.Settings()
     params = the_options.get_data_file_ini("loading")
     return params
