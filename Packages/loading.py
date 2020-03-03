@@ -10,6 +10,7 @@ from getpass4 import getpass as gp
 import Packages.mysql_operations as mo
 import Packages.api_operations as ao
 import Packages.options as opt
+import Packages.product as prd
 lg.basicConfig(level=lg.WARNING)
 
 
@@ -66,6 +67,7 @@ class Loading:
             self.fill_table_aliment(data)
         else:
             data = self.build_big_data()
+        data = build_products(data)
         return data
 
     def build_big_data(self):
@@ -240,6 +242,30 @@ class Loading:
         lg.info("\nEnd of file\n")
         lg.info("=" * 150)
         return list_file
+
+
+def build_products(data):
+    """
+    'build_products' function provides each aliment
+     as an product object. It returns all theses products
+    into the big data.
+    :param data:
+    :return:
+    """
+    data["objects"] = {}
+    for category, value in data["console"]["aliments"].items():
+        data["objects"][category] = {}
+        for local_n, rows in value.items():
+            name = rows["product_name"]
+            local_c = category
+            brands = rows["brands"]
+            score = rows["nutriscore_grade"]
+            stores = rows["stores"]
+            places = rows["purchase_places"]
+            url = rows["url"]
+            product = prd.Product(name, local_c, brands, score, stores, places, url)
+            data["objects"][category][local_n] = product
+    return data
 
 
 def fill_table_historic(data):
@@ -445,3 +471,10 @@ def get_settings():
 if __name__ == "__main__":
     THE_INSTANCE = Loading()
     BIG_DATA = THE_INSTANCE.big_data
+    ALIMENT = BIG_DATA["objects"]["biscuit"]["biscuit_0"]
+    ALIMENT2 = BIG_DATA["objects"]["biscuit"]["biscuit_1"]
+    print(ALIMENT)
+    print(type(ALIMENT))
+    print(ALIMENT.url)
+    print("\n")
+    print(ALIMENT < ALIMENT2)
