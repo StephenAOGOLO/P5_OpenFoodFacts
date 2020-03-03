@@ -283,10 +283,15 @@ Pour lancer le programme autrement, double-cliquez sur "main.py" oubien ouvrir "
 ---
 ## OUTILS DE DEVELOPPEMENT  
         - Pycharm ; version : 2019.3
-        - Python ; version : 3.7
+        - Python ; version : 3.7.4
         - Draw.io ; version 12.5.8
         - MySQL ; version 8.0 
         - Notepad Plus Plus ; version 7.8.1
+
+---
+## QUALITE DE DEVELOPPEMENT  
+        - Pylint ; Version : 2.4.4 ; Note : 10/10
+        - Flake8 ; Version : 3.7.9 ; Note : Line too long ~ 90/79
 
 ---
 ## RAPPEL

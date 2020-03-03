@@ -1,5 +1,6 @@
-pylint
 configparser==4.0.2
 mysql-connector>=2.2.9
 requests>=2.22.0
 getpass4>=0.0.8
+pylint>=2.4.4
+flake8>=3.7.9

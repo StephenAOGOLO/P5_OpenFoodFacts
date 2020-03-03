@@ -9,7 +9,6 @@ import time
 import Packages.loading as load
 
 
-
 def presentation():
     """
     'presentation' function is the first one
@@ -50,7 +49,6 @@ def menu(big_data):
         else:
             print("Mauvaise saisie!!\nVous avez entré {}".format(choice))
             display("*", 50, 5)
-
 
 
 def menu_1a(big_data):
@@ -206,8 +204,6 @@ def quit_console():
     print("Fermeture de la console en cours ...")
     time.sleep(1)
     sys.exit()
-
-
 
 
 def display(sign="*", number=50, lines=1):
@@ -402,7 +398,7 @@ def display_historic(big_data):
             print("{}".format(k_1))
             i = 0
             for element in v_1[0]:
-                row = big_data["console"]["historic"]["read_rows"][i]
+                row = big_data["console"]["historic"]["fr_rows"][i]
                 print("====> {} : {} ".format(row, element))
                 i += 1
             print("\n")

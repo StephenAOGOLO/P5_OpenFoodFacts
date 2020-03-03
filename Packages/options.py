@@ -14,7 +14,8 @@ class Settings:
     """
     def __init__(self):
         """
-        This constructor create a instance which contains all the data from a file ini.
+        This constructor create a instance
+        which contains all the data from a file ini.
         """
         self.file_ini = ".\\Packages\\settings.ini"
         self.all_sections_file = self.get_all_sections_file_ini()

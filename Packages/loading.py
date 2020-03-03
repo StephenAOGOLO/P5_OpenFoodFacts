@@ -244,7 +244,7 @@ class Loading:
 
 def fill_table_historic(data):
     """
-    'fill_table_historic' method insert
+    'fill_table_historic' function insert
     all concerning data into table 'Historic'.
     :param data:
     """
@@ -267,7 +267,7 @@ def fill_table_historic(data):
 
 def read_table_historic(data):
     """
-    'read_table_historic' method reads
+    'read_table_historic' function reads
     all needed data from table 'Historic'.
     It returns the data into a dict.
     :param data:
@@ -282,6 +282,7 @@ def read_table_historic(data):
     data["console"]["historic"]["swap_id"] = {}
     data["console"]["historic"]["graphic"] = {}
     data["console"]["historic"]["read_rows"] = read_columns(session)
+    data["console"]["historic"]["fr_rows"] = fr_columns()
     list_content = session.select_from("*", "Historic")
     for i, element in enumerate(list_content):
         lg.info("%s - %s", i, element)
@@ -299,7 +300,7 @@ def read_table_historic(data):
 
 def read_columns(session):
     """
-    'read_columns' method reads
+    'read_columns' function reads
     all columns from table 'Aliment'.
     It returns the data into a list.
     :param session:
@@ -318,9 +319,22 @@ def read_columns(session):
     return read_rows
 
 
+def fr_columns():
+    """
+    'fr_columns' function provides
+    all columns from table 'Aliment'
+    in french. It returns the data into a list.
+    :return:
+    """
+    columns = ["Id", "Nom", "Tag", "Categorie",
+               "Marque", "Nutriscore", "Magasin",
+               "Lieu", "Site"]
+    return columns
+
+
 def is_user_created(root_session, host="localhost", user="stephen"):
     """
-    'is_user_created' method checks if the MYSQL user
+    'is_user_created' function checks if the MYSQL user
     given as parameter is existing into MYSQL server.
     :param root_session:
     :param host:

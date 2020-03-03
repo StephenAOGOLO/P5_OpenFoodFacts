@@ -1,8 +1,10 @@
 """
 Welcome to the API Operations module, 'api_operations.py'.
 This module is composed of 'Data' class.
-three methods are defined to retrieve and store data coming from OpFoFa - OpenFoodFacts server.
-ten functions are defined to slice and sort the data needed for each packages module.
+three methods are defined to retrieve and store data
+coming from OpFoFa - OpenFoodFacts server.
+ten functions are defined to slice and sort the data
+needed for each packages module.
 """
 # -*- coding: utf-8 -*-
 import logging as lg
@@ -11,18 +13,26 @@ import requests
 
 
 class Data:
-    """Data class create an instance which centralizing
-     all pure data coming from Openfoodfacts server."""
+    """
+    Data class create an instance which centralizing
+    all pure data coming from Openfoodfacts server.
+    """
     def __init__(self):
-        """Init constructor has two attributes:
+        """
+        Init constructor has two attributes:
         json_url_file : URLS file path needed to request OpFoFa server.
-        big_data : Containing OpFoFa response, sliced and sorted. 'big_data' is a dict."""
+        big_data : Containing OpFoFa response, sliced and sorted.
+        'big_data' is a dict.
+        """
         self.json_url_file = ".\\Packages\\urls.json"
         self.big_data = self.load_api_data()
 
     def load_api_data(self):
-        """'Load_api_data' method is containing every steps of getting, slicing and sorting
-         before the data providing."""
+        """
+        'Load_api_data' method is containing every steps of
+         getting, slicing and sorting
+         before the data providing.
+         """
         all_data = {"sent": {}, "rcvd": {}}
         all_data = self.request_urls(all_data)
         print("Retrieving data from OpenFoodFacts server in progress...")
@@ -71,31 +81,37 @@ def response_urls(all_data):
     return all_data
 
 
-def get_aliments(all_data):
+def get_aliments(data):
     """
-    'get_aliments' method analyses each OpFoFa response and catches all aliments
-    located in. These aliments are sorted by quality. Actually, some aliments info may
-    not be provided. If it is so, this method set 'EMPTY' and 'NOT_PROVIDED'
-    tags in the impacted field. All aliment information are stored in to the big data.
+    'get_aliments' method analyses each OpFoFa response
+    and catches all aliments located in.
+    These aliments are sorted by quality.
+    Actually, some aliments info may not be provided.
+    If it is so, this method set 'EMPTY' and 'NOT_PROVIDED'
+    tags in the impacted field. All aliment information
+    are stored in to the big data.
     Keys to find '["rcvd"]["aliments"]'.
-    :param all_data:
-    :return all_data:
+    :param data:
+    :return data:
     """
-    list_r = ["product_name", "brands", "nutriscore_grade", "stores", "purchase_places", "url"]
-    for url_name in all_data["sent"]["urls"].keys():
-        all_data["rcvd"]["aliments"][url_name] = {}
-        for i in range(0, len(all_data["rcvd"][url_name]["products"])):
-            all_data["rcvd"]["aliments"][url_name][str(i)] = {}
+    list_r = ["product_name", "brands", "nutriscore_grade",
+              "stores", "purchase_places", "url"]
+    for url_name in data["sent"]["urls"].keys():
+        data["rcvd"]["aliments"][url_name] = {}
+        for i in range(0, len(data["rcvd"][url_name]["products"])):
+            data["rcvd"]["aliments"][url_name][str(i)] = {}
             for element in list_r:
-                if element in all_data["rcvd"][url_name]["products"][i]:
-                    if all_data["rcvd"][url_name]["products"][i][element] == "":
-                        all_data["rcvd"]["aliments"][url_name][str(i)][element] = "EMPTY"
+                if element in data["rcvd"][url_name]["products"][i]:
+                    if data["rcvd"][url_name]["products"][i][element] == "":
+                        data["rcvd"]["aliments"][url_name][str(i)][element]\
+                            = "EMPTY"
                     else:
-                        all_data["rcvd"]["aliments"][url_name][str(i)][element] = \
-                            all_data["rcvd"][url_name]["products"][i][element]
+                        data["rcvd"]["aliments"][url_name][str(i)][element] = \
+                            data["rcvd"][url_name]["products"][i][element]
                 else:
-                    all_data["rcvd"]["aliments"][url_name][str(i)][element] = "NOT_PROVIDED"
-    return all_data
+                    data["rcvd"]["aliments"][url_name][str(i)][element]\
+                        = "NOT_PROVIDED"
+    return data
 
 
 def all_categories(all_data):
@@ -125,33 +141,33 @@ def all_rows(all_data):
     return all_data
 
 
-def prepare_sql_values(all_data):
+def prepare_sql_values(data):
     """
     'prepare_sql_values' method formats all needed data
     to fill MYSQL tables. Keys to find '["rcvd"]["sql_values"]'.
-    :param all_data:
-    :return all_data:
+    :param data:
+    :return data:
     """
     list_categories = []
-    all_data["rcvd"]["sql_values"] = {}
-    for key in all_data["rcvd"]["aliments"].keys():
-        all_data["rcvd"]["sql_values"][key] = {}
+    data["rcvd"]["sql_values"] = {}
+    for key in data["rcvd"]["aliments"].keys():
+        data["rcvd"]["sql_values"][key] = {}
         list_categories.append(key)
     for category in list_categories:
-        for i in range(0, len(all_data["rcvd"]["aliments"][category])):
-            all_data["rcvd"]["sql_values"][category][category+"_"+str(i)]\
-                = all_data["rcvd"]["aliments"][category][str(i)]
+        for i in range(0, len(data["rcvd"]["aliments"][category])):
+            data["rcvd"]["sql_values"][category][category+"_"+str(i)]\
+                = data["rcvd"]["aliments"][category][str(i)]
     for category in list_categories:
-        for i in range(0, len(all_data["rcvd"]["aliments"][category])):
-            for row in all_data["rcvd"]["rows"]:
+        for i in range(0, len(data["rcvd"]["aliments"][category])):
+            for row in data["rcvd"]["rows"]:
                 try:
-                    the_row = all_data["rcvd"]["sql_values"][category][category+"_"+str(i)][row]
+                    the_row = data["rcvd"]["sql_values"][category][category+"_"+str(i)][row]
                     the_row = str(the_row).replace(",", " ou ")
                     the_row = the_row.replace("'", "-")
-                    all_data["rcvd"]["sql_values"][category][category + "_" + str(i)][row] = the_row
+                    data["rcvd"]["sql_values"][category][category + "_" + str(i)][row] = the_row
                 except KeyError as error:
                     lg.info("erreur sur part: %s", error)
-    return all_data
+    return data
 
 
 def prepare_hmi_values(all_data):
@@ -164,7 +180,6 @@ def prepare_hmi_values(all_data):
     all_data["console"] = {}
     all_data["console"]["aliments"] = {}
     list_c = all_data["rcvd"]["local_category"]
-    # list_r = all_data["rcvd"]["rows"]
     for category in list_c:
         all_data["console"]["aliments"][category] = {}
         for key, value in all_data["rcvd"]["sql_values"][category].items():
@@ -181,7 +196,8 @@ def classify_ihm_values(all_data):
     """
     'classify_ihm_values' function sorts all needed data
     to display it through the interface. This function set
-    the substitute aliment into the big data. Keys to find '["console"]["substitute"]'.
+    the substitute aliment into the big data.
+    Keys to find '["console"]["substitute"]'.
     :param all_data:
     :return all_data:
     """
@@ -219,7 +235,8 @@ def traduce_rows(all_data):
     :param all_data:
     :return:
     """
-    list_fr_r = ["Nom", "Catégorie", "Marque", "Nutriscore", "Magasins", "Lieu", "URL"]
+    list_fr_r = ["Nom", "Catégorie", "Marque",
+                 "Nutriscore", "Magasins", "Lieu", "URL"]
     all_data["console"]["rows"] = {}
     for i, element in enumerate(all_data["rcvd"]["rows"]):
         all_data["console"]["rows"][element] = list_fr_r[i]
