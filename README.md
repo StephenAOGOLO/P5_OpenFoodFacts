@@ -179,10 +179,11 @@ Ouvrir un invité de commandes et rendez-vous dans le dossier parent du projet t
 Créez l'environnement virtuel, avec le même nom que celui du projet.  
 Cette opération permettra de transformer le projet en environnement virtuel.
 Exemple sous windows :  
-        python -m virtualenv -p python P5_OpenFoodFacts-master.  
-Lancez l'environnement virtuel, exemple sous windows :
-        P5_OpenFoodFacts-master\Scripts\activate.  
 
+        python -m virtualenv -p python P5_OpenFoodFacts-master.          
+Lancez l'environnement virtuel, exemple sous windows :  
+
+        P5_OpenFoodFacts-master\Scripts\activate.  
 ---
 #### *L'installation manuelle des dépendances*.  
 Voici la liste des modules externes essentiels au fonctionnement du programme :  
