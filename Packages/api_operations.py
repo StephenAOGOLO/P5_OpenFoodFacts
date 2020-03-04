@@ -35,20 +35,25 @@ class Data:
          """
         all_data = {"sent": {}, "rcvd": {}}
         all_data = self.request_urls(all_data)
-        print("Retrieving data from OpenFoodFacts server in progress...")
+        #print("Retrieving data from OpenFoodFacts server in progress...")
+        print("La récupération des données depuis le serveur OpenFoodFacts est en cours...")
         all_data = response_urls(all_data)
         all_data["rcvd"]["aliments"] = {}
-        print("Data received from OpenFoodFacts server")
-        print("Data organizing in progress...")
+        #print("Data received from OpenFoodFacts server")
+        print("Récupération des données terminée OpenFoodFacts avec succès")
+        #print("Data organizing in progress...")
+        print("Organisation des données en cours...")
         all_data = get_aliments(all_data)
-        print("Getting data ready for console and local database...")
+        #print("Getting data ready for console and local database...")
+        print("Préparation des données pour l'interface en cours...")
+        print("Préparation des données pour la base de données en cours...")
         all_data = all_rows(all_data)
         all_data = all_categories(all_data)
         all_data = prepare_sql_values(all_data)
         all_data = prepare_hmi_values(all_data)
         all_data = classify_ihm_values(all_data)
-        print("Data ready!!!")
-        print("Data initialization complete.")
+        print("Préparation des données terminée!!!")
+        print("Initialisation du système terminée avec succès.\n")
         return all_data
 
     def open_json_file(self):
@@ -266,10 +271,3 @@ def show_all_data(all_data):
         print("element n'est pas un dict...")
         print("*" * 50)
     return True
-
-
-if __name__ == "__main__":
-    THE_INSTANCE = Data()
-    BIG_DATA = THE_INSTANCE.load_api_data()
-    print(BIG_DATA["rcvd"])
-    print(BIG_DATA["console"])

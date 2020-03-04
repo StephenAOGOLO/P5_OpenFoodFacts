@@ -68,6 +68,7 @@ class Loading:
         else:
             data = self.build_big_data()
         data = build_products(data)
+        prd.get_product_number()
         return data
 
     def build_big_data(self):
@@ -466,15 +467,3 @@ def get_settings():
     the_options = opt.Settings()
     params = the_options.get_data_file_ini("loading")
     return params
-
-
-if __name__ == "__main__":
-    THE_INSTANCE = Loading()
-    BIG_DATA = THE_INSTANCE.big_data
-    ALIMENT = BIG_DATA["objects"]["biscuit"]["biscuit_0"]
-    ALIMENT2 = BIG_DATA["objects"]["biscuit"]["biscuit_1"]
-    print(ALIMENT)
-    print(type(ALIMENT))
-    print(ALIMENT.url)
-    print("\n")
-    print(ALIMENT < ALIMENT2)

@@ -19,7 +19,7 @@ def presentation():
     display("~", 50, 3)
     print("~~~~~~~~~~ BIENVENUE SUR PUREBERRE app ~~~~~~~~~~")
     display("~", 50, 3)
-    print("~"*35+" by Stephen A.O")
+    print("~"*34+" Par Stephen A.O")
     display("~", 50)
     display(" ", 50, 3)
     display()
@@ -47,8 +47,7 @@ def menu(big_data):
             print("Vous avez choisi le menu 2")
             menu_2a(big_data)
         else:
-            print("Mauvaise saisie!!\nVous avez entré {}".format(choice))
-            display("*", 50, 5)
+            wrong_entry(choice)
 
 
 def menu_1a(big_data):
@@ -62,7 +61,7 @@ def menu_1a(big_data):
         print("Sélectionnez la catégorie.")
         display("*", 50)
         dict_category = get_categories(big_data)
-        print("\nx -  menu principal")
+        print("\nx -  Menu principal")
         display("*", 50)
         choice = get_choice()
         try:
@@ -70,17 +69,15 @@ def menu_1a(big_data):
                 print("Vous avez choisi le retour au menu principal")
                 interface(big_data)
         except ValueError:
-            print("Mauvaise saisie!!\nVous avez entré {}".format(choice))
-            display("*", 50, 5)
+            wrong_entry(choice)
         try:
             if choice in str(dict_category.keys()):
                 big_data["user"] = {"category": dict_category[int(choice)]}
                 print("Vous avez fait le choix {}, la catégorie : {}"
                       .format(choice, big_data["user"]["category"]))
                 menu_1b(big_data)
-        except KeyError:
-            print("Mauvaise saisie!!\nVous avez entré {}".format(choice))
-            display("*", 50, 5)
+        except ValueError:
+            wrong_entry(choice)
 
 
 def menu_1b(big_data):
@@ -94,7 +91,7 @@ def menu_1b(big_data):
         print("Sélectionnez l'aliment.")
         display("*", 50)
         dict_aliment = get_aliments(big_data)
-        print("\nx -   menu principal")
+        print("\nx -   Menu principal")
         display("*", 50)
         choice = get_choice()
         try:
@@ -108,11 +105,9 @@ def menu_1b(big_data):
                 display_aliment(big_data)
                 menu_1c(big_data)
             else:
-                print("Mauvaise saisie!!\nVous avez entré {}".format(choice))
-                display("*", 50, 5)
+                wrong_entry(choice)
         except ValueError:
-            print("Mauvaise saisie!!\nVous avez entré {}".format(choice))
-            display("*", 50, 5)
+            wrong_entry(choice)
 
 
 def menu_1c(big_data):
@@ -129,7 +124,7 @@ def menu_1c(big_data):
         display("*", 50, 2)
         print("Voulez-vous sauvegarder cet échange ?")
         display("*", 50)
-        print("1 - sauvegarder ?")
+        print("1 - Sauvegarder ?")
         print("x - Retour au menu principal")
         display("*", 50)
         choice = get_choice()
@@ -141,8 +136,7 @@ def menu_1c(big_data):
             print("Vous avez choisi de sauvegarder cette opération")
             save_data(big_data, aliment, substitute)
         else:
-            print("Mauvaise saisie!!\nVous avez entré {}".format(choice))
-            display("*", 50, 5)
+            wrong_entry(choice)
 
 
 def menu_1c0(big_data):
@@ -166,10 +160,9 @@ def menu_1c0(big_data):
                 print("Vous avez choisi le menu 0")
                 interface(big_data)
             else:
-                print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
+                wrong_entry(choice)
         except ValueError:
-            print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
-            display("*", 50, 5)
+            wrong_entry(choice)
 
 
 def menu_2a(big_data):
@@ -191,10 +184,9 @@ def menu_2a(big_data):
                 print("Vous avez choisi le menu 0")
                 interface(big_data)
             else:
-                print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
+                wrong_entry(choice)
         except ValueError:
-            print("\nMauvaise saisie!!\nVous avez entré {}".format(choice))
-            display("*", 50, 5)
+            wrong_entry(choice)
 
 
 def quit_console():
@@ -227,6 +219,15 @@ def get_choice():
     text = input("Que voulez-vous faire : ")
     display("*", 50, 5)
     return text
+
+
+def wrong_entry(choice):
+    """
+    'wrong_entry' function is called
+    to alert customer on a keyboard wrong entry.
+    """
+    print("Mauvaise saisie!!\nVous avez entré {}".format(choice))
+    display("*", 50, 5)
 
 
 def get_categories(big_data):
@@ -311,7 +312,7 @@ def save_data(big_data, aliment, substitute):
             big_data["save"]["substitute"] = k_1
     load.fill_table_historic(big_data)
     display("*", 50, 5)
-    print("l'aliment et son substitut ont été sauvegardé !")
+    print("L'aliment et son substitut ont été sauvegardé !")
     display("*", 50, 5)
     interface(big_data)
 
@@ -422,12 +423,8 @@ def start_program():
     to provide it to the interface.
     """
     display("*", 50, 5)
-    print("interface running...")
+    print("Lancement de l'interface en cours...")
     display("*", 50, 5)
     the_instance = load.Loading()
     big_data = the_instance.big_data
     interface(big_data)
-
-
-if __name__ == "__main__":
-    start_program()

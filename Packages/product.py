@@ -61,4 +61,4 @@ def get_product_number():
     """
     get_product_number
     """
-    print("Il y a {} aliments au total".format(Product.number))
+    print("Il y a {} produits au total".format(Product.number))
