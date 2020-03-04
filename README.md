@@ -5,7 +5,7 @@ Utilisez les données publiques de l'OpenFoodFacts
 [![](https://static.openfoodfacts.org/images/misc/openfoodfacts-logo-fr-178x150.png)](https://fr.openfoodfacts.org/)  
 
 ---
-## Contexte
+## CONTEXTE
 La startup Pur Beurre connait bien les habitudes alimentaires françaises.  
 Leur restaurant, Ratatouille, remporte un succès croissant et attire toujours plus de visiteurs,  
 sur la butte de Montmartre.  
@@ -14,7 +14,7 @@ mais ne savaient pas bien par quoi commencer.
 Remplacer le Nutella par une pâte aux noisettes, oui, mais laquelle ? Et dans quel magasin l'acheter ?  
 
 ---
-## But du projet
+## BUT DU PROJET
 Créer un programme qui interagirait avec la base Open Food Facts pour en récupérer les aliments,  
 les comparer et proposer à l'utilisateur un substitut plus sain à l'aliment qui lui fait envie.  
 Le programme doit pouvoir interroger la base de données d'OpenFoodFacts à travers son API.  
@@ -24,7 +24,7 @@ Chaque produit pourra être sauvegardé dans la base de donnée de l'application
 Le projet hébergé sur GitHub est disponible [ici](https://github.com/StephenAOGOLO/P5_OpenFoodFacts.git).  
 
 ---
-## Découpage du projet
+## DECOUPAGE DU PROJET
 Le projet a été découpé en plusieurs étapes de réalisation.  
 Chaque étape du projet est une 'user-story'  
 qui représente une fonction principale, secondaire ou tertiaire de l'application.  
@@ -52,7 +52,7 @@ Liste des fonctions liées aux opérations IHM :
 * __***US30***__ *Fonction aliment à remplacer*
 
         En tant qu’utilisateur enregistré,
-        je peux sélectionner la proposition 1,
+        je peux sélectionner 'Quel aliment souhaitez-vous remplacer ?',
         afin de choisir l’aliment à remplacer.
 
 * __***US31***__ *Fonction catégorie alimentaire*
@@ -82,7 +82,7 @@ Liste des fonctions liées aux opérations IHM :
 * __***US40***__ *Fonction mes aliments substitués*
 
         En tant qu’utilisateur enregistré,
-        je peux sélectionner la proposition 2 du menu principal,
+        je peux sélectionner la proposition 'Retrouver mes aliments substitués',
         afin de retrouver mes aliments substitués.
 
 * __***US41***__ *Fonction tableau aliments ajoutés*
@@ -97,10 +97,10 @@ Liste des fonctions liées aux opérations IHM :
         je peux accéder à un tableau d’informations,
         afin de voir les aliments soustraits.
 
-* __***US50***__ *Fonction proposition 3*
+* __***US50***__ *Fonction fermeture du programme*
     
         En tant qu’utilisateur,
-        je peux sélectionner la proposition 3,
+        je peux sélectionner 'Quitter',
         afin de quitter le programme. 
 
 ---
@@ -129,35 +129,80 @@ pour lire ce fichier veuillez vous rendre sur le site [*DRAW.IO*](https://www.dr
 - Sélectionnez le fichier *P5_OpenFoodFacts.drawio* disponible [*ici*](P5_OpenFoodFacts.drawio)
 
 ---
+## ENVIRONNEMENT DE DEVELOPPEMENT  
+
+---
+### Outils de développemment  
+Liste des outils et versions utilisées:
+-        Pycharm ; version : 2019.3
+-        Python ; version : 3.7.4
+-        Draw.io ; version 12.5.8
+-        MySQL ; version 8.0 
+-        Notepad Plus Plus ; version 7.8.1
+
+---
+### Qualité de développement  
+Liste des outils, des versions utilisées
+et des rapports de qualité:  
+-        Pylint ; Version : 2.4.4 ; Note : 10/10
+-        Flake8 ; Version : 3.7.9 ; Note : Line too long ~ 90/79
+
+---
 ## COMMENT INSTALLER L'APPLICATION  
 
 ---
-### *ENVIRONNEMENT VIRTUEL*.  
-Ouvrir un invité de commandes et rendez-vous à la racine du projet téléchargé, exemple sous windows :   
--       cd D:projet\projet_python\P5_OpenFoodFacts-master
-Créez l'environnement virtuel, exemple sous windows :  
--       python -m virtualenv -p python my_env.  
-Lancez l'environnement virtuel, exemple sous windows :
--       my_env\Script\activate.  
+### *La pré-installation automatisée*.   
+La pré-installation suit les étapes suivante:
+-       Création d'un environnement virtuel
+-       Activation de l'environnement virtuel
+-       Installation des dépendances, modules externes du programme
+---
+### *La procédure de la pré-installation automatisée*.
+-       Téléchargez le projet P5_OpenFoodFacts au format .zip => https://github.com/StephenAOGOLO/P5_OpenFoodFacts.git
+-       Décompressez le fichier .zip
+-       Ouvrez le dossier extrait
+-       Double-cliquez sur le script "pre_installation.bat"
+Après avoir lancé la pré-installation, via le script "pre_installation.bat",
+un invité de commande s'ouvre et le processus d'installation se déroule.  
+En fin d'installation, le message _PREINSTALLATION TERMINE_ s'affiche.
+
+L'invité de commande reste ouverte. Vous pouvez immédiatement démarrer le programme ainsi:
+
+-       main.py
 
 ---
-### *DEPENDANCES*.  
+### *Pré-installation manuelle*.
+
+---
+#### *L'installation manuelle de l'environnement virtuel*.  
+Ouvrir un invité de commandes et rendez-vous dans le dossier parent du projet téléchargé.   
+Créez l'environnement virtuel, avec le même nom que celui du projet.  
+Cette opération permettra de transformer le projet en environnement virtuel.
+Exemple sous windows :  
+        python -m virtualenv -p python P5_OpenFoodFacts-master.  
+Lancez l'environnement virtuel, exemple sous windows :
+        P5_OpenFoodFacts-master\Scripts\activate.  
+
+---
+#### *L'installation manuelle des dépendances*.  
 Voici la liste des modules externes essentiels au fonctionnement du programme :  
 -      configparser==4.0.2 "Ce module permet la gestion du fichier de configuration'settings.ini'".
 -       mysql-connector>=2.2.9 "Ce module permet la communication avec le serveur MYSQL.
 -       requests>=2.22.0 "Ce module permet la communication protocolaire HTTP vers l'API.
 -       getpass4>=0.0.8 "Ce module permet la sasie masquée de mot de passe utilisateur.
-Pour installer les dépendances du programme, entrez la commande : 
--       pip install -r requirements.txt   
+Pour installer les dépendances du programme, rendez-vous dans le répertoire _\Scripts_ du projet  
+puis entrez la commande : 
+        pip install -r requirements.txt   
 exemple sous windows :
--       my_env\Script\pip install -r Labyrinthe\requirements.txt
+        my_env\Scripts\pip install -r P5_OpenFoodFacts-master\requirements.txt
 
 ---
 ## COMMENT FONCTIONNE L'APPLICATION  
 
 ---
-### *ARCHITECTURE FONCTIONNELLE*
--       -> main.py
+### *l'Architecture interne*
+        -> pre_installation.bat
+        -> main.py
         -> Packages -> api_operations.py
                     -> console.py
                     -> loading.py
@@ -168,20 +213,41 @@ exemple sous windows :
                     -> urls.json
 
 ---
-### *BASE DE DONNEES*  
-Un script est dédié à la base de données.  
--       db_purebeurre.sql     
-Ce scripts est disponible dans le répertoire [*/Packages*](/Packages)
+### *Le processus algorhitmique*
+Les blocs ci-dessous décrivent le processus algorhitmique du programme.  
+Chaque bloc shématise une opération fonctionnelle,  
+qui peut être réalisé par un ou plusieurs modules.  
+Les blocs sont numérotés par ordre d'exécution.  
+
+        1. Démarrage du programme
+        2. Récupération des paramètres d'initialisation
+        3. Récupération des données OpenFoodFacts
+        4. Création et remplissage de la base données locale
+        5. Exécution de l'interface homme-machine
+        6. Extinction du programme
 
 ---
-### *PARAMETRAGE*  
+### *La base de données*  
+Un script est dédié à la base de données.  
+-       db_purebeurre.sql     
+Ce scripts est disponible dans le répertoire [*/Packages*](/Packages)  
+
+---
+### *Les requêtes HTTP*  
+Un fichier est dédié à la conservation des requête HTTP.  
+-       urls.json     
+Ce fichier est disponible dans le répertoire [*/Packages*](/Packages)  
+
+---
+### *Le paramétrage*  
 __ATTENTION__ :
   
 -        LA PRESENCE ET LA VALORISATION DE LA TOTALITE DES PARAMETRES SONT OBLIGATOIRES.
   
 Le paramétrage du programme est centralisé dans un fichier de configuration.
 -       settings.ini
-Il contient les paramètres essentiels au lancement du programme.  
+Il contient les paramètres essentiels au lancement du programme. 
+Ce fichier est disponible dans le répertoire [*/Packages*](/Packages)   
 
 ---
 #### *Paramétrage MYSQL*
@@ -272,32 +338,38 @@ Pour rappel:
 ### *Démarrage du programme*.
 Rendez-vous dans le répertoire "P5_OpenFoodFacts", exemple sous windows :
  -      cd P5_OpenFoodFacts
+Assurez-vous que votre environnement virtuel est correctement installé et activé.
+Si ce n'est pas le cas, veuillez suivre les instructions de pré-installation.
 Lancer le programme principale "main.py", exemple sous windows :
 -       python main.py  
-Pour lancer le programme autrement, double-cliquez sur "main.py" oubien ouvrir "main.py" dans un IDE python.  
+Pour lancer le programme autrement, double-cliquez sur "main.py"  
+oubien ouvrir "main.py" dans un IDE python.  
 
 ---
 ### *Prise en main de la console*.  
-            in progress...
+L'utilisateur est sur le terminal. Ce dernier lui affiche les choix suivants :  
 
----
-## ENVIRONNEMENT DE DEVELOPPEMENT  
+        1 - Quel aliment souhaitez-vous remplacer ?
+        2 - Retrouver mes aliments substitués.
+L'utilisateur sélectionne 1. Le programme pose les questions suivantes à l'utilisateur  
+et ce dernier sélectionne les réponses :
 
----
-### Outils de développemment  
-Liste des outils et versions utilisées:
--        Pycharm ; version : 2019.3
--        Python ; version : 3.7.4
--        Draw.io ; version 12.5.8
--        MySQL ; version 8.0 
--        Notepad Plus Plus ; version 7.8.1
+        Sélectionnez la catégorie.
+Plusieurs propositions sont associées à un chiffre.  
+L'utilisateur entre le chiffre correspondant et appuie sur entrée  
 
----
-### Qualité de développement  
-Liste des outils, des versions utilisées
-et des rapports de qualité:  
--        Pylint ; Version : 2.4.4 ; Note : 10/10
--        Flake8 ; Version : 3.7.9 ; Note : Line too long ~ 90/79
+        Sélectionnez l'aliment.
+Plusieurs propositions sont associées à un chiffre.
+L'utilisateur entre le chiffre correspondant à l'aliment choisi et appuie sur entrée
+
+        Le programme propose un substitut, sa description,  
+        un magasin ou l'acheter et un lien vers la page d'Open Food Facts concernant cet aliment.
+
+L'utilisateur a alors la possibilité d'enregistrer la substitution.  
+
+Après un retour au menu principale, l'utilisateur peut répéter l'opération,  
+consulter l'historique de ces substitutions ou fermer le programme. 
+
 
 ---
 ## RAPPEL
