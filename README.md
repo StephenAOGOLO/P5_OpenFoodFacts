@@ -191,9 +191,12 @@ Voici la liste des modules externes essentiels au fonctionnement du programme :
 -       requests>=2.22.0 "Ce module permet la communication protocolaire HTTP vers l'API.
 -       getpass4>=0.0.8 "Ce module permet la sasie masquée de mot de passe utilisateur.
 Pour installer les dépendances du programme, rendez-vous dans le répertoire _\Scripts_ du projet  
-puis entrez la commande : 
-        pip install -r requirements.txt   
-exemple sous windows :
+puis entrez la commande :
+ 
+        pip install -r requirements.txt  
+
+Exemple sous windows :
+
         my_env\Scripts\pip install -r P5_OpenFoodFacts-master\requirements.txt
 
 ---
