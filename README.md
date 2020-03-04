@@ -193,11 +193,11 @@ Voici la liste des modules externes essentiels au fonctionnement du programme :
 Pour installer les dépendances du programme, rendez-vous dans le répertoire _\Scripts_ du projet  
 puis entrez la commande :
  
-        pip install -r requirements.txt  
+-       pip install -r requirements.txt  
 
 Exemple sous windows :
 
-        my_env\Scripts\pip install -r P5_OpenFoodFacts-master\requirements.txt
+-       my_env\Scripts\pip install -r P5_OpenFoodFacts-master\requirements.txt
 
 ---
 ## COMMENT FONCTIONNE L'APPLICATION  
