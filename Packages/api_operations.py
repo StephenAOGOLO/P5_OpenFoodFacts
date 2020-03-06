@@ -35,16 +35,12 @@ class Data:
          """
         all_data = {"sent": {}, "rcvd": {}}
         all_data = self.request_urls(all_data)
-        #print("Retrieving data from OpenFoodFacts server in progress...")
         print("La récupération des données depuis le serveur OpenFoodFacts est en cours...")
         all_data = response_urls(all_data)
         all_data["rcvd"]["aliments"] = {}
-        #print("Data received from OpenFoodFacts server")
         print("Récupération des données terminée OpenFoodFacts avec succès")
-        #print("Data organizing in progress...")
         print("Organisation des données en cours...")
         all_data = get_aliments(all_data)
-        #print("Getting data ready for console and local database...")
         print("Préparation des données pour l'interface en cours...")
         print("Préparation des données pour la base de données en cours...")
         all_data = all_rows(all_data)
